@@ -1,0 +1,91 @@
+package fr.l3z.repositories;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import fr.l3z.models.Family;
+import fr.l3z.models.User;
+
+public class UserRepositoryImpl implements UserRepository {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+	@Inject
+	private FamilyRepository familyRep;
+	
+	public UserRepositoryImpl() {
+		
+	}
+	
+	@Override
+	public User save(User t) {
+		entityManager.persist(t);
+		return t;
+	}
+
+	@Override
+	public User find(Long id) {
+		return entityManager
+				.createQuery("select u from User u where u.id = :userIdParam", User.class)
+				.setParameter("userIdParam", id)
+				.getSingleResult();
+	}
+
+	@Override
+	public User findByObject(User t) {
+		User user = entityManager.find(User.class, t.getId());
+		return user;
+	}
+
+	@Override
+	public List<User> findAll() {
+		return entityManager.createQuery("select u from User u", User.class).getResultList();
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		entityManager.remove(entityManager.find(User.class, id));
+		
+	}
+
+	@Override
+	public void deleteByObject(User t) {
+		entityManager.remove(entityManager.find(User.class, t.getId()));
+		
+	}
+
+	@Override
+	public void update(Long idAModifier, User t) {
+		User userAModifier=entityManager.find(User.class,idAModifier);
+		userAModifier.setUserName(t.getUserName());
+		userAModifier.setPassword(t.getPassword());
+		userAModifier.setFamilyList(t.getFamilyList());
+		userAModifier.setSkillProfile(t.getSkillProfile());
+		userAModifier.setScore(t.getScore());
+		
+		entityManager.merge(userAModifier);
+		
+	}
+
+	@Override
+	public User findByUserName(String name) {
+		return entityManager
+				.createQuery("select u from User u where u.userName = :userNameParam", User.class)
+				.setParameter("userNameParam", name)
+				.getSingleResult();
+	}
+
+	@Override
+	public List<User> usersByFamily(Long idFamily) {
+		Family f = familyRep.find(idFamily);
+		return entityManager
+				.createQuery("select u from User u where :familyParam member of u.familyList", User.class)
+				.setParameter("familyParam", f)
+				.getResultList();
+	}
+
+}

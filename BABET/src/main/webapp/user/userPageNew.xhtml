@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Nouvelle tache</title>
+</h:head>
+
+<body>
+	<div class="content">
+
+		<div class="logoIndex">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="topBox">
+
+			<div class="userName">Bienvenue #{userPageBean.user.userName}</div>
+
+			<div class="userSkillProfile">
+				<ui:repeat value="#{userPageBean.user.skillProfile.skillNoteList}"
+					var="p">
+					<div class="userSkill">
+						<div class="skillName">#{p.skill.name}</div>
+
+						<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageBean.skillNote1(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageBean.skillNote2(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageBean.skillNote3(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageBean.skillNote4(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageBean.skillNote5(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageBean.skillNote1Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageBean.skillNote2Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageBean.skillNote3Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageBean.skillNote4Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageBean.skillNote5Inverted(p.score)}" />
+						</div>
+					</div>
+				</ui:repeat>
+				<div class="espace5px"></div>
+				<div>
+					<a href="../index.xhtml"><img
+						src="../resources/boutonTroisPoints.png" height="30px" /> </a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="topRight">
+
+			<div class="score">75</div>
+
+			<a href="../index.xhtml"> <img
+				src="../resources/boutonPoints.png" width="100%" />
+			</a>
+		</div>
+
+
+
+		<div class="actions">
+
+			<div class="boutonGauche">
+				<a href="../user/userPage.xhtml"> <img
+					src="../resources/babetid3.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../family/familyPage.xhtml"> <img
+					src="../resources/babetidfamily.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageShoppingList.xhtml"><img
+					src="../resources/boutonCourses.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageVote.xhtml"><img
+					src="../resources/boutonVote.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageRules.xhtml"><img
+					src="../resources/logoRegles.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageHistoric.xhtml"><img
+					src="../resources/boutonHistorique.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGaucheLong">
+				<a href="../index.xhtml"><img
+					src="../resources/boutonNewTask.png" width="95%" /> </a>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="tasksListContener">
+			Liste des taches possibles
+			<div class="tasksList">
+				<h:form>
+
+					<h:dataTable value="#{userPageBean.tasksList}" var="p"
+						columnClasses="column1,column2,column3">
+						<h:column>
+							<f:facet name="header"></f:facet>
+					#{p.name}
+				</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+					#{p.nextDate}
+				</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<h:graphicImage url="/resources/boutonBleu.png" width="15%" />
+							<h:graphicImage url="/resources/boutonFleche.png" width="15%" />
+							<h:graphicImage url="/resources/boutonValid.png" width="15%" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png"
+								width="15%" />
+						</h:column>
+					</h:dataTable>
+
+				</h:form>
+			</div>
+		</div>
+		
+
+
+
+
+
+
+	</div>
+
+</body>
+</html>

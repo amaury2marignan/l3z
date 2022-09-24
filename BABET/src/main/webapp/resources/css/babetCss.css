@@ -1,0 +1,231 @@
+
+@import url(http://fonts.cdnfonts.com/css/berlin-sans-fb-demi);
+
+
+body{
+	background-color: #FFD966; 
+		
+}
+
+.content{
+	width: 100%;
+	display:flex;
+	flex-wrap: wrap;
+	margin:2px;
+	
+	font-family: "Berlin Sans FB Demi";
+	
+	
+}
+
+.img-titre{
+	
+	padding-top:50px;
+	width:400px;
+	margin-left:0px;
+	padding-left:2px;
+}
+
+.forms{
+	
+	width:350px;
+	display:flex;
+	flex-direction:column;
+	font-family: "Berlin Sans FB Demi";
+	font-size: 30px;
+	text-align: left;
+	color:#FFD966;
+	padding-top:30px;
+}
+
+
+
+
+
+
+
+.login-form{
+	border-radius:30px;
+	text-align:center;
+	margin-top:30px;
+	background-color: #44546A; 
+	width:100%;
+	margin-bottom:2px;
+	padding-top:2px;
+	padding-bottom:2px;
+	box-shadow: 2px 2px 2px grey;
+	height:200px;
+}
+
+.loginFamily-form{
+	border-radius:30px;
+	text-align:center;
+	margin-top:2px;
+	background-color: #A6A6A6;  
+	width:100%;
+	padding-top:0px;
+	box-shadow: 2px 2px 2px grey;
+	padding-bottom:2px;
+	height:200px;
+}
+
+.logoIndex{
+	margin:2px;
+	width:15%;
+	
+}
+
+
+
+.userName{
+	
+	text-align:left;
+	width:97%;
+	color:#FFD966;
+	font-size:30px;
+	padding:2px;
+	height:50%;
+	}
+
+.userSkillProfile{
+	margin-top:2px;
+	display:flex;
+	flex-wrap: wrap;
+	padding-left:2px;
+	width:97%;
+	align-content:flex-end;
+	height:50%;
+	
+	
+	
+}
+
+.userSkill{
+	margin:2px;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: inset 2px 2px #7F7F7F;
+	padding-right:2px;
+	width:20%;
+	height:45%;
+	display:flex;
+	flex-direction:row;
+	font-size:10px;
+	
+	
+}
+
+.skillName{
+	margin:2px;
+	padding-top:0px;
+	height:90%;
+	width:45%;
+}
+.stars{
+	width:50%;
+	height:90%;
+	margin-top:2px;
+}
+
+.tasksListContener{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	margin-top:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:75%;
+	height:320px;
+	background-color: #A6A6A6;
+	border-radius: 12px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+}
+
+
+
+.tasksList{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:80%;
+	overflow:auto;
+	width:95%;
+	margin-left:20px;
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: inset 2px 2px #7F7F7F;
+}
+
+.actions{
+	display:flex;
+	flex-wrap:wrap;
+	margin:2px;
+	margin-top:0px;
+	height:300px;
+	width:20%;
+	
+	
+}
+
+.topBox{
+	background-color: #44546A; 
+	margin:2px;
+	width:70.5%;
+	border-radius: 12px;
+	margin-top:8px;
+	box-shadow: 2px 2px 2px #A6A6A6;
+	height:100px;
+	padding:2px;
+	padding-bottom:0px;
+	vertical-align: text-top;
+}
+
+.topRight{
+	margin:2px;
+	width:10%;
+	margin-top:10px;
+	
+}
+
+.score{
+	background-color:#70AD47;
+	border-radius: 2px;
+	font-size:60px;
+	text-align:center;
+	color:white;
+	margin:2px;
+	margin-left:0px;
+	margin-bottom:0px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	width:97%;
+}
+
+.espace5px{
+	width:5px;
+}
+
+
+.column1{
+	width:50%;
+	text-align:left;
+}
+.column2{
+	width:20%;
+}
+.column3{
+	text-align:right;
+}
+
+.boutonGauche{
+	width:40%;
+	margin:2px;
+}
+
+.boutonGaucheLong{
+	width:97%;
+	margin:2px;
+	
+}

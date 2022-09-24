@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<h:outputStylesheet library="css" name="babetCss.css" />
+ 
+	<title>Page Famille</title>
+</h:head> 
+<body> 
+
+<p>#{familyPageBean.family.familyName}</p>
+<p>#{familyPageBean.connectedUser.userName}</p>
+
+<div class="usersList">
+		<h:form>
+			
+			<ui:repeat value="#{familyPageBean.users}"
+				var="p">
+
+
+				<div>
+					<h4 name="header">Nom : #{p.userName} </h4>
+
+				</div>
+
+				
+
+				<div>
+					<h:commandButton
+						action="#{familyPageBean.doLoginUser(p)}"
+						
+						class="btn-primary">
+<img src="../resources/babetidfamily.png" width="10%"/>
+					</h:commandButton>
+					<h:commandButton
+						action="#{familyPageBean.doLoginUser(p)}"
+						value="c'est moi !" class="btn-primary">
+
+					</h:commandButton>
+				</div>
+			</ui:repeat>
+		</h:form>
+	</div>
+</body> 
+</html>

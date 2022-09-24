@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" lang="en"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	
+	<!-- <h:link rel="stylesheet" href="resources/css/babetCss.css" /> -->
+	<h:outputStylesheet library="css" name="babetCss.css" />
+ 
+	<title>Babet</title>
+</h:head>
+
+<h:body>
+
+
+
+
+
+	<div class="content">
+
+		<div class="img-titre">
+			<a href="index.xhtml"> 
+			<img src="resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+		<div class="forms">
+			
+			<div class="login-form">
+				<p>Connection Parent</p>
+
+				<h:form>
+					<h:inputText value="#{loginBean.userName}"
+						a:placeholder="Nom d'utilisateur" />
+					<br />
+					<h:inputSecret value="#{loginBean.password}"
+						a:placeholder="Mot de passe" />
+					<br />
+					<h:commandButton class="btn btn-default btn-primary"
+						action="#{loginBean.doLogin}" value="Connection Parent" />
+				</h:form>
+			</div>
+			<div class="loginFamily-form">
+				<p>Connection Famille</p>
+				<h:form>
+					<h:inputText value="#{loginBean.familyName}"
+						a:placeholder="Nom de la Famille" />
+					<br />
+					<h:inputSecret value="#{loginBean.passwordFamily}"
+						a:placeholder="Mot de passe" />
+					<br />
+					<h:commandButton class="btn btn-default btn-primary"
+						action="#{loginBean.doLoginFamily}" value="Connection Famille" />
+				</h:form>
+			</div>
+		</div>
+	</div>
+	
+</h:body>
+</html>

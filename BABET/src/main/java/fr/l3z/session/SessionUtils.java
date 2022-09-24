@@ -1,0 +1,62 @@
+package fr.l3z.session;
+
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+public class SessionUtils {
+
+	private static final String USER_ID = "userId";
+	private static final String FAMILY_ID = "familyId";
+
+	public static HttpSession getSession() {
+		return (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+	}
+
+	public static HttpServletRequest getRequest() {
+		return (HttpServletRequest) FacesContext.getCurrentInstance()
+				.getExternalContext().getRequest();
+	}
+
+	public static Long getFamilyId() {
+		HttpSession session = getSession();
+		if (session != null)
+			return (Long) session.getAttribute(FAMILY_ID);
+		else
+			return null;
+	}
+
+	public static void setFamilyId(Long familyId) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.setAttribute(FAMILY_ID, familyId);
+	}
+	
+	public static Long getUserId() {
+		HttpSession session = getSession();
+		if (session != null)
+			return (Long) session.getAttribute(USER_ID);
+		else
+			return null;
+	}
+	
+	public static void setUserId(Long userId) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.setAttribute(USER_ID, userId);
+	}
+	
+
+	public static boolean isFamilyLogged() {
+		return getFamilyId() != null;
+	}
+	
+	public static boolean isUserLogged() {
+		return getUserId()!=null;
+	}
+	
+	public static void logout() {
+		getSession().invalidate();
+	}
+}
