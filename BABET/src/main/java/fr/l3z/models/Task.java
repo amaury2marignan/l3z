@@ -1,6 +1,7 @@
 package fr.l3z.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Task {
 	
 	private String name;
 	private String description;
-	private LocalTime nextDate;
+	private LocalDateTime nextDate;
 	private int repeatAfter;
 	
 	@OneToOne
@@ -35,7 +36,7 @@ public class Task {
 	
 	private int status;
 
-	public Task(String name, String description, LocalTime nextDate, int repeatAfter,
+	public Task(String name, String description, LocalDateTime nextDate, int repeatAfter,
 			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck) {
 		super();
 		this.name = name;
@@ -69,11 +70,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public LocalTime getNextDate() {
+	public LocalDateTime getNextDate() {
 		return nextDate;
 	}
 
-	public void setNextDate(LocalTime nextDate) {
+	public void setNextDate(LocalDateTime nextDate) {
 		this.nextDate = nextDate;
 	}
 

@@ -1,6 +1,7 @@
 package fr.l3z.test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -204,7 +205,7 @@ public class Launcher {
 		Task preparerPetitDej = new Task(
 				"Préparer le petit déjeuner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1.),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedPetitDejMinimumSkillProfileToDo,
 				savedPetitDejMinimumSkillProfileToCheck);
@@ -244,7 +245,7 @@ public class Launcher {
 		Task preparerDej = new Task(
 				"Préparer le déjeuner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedDejMinimumSkillProfileToDo,
 				savedDejMinimumSkillProfileToCheck);
@@ -267,7 +268,7 @@ public class Launcher {
 		Task preparerDiner = new Task(
 				"Préparer le diner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedDinerMinimumSkillProfileToDo,
 				savedDinerMinimumSkillProfileToCheck);
@@ -289,7 +290,7 @@ public class Launcher {
 		Task preparerNourrirChat = new Task(
 				"Nourrir le Chat",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedNourrirChatMinimumSkillProfileToDo,
 				savedNourrirChatMinimumSkillProfileToCheck);
@@ -311,7 +312,7 @@ public class Launcher {
 		Task preparerLaverVitres = new Task(
 				"Laver les vitres",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedLaverVitresMinimumSkillProfileToDo,
 				savedLaverVitresMinimumSkillProfileToCheck);
@@ -333,7 +334,7 @@ public class Launcher {
 		Task preparerPasserVadorEnBas = new Task(
 				"Passer Aspirateur en bas",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1,20,52),
 				1,
 				savedPasserVadorEnBasMinimumSkillProfileToDo,
 				savedPasserVadorEnBasMinimumSkillProfileToCheck);
@@ -355,7 +356,7 @@ public class Launcher {
 		Task preparerPasserVadorEnHaut = new Task(
 				"Passer Aspirateur en haut",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedPasserVadorEnHautMinimumSkillProfileToDo,
 				savedPasserVadorEnHautMinimumSkillProfileToCheck);
@@ -377,7 +378,7 @@ public class Launcher {
 		Task preparerLaverSdBHaut = new Task(
 				"Nettoyer la SdB en haut",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1, 20, 52),
 				1,
 				savedLaverSdBHautMinimumSkillProfileToDo,
 				savedLaverSdBHautMinimumSkillProfileToCheck);
@@ -400,7 +401,7 @@ public class Launcher {
 		Task preparerLaverSdBBas = new Task(
 				"Nettoyer la SdB en bas",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalTime.of(2022, 9, 1),
+				LocalDateTime.of(2022, 9, 1,20, 52),
 				1,
 				savedLaverSdBBasMinimumSkillProfileToDo,
 				savedLaverSdBBasMinimumSkillProfileToCheck);
