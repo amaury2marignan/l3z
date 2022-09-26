@@ -341,6 +341,8 @@ public class Launcher {
 		
 		Task savedPreparerPasserVadorEnBas = taskRep.save(preparerPasserVadorEnBas);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPasserVadorEnBas);
+		savedPreparerPasserVadorEnBas.setStatus(1);
+		Task ToDoSavedPreparerPAsserVadorEnBas = taskRep.save(savedPreparerPasserVadorEnBas);
 		
 		SkillProfile passerVadorEnHautMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelPasserVadorEnHaut = skillNoteRep.save(new SkillNote(savedCuisine,2));

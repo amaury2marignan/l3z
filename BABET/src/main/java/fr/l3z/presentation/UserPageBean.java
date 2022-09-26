@@ -162,7 +162,29 @@ public class UserPageBean  {
 		this.tasksList = tasksList;
 	}
 
+	public boolean isOkReservationButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==1 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
+	public boolean isOkDoButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && (task.getStatus()==1 || task.getStatus()==2)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkCheckButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	
 
