@@ -19,10 +19,13 @@ import javax.persistence.Table;
 @Table
 public class Task {
 	
+	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+	@ManyToOne
+	private Rule rule;
 	private String name;
 	private String description;
 	private LocalDateTime nextDate;
@@ -33,6 +36,9 @@ public class Task {
 	
 	@OneToOne
 	private SkillProfile skillProfileMinimumToCheck;
+	
+	@ManyToOne
+	private User whoDidIt;
 	
 	private int status;
 
@@ -138,5 +144,23 @@ public class Task {
 		this.status = status;
 	}
 
-	
+	public User getWhoDidIt() {
+		return whoDidIt;
+	}
+
+
+	public void setWhoDidIt(User whoDidIt) {
+		this.whoDidIt = whoDidIt;
+	}
+
+
+	public Rule getRule() {
+		return rule;
+	}
+
+
+	public void setRule(Rule rule) {
+		this.rule = rule;
+	}
+
 }

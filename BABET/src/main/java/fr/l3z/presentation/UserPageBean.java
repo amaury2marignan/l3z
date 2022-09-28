@@ -1,6 +1,8 @@
 package fr.l3z.presentation;
 
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +12,24 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import fr.l3z.models.Event;
 import fr.l3z.models.Family;
-import fr.l3z.models.SkillNote;
-import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
-import fr.l3z.models.Vote;
+import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
-import fr.l3z.repositories.VoteRepository;
 import fr.l3z.session.SessionUtils;
 
 
 @ManagedBean
 @ViewScoped
-public class UserPageBean  {
+public class UserPageBean  implements Serializable {
 	
 	
+	private static final long serialVersionUID = 6978367080470271677L;
+	 
 	
 	
 	@Inject
@@ -36,10 +38,13 @@ public class UserPageBean  {
 	private FamilyRepository familyRep;
 	@Inject
 	private TaskRepository taskRep;
+	@Inject 
+	private EventRepository eventRep;
 	
 	private User user = new User();
 	private Family family = new Family();
 	private List<Task> tasksList = new ArrayList<Task>();
+	private Task task = new Task();
 	
 	
 	
@@ -135,6 +140,100 @@ public class UserPageBean  {
 		}
 	}
 
+	
+
+	public boolean isOkReservationButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==1 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkDoButton(Task task) {
+	
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && ((task.getStatus()==1) || ((task.getStatus()==2)&&(task.getWhoDidIt().getId()==user.getId())))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkCheckButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt()!=this.user) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String reservationAction(Task task) {
+		task.setWhoDidIt(this.user);
+		task.setStatus(2);
+		System.out.println(task);
+		taskRep.update(task.getId(), task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				task.getRule(),
+				task,
+				null,
+				null,				
+				user.getUserName()+" réserve la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		System.out.println(savedNewEvent);
+		
+		return "user/userPage.xhtml?faces-redirect=true";
+		
+	}
+
+	public String doAction(Task task) {
+		task.setWhoDidIt(this.user);
+		task.setStatus(3);
+		System.out.println(task);
+		taskRep.update(task.getId(), task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				task.getRule(),
+				task,
+				null,
+				null,				
+				user.getUserName()+" réalise la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		System.out.println(savedNewEvent);
+		
+		return "user/userPage.xhtml?faces-redirect=true";
+		
+	}
+	
+	public String checkAction(Task task) {
+		task.setStatus(4);
+		System.out.println(task);
+		taskRep.update(task.getId(), task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				task.getRule(),
+				task,
+				null,
+				null,				
+				user.getUserName()+" valide la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		System.out.println(savedNewEvent);
+		
+		return "user/userPage.xhtml?faces-redirect=true";
+		
+	}
+	
+	public String detailsAction(Task taskD) {
+		this.task = taskD;
+		return "/detail/detailTaskPage.xhtml";
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -153,6 +252,16 @@ public class UserPageBean  {
 	public void setFamily(Family family) {
 		this.family = family;
 	}
+	
+
+	public EventRepository getEventRep() {
+		return eventRep;
+	}
+
+	public void setEventRep(EventRepository eventRep) {
+		this.eventRep = eventRep;
+	}
+
 
 	public List<Task> getTasksList() {
 		return tasksList;
@@ -162,33 +271,11 @@ public class UserPageBean  {
 		this.tasksList = tasksList;
 	}
 
-	public boolean isOkReservationButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==1 ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean isOkDoButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && (task.getStatus()==1 || task.getStatus()==2)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean isOkCheckButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 ) {
-			return true;
-		} else {
-			return false;
-		}
+	public Task getTask() {
+		return task;
 	}
 
-	
-
-	
-
-	
+	public void setTask(Task task) {
+		this.task = task;
+	}
 }

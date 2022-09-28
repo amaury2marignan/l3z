@@ -342,6 +342,7 @@ public class Launcher {
 		Task savedPreparerPasserVadorEnBas = taskRep.save(preparerPasserVadorEnBas);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPasserVadorEnBas);
 		savedPreparerPasserVadorEnBas.setStatus(1);
+		savedPreparerPasserVadorEnBas.setRule(savedPreparerRepas);
 		Task ToDoSavedPreparerPAsserVadorEnBas = taskRep.save(savedPreparerPasserVadorEnBas);
 		
 		SkillProfile passerVadorEnHautMinimumSkillProfileToDo = new SkillProfile();
@@ -365,6 +366,10 @@ public class Launcher {
 		
 		Task savedPreparerPasserVadorEnHaut = taskRep.save(preparerPasserVadorEnHaut);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPasserVadorEnHaut);
+		savedPreparerPasserVadorEnHaut.setStatus(2);
+		savedPreparerPasserVadorEnHaut.setWhoDidIt(savedU1);
+		Task ToDoSavedPreparerPAsserVadorEnHaut = taskRep.save(savedPreparerPasserVadorEnBas);
+		
 		
 		SkillProfile laverSdBHautMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelLaverSdBHaut = skillNoteRep.save(new SkillNote(savedCuisine,2));
@@ -387,7 +392,9 @@ public class Launcher {
 		
 		Task savedPreparerLaverSdBHaut = taskRep.save(preparerLaverSdBHaut);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerLaverSdBHaut);
-	
+		savedPreparerLaverSdBHaut.setStatus(2);
+		savedPreparerLaverSdBHaut.setWhoDidIt(savedU2);
+		Task ToDoSavedPreparerLaverSdBHaut = taskRep.save(savedPreparerLaverSdBHaut);
 		
 		SkillProfile laverSdBBasMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelLaverSdBBas = skillNoteRep.save(new SkillNote(savedCuisine,2));
@@ -410,7 +417,9 @@ public class Launcher {
 		
 		Task savedPreparerLaverSdBBas = taskRep.save(preparerLaverSdBBas);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerLaverSdBBas);
-	
+		savedPreparerLaverSdBBas.setStatus(3);
+		savedPreparerLaverSdBBas.setWhoDidIt(savedU2);
+		Task ToDoSavedPreparerLaverSdBBas = taskRep.save(savedPreparerLaverSdBBas);
 	}
 	
 }

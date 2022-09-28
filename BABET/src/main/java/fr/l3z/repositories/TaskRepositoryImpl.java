@@ -2,6 +2,8 @@ package fr.l3z.repositories;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -9,8 +11,11 @@ import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 
+@ApplicationScoped
+@Stateless
 public class TaskRepositoryImpl implements TaskRepository {
 
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -64,6 +69,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 		taskAModifier.setSkillProfileMinimumToDo(t.getSkillProfileMinimumToDo());
 		taskAModifier.setSkillProfileMinimumToCheck(t.getSkillProfileMinimumToCheck());
 		taskAModifier.setStatus(t.getStatus());
+		taskAModifier.setWhoDidIt(t.getWhoDidIt());
 
 		entityManager.merge(taskAModifier);
 

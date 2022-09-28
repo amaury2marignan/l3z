@@ -131,11 +131,19 @@
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-							<h:graphicImage url="/resources/boutonBleu.png" width="15%" rendered="#{userPageBean.isOkReservationButton(p)}"/>
+						<h:commandLink action="#{userPageBean.reservationAction(p)}">
+						<h:graphicImage url="/resources/boutonBleu.png" width="15%" rendered="#{userPageBean.isOkReservationButton(p)}" />
+						</h:commandLink>
+						<h:commandLink action="#{userPageBean.doAction(p)}">
 							<h:graphicImage url="/resources/boutonFleche.png" width="15%" rendered="#{userPageBean.isOkDoButton(p)}"/>
+						</h:commandLink>
+						<h:commandLink action="#{userPageBean.checkAction(p)}">
 							<h:graphicImage url="/resources/boutonValid.png" width="15%" rendered="#{userPageBean.isOkCheckButton(p)}"/>
-							<h:graphicImage url="/resources/boutonTroisPoints.png"
-								width="15%" />
+						</h:commandLink>
+						<h:commandLink action="#{userPageBean.detailsAction(p)}">
+							<f:param name="taskId" value="#{p.id}" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
+						</h:commandLink>
 						</h:column>
 					</h:dataTable>
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Detail Tache</title>
+</h:head>
+<body>
+	<div class="content">
+
+		<div class="logoIndex">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="topBoxDetail">
+
+			topboxdetails
+		<div class="userName">Bienvenue #{detailTaskPageBean.user.userName}</div>
+		<div class="familyName">de #{detailTaskPageBean.family.familyName}</div>
+		<div class="taskName">Tache #{detailTaskPageBean.task.name}</div>
+		</div>
+
+		<div class="topRightDetail">
+
+			toprightdetails
+		</div>
+
+
+
+		<div class="actions">
+
+			<div class="boutonGauche">
+				<a href="../user/userPage.xhtml"> <img
+					src="../resources/babetid3.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../family/familyPage.xhtml"> <img
+					src="../resources/babetidfamily.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageShoppingList.xhtml"><img
+					src="../resources/boutonCourses.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageVote.xhtml"><img
+					src="../resources/boutonVote.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageRules.xhtml"><img
+					src="../resources/logoRegles.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageHistoric.xhtml"><img
+					src="../resources/boutonHistorique.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGaucheLong">
+				<a href="../user/userPageNew.xhtml"><img
+					src="../resources/boutonNewTask.png" width="95%" /> </a>
+			</div>
+		</div>
+
+		<div class="tasksListContener">
+			tasksListContener
+		</div>
+
+
+	</div>
+
+</body>
+</html>

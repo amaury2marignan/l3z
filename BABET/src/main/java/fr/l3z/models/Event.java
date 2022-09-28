@@ -1,6 +1,7 @@
 package fr.l3z.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Event {
 	@ManyToOne
 	private User user;
 	
-	private LocalDate date;
+	private LocalDateTime date;
 	
 	@ManyToOne
 	private Rule rule;
@@ -35,7 +36,7 @@ public class Event {
 	
 	private String action;
 
-	public Event(User user, LocalDate date, Rule rule, Task task, Project project, Domain domain, String action) {
+	public Event(User user, LocalDateTime date, Rule rule, Task task, Project project, Domain domain, String action) {
 		super();
 		this.user = user;
 		this.date = date;
@@ -58,11 +59,11 @@ public class Event {
 		this.user = user;
 	}
 
-	public LocalDate getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
@@ -119,14 +120,6 @@ public class Event {
 		builder.append(user);
 		builder.append(", date=");
 		builder.append(date);
-		builder.append(", rule=");
-		builder.append(rule);
-		builder.append(", task=");
-		builder.append(task);
-		builder.append(", project=");
-		builder.append(project);
-		builder.append(", domain=");
-		builder.append(domain);
 		builder.append(", action=");
 		builder.append(action);
 		builder.append("]");
