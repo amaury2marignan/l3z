@@ -41,6 +41,9 @@ public class Task {
 	private User whoDidIt;
 	
 	private int status;
+	
+	@ManyToOne
+	private Task nextTask;
 
 	public Task(String name, String description, LocalDateTime nextDate, int repeatAfter,
 			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck) {
@@ -52,6 +55,7 @@ public class Task {
 		this.skillProfileMinimumToDo = skillProfileMinimumToDo;
 		this.skillProfileMinimumToCheck = skillProfileMinimumToCheck;
 		this.status = 0;
+		this.nextTask = null;
 	}
 	
 	
@@ -161,6 +165,16 @@ public class Task {
 
 	public void setRule(Rule rule) {
 		this.rule = rule;
+	}
+
+
+	public Task getNextTask() {
+		return nextTask;
+	}
+
+
+	public void setNextTask(Task nextTask) {
+		this.nextTask = nextTask;
 	}
 
 }

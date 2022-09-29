@@ -10,69 +10,87 @@
 	<title>Detail Tache</title>
 </h:head>
 <body>
-	<div class="content">
+	<div class="dtpContent">
 
-		<div class="logoIndex">
+		<div class="dtpTopLeft">
 			<a href="../index.xhtml"> <img
 				src="../resources/babetlogocarre.png" width="100%" />
 			</a>
 		</div>
 
-		<div class="topBoxDetail">
+		<div class="dtpTop">
+		
+			<div class="dtpTaskName">#{detailTaskPageBean.task.name}</div>
+			<div class="dtpTaskInfo">
+				<div class="dtpDomain">#{detailTaskPageBean.task.rule.domain.name}</div>
+				<div class="dtpRule">#{detailTaskPageBean.task.rule.name}</div>
+			</div>
+			
+			<div class="dtpSkillProfile">
+				<ui:repeat value="#{detailTaskPageBean.task.skillProfileMinimumToDo.skillNoteList}"
+					var="p">
+					<div class="dtpTaskSkill">
+						<div class="dtpSkillName">#{p.skill.name}</div>
 
-			topboxdetails
-		<div class="userName">Bienvenue #{detailTaskPageBean.user.userName}</div>
-		<div class="familyName">de #{detailTaskPageBean.family.familyName}</div>
-		<div class="taskName">Tache #{detailTaskPageBean.task.name}</div>
+						<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote1(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote2(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote3(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote4(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote5(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote1Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote2Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote3Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote4Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.skillNote5Inverted(p.score)}" />
+						</div>
+					</div>
+				</ui:repeat>
+			
+			
+			</div>
 		</div>
-
-		<div class="topRightDetail">
-
-			toprightdetails
-		</div>
-
-
-
-		<div class="actions">
-
-			<div class="boutonGauche">
-				<a href="../user/userPage.xhtml"> <img
-					src="../resources/babetid3.png" width="95%" />
+		<div class="dtpLogoPerso">
+					<a href="../user/userPage.xhtml"> <img
+					src="../resources/babetid3.png" width="100%" />
 				</a>
 			</div>
-			<div class="boutonGauche">
-				<a href="../family/familyPage.xhtml"> <img
-					src="../resources/babetidfamily.png" width="95%" />
-				</a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageShoppingList.xhtml"><img
-					src="../resources/boutonCourses.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageVote.xhtml"><img
-					src="../resources/boutonVote.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageRules.xhtml"><img
-					src="../resources/logoRegles.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageHistoric.xhtml"><img
-					src="../resources/boutonHistorique.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGaucheLong">
-				<a href="../user/userPageNew.xhtml"><img
-					src="../resources/boutonNewTask.png" width="95%" /> </a>
-			</div>
-		</div>
-
-		<div class="tasksListContener">
-			tasksListContener
+		<div class="dtpLeft">
+			<h:panelGroup class="dtpPeriod" layout="block" rendered="#{detailTaskPageBean.repeatDay()}">tous les jours</h:panelGroup>
+			<h:panelGroup class="dtpPeriod" layout="block" rendered="#{detailTaskPageBean.repeat()}">tous les #{detailTaskPageBean.task.repeatAfter} jours</h:panelGroup>
+			<h:panelGroup class="dtpNext" layout="block" rendered="#{detailTaskPageBean.next()}">tâche suivante #{detailTaskPageBean.task.nextTask.name}</h:panelGroup>
+			<div class="dtpPoints"><div class="dtpScore">5</div>points</div>
+		
 		</div>
 
 
+
+		<div class="dtpMiddle">
+			#{detailTaskPageBean.task.description}
+		
+		</div>
+
+		<div class="dtpDownLeft">
+				dtpDownLeft
+		</div>
+		
+		<div class="dtpDownRight">
+			<div class="dtpStatus">dtpStatus</div>
+			<div class="dtpButtons">dtpButtons</div>
+		</div>
 	</div>
+
+	
 
 </body>
 </html>

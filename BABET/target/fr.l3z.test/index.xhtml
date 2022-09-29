@@ -29,30 +29,31 @@
 		<div class="forms">
 			
 			<div class="login-form">
-				<p>Connection Parent</p>
-
-				<h:form>
+				<div class="login-form-title">Connection Parent</div>
+				
+				<h:form class="login-form-form">
 					<h:inputText value="#{loginBean.userName}"
-						a:placeholder="Nom d'utilisateur" />
+						a:placeholder="Nom d'utilisateur" size="20" style="font-size:10px;border-radius: 5px; margin:2px;border:hidden"/>
 					<br />
 					<h:inputSecret value="#{loginBean.password}"
-						a:placeholder="Mot de passe" />
+						a:placeholder="Mot de passe"  size="20" style="font-size:10px ;border-radius: 5px; margin:2px;border:hidden"/>
 					<br />
 					<h:commandButton class="btn btn-default btn-primary"
-						action="#{loginBean.doLogin}" value="Connection Parent" />
+						action="#{loginBean.doLogin}" value="Connection Parent" size="20" style="font-size:10px; border-radius: 5px ; margin:2px;border:hidden;font-family:Berlin Sans FB Demi; color:#44546A; background-color:#FFD966"/>
 				</h:form>
 			</div>
 			<div class="loginFamily-form">
-				<p>Connection Famille</p>
-				<h:form>
+				<div class="login-form-title">Connection Famille</div>
+				
+				<h:form class="login-form-form">
 					<h:inputText value="#{loginBean.familyName}"
-						a:placeholder="Nom de la Famille" />
+						a:placeholder="Nom de la Famille" size="20" style="font-size:10px;border-radius: 5px; margin:2px;border:hidden"/>
 					<br />
 					<h:inputSecret value="#{loginBean.passwordFamily}"
-						a:placeholder="Mot de passe" />
+						a:placeholder="Mot de passe" size="20" style="font-size:10px ; border-radius: 5px; margin:2px; border:hidden"/>
 					<br />
 					<h:commandButton class="btn btn-default btn-primary"
-						action="#{loginBean.doLoginFamily}" value="Connection Famille" />
+						action="#{loginBean.doLoginFamily}" value="Connection Famille" size="20" style=" font-size:10px ;border-radius: 5px; margin:2px ; background-color:#FFD966; border:hidden; font-family: Berlin Sans FB Demi ; color:#A6A6A6"/>
 				</h:form>
 			</div>
 		</div>

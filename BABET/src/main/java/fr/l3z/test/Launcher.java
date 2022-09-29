@@ -193,7 +193,9 @@ public class Launcher {
 		
 		SkillProfile petitDejMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelPetitDej = skillNoteRep.save(new SkillNote(savedCuisine,2));
+		SkillNote savedMenageLevelPetitDej = skillNoteRep.save(new SkillNote(savedMenage,3));
 		petitDejMinimumSkillProfileToDo.getSkillNoteList().add(savedCuisineLevelPetitDej);
+		petitDejMinimumSkillProfileToDo.getSkillNoteList().add(savedMenageLevelPetitDej);
 		SkillProfile savedPetitDejMinimumSkillProfileToDo = skillProfileRep.save(petitDejMinimumSkillProfileToDo);
 		
 		SkillProfile petitDejMinimumSkillProfileToCheck = new SkillProfile();
@@ -201,23 +203,9 @@ public class Launcher {
 		petitDejMinimumSkillProfileToCheck.getSkillNoteList().add(savedCuisineLevelPetitDejCheck);
 		SkillProfile savedPetitDejMinimumSkillProfileToCheck = skillProfileRep.save(petitDejMinimumSkillProfileToCheck);
 		
-		
-		Task preparerPetitDej = new Task(
-				"Préparer le petit déjeuner",
-				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
-				1,
-				savedPetitDejMinimumSkillProfileToDo,
-				savedPetitDejMinimumSkillProfileToCheck);
-		
-		Task savedPreparerPetitDej = taskRep.save(preparerPetitDej);
-		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPetitDej);
-		
-		
 		Rule preparerRepas = new Rule();
 		preparerRepas.setName("Preparation des Repas");
 		preparerRepas.setDescription("règles et tâches concernantla préparation des repas");
-		preparerRepas.getTasksList().add(savedPreparerPetitDej);
 		SkillNote savedCuisinePreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedCuisine,5));
 		SkillNote savedParentPreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedParent,5));
 		SkillProfile preparerRepasSkillProfile = new SkillProfile();
@@ -229,6 +217,29 @@ public class Launcher {
 		Rule savedPreparerRepas = ruleRep.save(preparerRepas);
 		
 		System.out.println(savedPreparerRepas);
+		
+		Task preparerPetitDej = new Task(
+				"Préparer le petit déjeuner",
+				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
+				LocalDateTime.of(2022, 9, 1, 20, 52),
+				1,
+				savedPetitDejMinimumSkillProfileToDo,
+				savedPetitDejMinimumSkillProfileToCheck);
+		Task nettoyerPetitDej = new Task(
+				"Nettoyer le petit déjeuner",
+				"Mettre les couverts à la machine,ranger les aliments, nettoyer la table et le sol",
+				LocalDateTime.of(2022, 9, 1, 20, 52),
+				3,
+				savedPetitDejMinimumSkillProfileToDo,
+				savedPetitDejMinimumSkillProfileToCheck);
+		Task savedNettoyerPetitDej =taskRep.save(nettoyerPetitDej);
+		preparerPetitDej.setRule(preparerRepas);
+		preparerPetitDej.setNextTask(savedNettoyerPetitDej);
+		Task savedPreparerPetitDej = taskRep.save(preparerPetitDej);
+		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPetitDej);
+		
+		
+		
 		
 		
 		SkillProfile dejMinimumSkillProfileToDo = new SkillProfile();

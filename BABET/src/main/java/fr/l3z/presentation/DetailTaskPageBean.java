@@ -42,6 +42,7 @@ public class DetailTaskPageBean implements Serializable {
 	
 	
 	
+	
 	@PostConstruct
 	private void init() {
 		System.out.println("detailtaskbeaninit");
@@ -52,8 +53,113 @@ public class DetailTaskPageBean implements Serializable {
 		System.out.println("id de la tache : "+taskIdStr);
 		Long taskId = Long.valueOf(taskIdStr);
 		this.task = taskRep.find(taskId);
+		
+	}
+	
+	public Boolean repeat() {
+		if(this.task.getRepeatAfter()>1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean repeatDay() {
+		if(this.task.getRepeatAfter()==1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean next() {
+		if (this.task.getNextTask()==null){
+			return false;
+		} else {
+			return true;
+		}
+	}
+	public Boolean skillNote1(int score){
+		if(score>=1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
+	public Boolean skillNote2(int score){
+		if(score>=2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean skillNote3(int score){
+		if(score>=3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean skillNote4(int score){
+		if(score>=4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean skillNote5(int score){
+		if(score>=5) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
+	public Boolean skillNote1Inverted(int score){
+		if(score>=1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote2Inverted(int score){
+		if(score>=2) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote3Inverted(int score){
+		if(score>=3) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote4Inverted(int score){
+		if(score>=4) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote5Inverted(int score){
+		if(score>=5) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -85,6 +191,8 @@ public class DetailTaskPageBean implements Serializable {
 	public void setEventRep(EventRepository eventRep) {
 		this.eventRep = eventRep;
 	}
+
+
 	
 	
 }

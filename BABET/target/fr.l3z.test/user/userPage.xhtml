@@ -141,8 +141,8 @@
 							<h:graphicImage url="/resources/boutonValid.png" width="15%" rendered="#{userPageBean.isOkCheckButton(p)}"/>
 						</h:commandLink>
 						<h:commandLink action="#{userPageBean.detailsAction(p)}">
-							<h:graphicImage url="/resources/boutonTroisPoints.png"
-								width="15%" />
+							<f:param name="taskId" value="#{p.id}" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
 						</h:commandLink>
 						</h:column>
 					</h:dataTable>
