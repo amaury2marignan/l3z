@@ -41,6 +41,7 @@ public class Task {
 	private User whoDidIt;
 	
 	private int status;
+	private int nbPoints;
 	
 	@ManyToOne
 	private Task nextTask;
@@ -56,6 +57,7 @@ public class Task {
 		this.skillProfileMinimumToCheck = skillProfileMinimumToCheck;
 		this.status = 0;
 		this.nextTask = null;
+		this.nbPoints = 0;
 	}
 	
 	
@@ -175,6 +177,16 @@ public class Task {
 
 	public void setNextTask(Task nextTask) {
 		this.nextTask = nextTask;
+	}
+
+
+	public int getNbPoints() {
+		return nbPoints;
+	}
+
+
+	public void setNbPoints(int nbPoints) {
+		this.nbPoints = nbPoints;
 	}
 
 }

@@ -235,6 +235,7 @@ public class Launcher {
 		Task savedNettoyerPetitDej =taskRep.save(nettoyerPetitDej);
 		preparerPetitDej.setRule(preparerRepas);
 		preparerPetitDej.setNextTask(savedNettoyerPetitDej);
+		preparerPetitDej.setStatus(1);
 		Task savedPreparerPetitDej = taskRep.save(preparerPetitDej);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPetitDej);
 		
@@ -260,6 +261,7 @@ public class Launcher {
 				1,
 				savedDejMinimumSkillProfileToDo,
 				savedDejMinimumSkillProfileToCheck);
+		
 		
 		Task savedPreparerDej = taskRep.save(preparerDej);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerDej);

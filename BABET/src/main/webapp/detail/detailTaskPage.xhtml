@@ -19,15 +19,16 @@
 		</div>
 
 		<div class="dtpTop">
-		
+
 			<div class="dtpTaskName">#{detailTaskPageBean.task.name}</div>
 			<div class="dtpTaskInfo">
 				<div class="dtpDomain">#{detailTaskPageBean.task.rule.domain.name}</div>
 				<div class="dtpRule">#{detailTaskPageBean.task.rule.name}</div>
 			</div>
-			
+
 			<div class="dtpSkillProfile">
-				<ui:repeat value="#{detailTaskPageBean.task.skillProfileMinimumToDo.skillNoteList}"
+				<ui:repeat
+					value="#{detailTaskPageBean.task.skillProfileMinimumToDo.skillNoteList}"
 					var="p">
 					<div class="dtpTaskSkill">
 						<div class="dtpSkillName">#{p.skill.name}</div>
@@ -56,41 +57,83 @@
 						</div>
 					</div>
 				</ui:repeat>
-			
-			
+
+
 			</div>
 		</div>
 		<div class="dtpLogoPerso">
-					<a href="../user/userPage.xhtml"> <img
-					src="../resources/babetid3.png" width="100%" />
-				</a>
-			</div>
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid3.png" width="100%" />
+			</a>
+		</div>
 		<div class="dtpLeft">
-			<h:panelGroup class="dtpPeriod" layout="block" rendered="#{detailTaskPageBean.repeatDay()}">tous les jours</h:panelGroup>
-			<h:panelGroup class="dtpPeriod" layout="block" rendered="#{detailTaskPageBean.repeat()}">tous les #{detailTaskPageBean.task.repeatAfter} jours</h:panelGroup>
-			<h:panelGroup class="dtpNext" layout="block" rendered="#{detailTaskPageBean.next()}">tâche suivante #{detailTaskPageBean.task.nextTask.name}</h:panelGroup>
-			<div class="dtpPoints"><div class="dtpScore">5</div>points</div>
-		
+			<h:panelGroup class="dtpPeriod" layout="block"
+				rendered="#{detailTaskPageBean.repeatDay()}">tous les jours</h:panelGroup>
+			<h:panelGroup class="dtpPeriod" layout="block"
+				rendered="#{detailTaskPageBean.repeat()}">tous les #{detailTaskPageBean.task.repeatAfter} jours</h:panelGroup>
+			<h:panelGroup class="dtpNext" layout="block"
+				rendered="#{detailTaskPageBean.next()}">tâche suivante #{detailTaskPageBean.task.nextTask.name}</h:panelGroup>
+			<div class="dtpPoints">
+				<div class="dtpScore">#{detailTaskPageBean.task.nbPoints}</div>
+				points
+			</div>
+
 		</div>
 
 
 
-		<div class="dtpMiddle">
-			#{detailTaskPageBean.task.description}
-		
-		</div>
+		<div class="dtpMiddle">#{detailTaskPageBean.task.description}</div>
 
 		<div class="dtpDownLeft">
-				dtpDownLeft
+			Historique
+			<div class="dtpEventList">
+				<h:form>
+
+					<h:dataTable value="#{detailTaskPageBean.eventList}" var="p"
+						columnClasses="eventListColumn1,eventListColumn2">
+						<h:column>
+							<f:facet name="header"></f:facet>
+							#{detailTaskPageBean.giveDate(p)}
+						</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+							#{p.action}
+						</h:column>
+
+					</h:dataTable>
+
+				</h:form>
+			</div>
 		</div>
-		
+
 		<div class="dtpDownRight">
-			<div class="dtpStatus">dtpStatus</div>
-			<div class="dtpButtons">dtpButtons</div>
+			<h:panelGroup class="dtpStatusModel" layout="block"	rendered="#{detailTaskPageBean.status0()}"><div class="statusText">Modèle</div></h:panelGroup>
+			<h:panelGroup class="dtpStatusToDo" layout="block"	rendered="#{detailTaskPageBean.status1()}"><div class="statusText">A faire</div></h:panelGroup>
+			<h:panelGroup class="dtpStatusReserved" layout="block"	rendered="#{detailTaskPageBean.status2()}"><div class="statusText">Réservé</div></h:panelGroup>
+			<h:panelGroup class="dtpStatusDone" layout="block"	rendered="#{detailTaskPageBean.status3()}"><div class="statusText">Fait</div></h:panelGroup>
+			<h:panelGroup class="dtpStatusChecked" layout="block"	rendered="#{detailTaskPageBean.status4()}"><div class="statusText">Vérifié</div></h:panelGroup>
+			<h:panelGroup class="dtpStatusCancelled" layout="block"	rendered="#{detailTaskPageBean.status5()}"><div class="statusText">Annulé</div></h:panelGroup>
+			
+			<div class="dtpButtons">
+				<h:graphicImage url="/resources/boutonBleu.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkReservationButton()}" />
+				<h:graphicImage url="/resources/boutonFleche.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkDoButton()}" />
+				<h:graphicImage url="/resources/boutonCancel.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkCancelButton()}" />
+				<h:graphicImage url="/resources/boutonValid.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkCheckButton()}" />
+				<h:graphicImage url="/resources/boutonModify.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkModifyButton()}" />
+				<h:graphicImage url="/resources/boutonPlan.png" width="50%"
+								rendered="#{detailTaskPageBean.isOkPlanButton()}" />
+
+			
+			</div>
 		</div>
 	</div>
 
-	
+
 
 </body>
 </html>

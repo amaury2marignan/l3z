@@ -2,6 +2,8 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -10,10 +12,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.ManyToMany;
 
 import fr.l3z.models.Family;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
+import fr.l3z.models.Event;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
 import fr.l3z.repositories.TaskRepository;
@@ -39,6 +43,9 @@ public class DetailTaskPageBean implements Serializable {
 	private Family family = new Family();
 	private Task task = new Task();
 	
+	@ManyToMany
+	private List<Event> eventList = new ArrayList<Event>();
+	
 	
 	
 	
@@ -53,7 +60,119 @@ public class DetailTaskPageBean implements Serializable {
 		System.out.println("id de la tache : "+taskIdStr);
 		Long taskId = Long.valueOf(taskIdStr);
 		this.task = taskRep.find(taskId);
+		initEventList(this.task.getId());
 		
+	}
+	
+	
+	public void initEventList(Long t) {
+		this.eventList=eventRep.findByTask(t);
+	}
+	
+	public String giveDate(Event event) {
+		
+	return "le "+event.getDate().getDayOfMonth()+" / "+event.getDate().getMonthValue()+" à "+event.getDate().getHour()+":"+event.getDate().getMinute();
+	
+	
+	}
+	
+	public boolean isOkReservationButton() {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToDo()) && this.task.getStatus()==1 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkDoButton() {
+	
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToDo()) && ((this.task.getStatus()==1) || ((task.getStatus()==2)&&(task.getWhoDidIt().getId()==user.getId())))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkCheckButton() {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) && this.task.getStatus()==3 && this.task.getWhoDidIt().getId()!=this.user.getId()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkCancelButton() {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) && this.task.getStatus()==3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkPlanButton() {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) && this.task.getStatus()==0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkModifyButton() {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) && this.task.getStatus()==0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
+	public Boolean status0() {
+		if (this.task.getStatus()==0) {
+			return true;
+				} else {
+					return false;
+				}
+	}
+	
+	public Boolean status1() {
+		if (this.task.getStatus()==1) {
+			return true;
+				} else {
+					return false;
+				}
+	}
+	
+	public Boolean status2() {
+		if (this.task.getStatus()==2) {
+			return true;
+				} else {
+					return false;
+				}
+	}
+	
+	public Boolean status3() {
+		if (this.task.getStatus()==3) {
+			return true;
+				} else {
+					return false;
+				}
+	}
+	
+	public Boolean status4() {
+		if (this.task.getStatus()==4) {
+			return true;
+				} else {
+					return false;
+				}
+	}
+	
+	public Boolean status5() {
+		if (this.task.getStatus()==5) {
+			return true;
+				} else {
+					return false;
+				}
 	}
 	
 	public Boolean repeat() {
@@ -190,6 +309,14 @@ public class DetailTaskPageBean implements Serializable {
 
 	public void setEventRep(EventRepository eventRep) {
 		this.eventRep = eventRep;
+	}
+
+	public List<Event> getEventList() {
+		return eventList;
+	}
+
+	public void setEventList(List<Event> eventList) {
+		this.eventList = eventList;
 	}
 
 

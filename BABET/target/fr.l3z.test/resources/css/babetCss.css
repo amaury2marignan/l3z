@@ -224,6 +224,18 @@ body{
 	text-align:right;
 }
 
+.eventListColumn1{
+	width:30%;
+	text-align:left;
+	font-size:16px;
+	
+}
+
+.eventListColumn2{
+	text-align:right;
+	font-size:16px;
+}
+
 .boutonGauche{
 	width:40%;
 	margin:2px;
@@ -289,6 +301,7 @@ body{
 	border-radius: 5px;
 	border:hidden;
 	font-size:12px;
+	color:#ED7D31;
 		
 }
 .dtpRule{
@@ -345,7 +358,7 @@ body{
 
 .dtpLeft{
 	width:15%;
-	height:240px;
+	height:200px;
 	margin:2px;
 	border-radius: 5px;
 	border:hidden;
@@ -387,47 +400,117 @@ body{
 
 .dtpMiddle{
 	width:80%;
-	height:240px;
+	height:180px;
 	background-color:white;
 	margin:2px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 2px #7F7F7F;
+	overflow:auto;
+	padding:5px;
 }
 
 .dtpDownLeft{
 	width:75%;
 	height:100px;
-	background-color:purple;	
+	background-color:#A6A6A6;	
 	margin:2px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:#FFD966;
+	margin-top:-10px;
+	
 }
 
 .dtpDownRight{
 	width:20%;
-	height:100px;
-	background-color:white;	
+	margin:2px;
+	border-radius: 5px;
+	border:hidden;
+	margin-top:-10px;
+}
+
+.statusText{
+	vertical-align:middle;
+}
+.dtpStatusModel{
+	width:95%;
+	background-color:#3C6EC8;
 	margin:2px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+
+	
 }
 
-.dtpStatus{
+.dtpStatusToDo{
 	width:95%;
-	height:30%;
-	background-color:grey;
+	background-color:#ED7D31;
 	margin:2px;
 	border-radius: 5px;
-	box-shadow: 2px 2px 2px #7F7F7F;	
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+
+	
 }
+
+.dtpStatusReserved{
+	width:95%;
+	background-color:#3C6EC8;
+	margin:2px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+	
+	
+}
+
+.dtpStatusDone{
+	width:95%;
+	background-color:#70AD47;
+	margin:2px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+	
+	
+}
+
+.dtpStatusChecked{
+	width:95%;
+	background-color:#70AD47;
+	margin:2px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+	
+	
+}
+
+.dtpStatusCancelled{
+	width:95%;
+	background-color:#ED7D31;
+	margin:2px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	color:white;
+	
+	}
+
+
 
 .dtpButtons{
 	width:95%;
-	height:65%;
-	background-color:red;	
 	margin:2px;
 	border-radius: 5px;
-	box-shadow: 2px 2px 2px #7F7F7F;
+	border:hidden;
 }
 
 .dtpContent{
@@ -438,4 +521,17 @@ body{
 }
 .dtpScore{
 	font-size:45px;
+}
+
+.dtpEventList{
+	overflow:auto;
+	height:70%;
+	width:95%;
+	background-color:white;
+	color:black;
+	margin:5px;
+	margin-left:10px;
+	padding:2px;
+	border-radius: 5px;
+	
 }

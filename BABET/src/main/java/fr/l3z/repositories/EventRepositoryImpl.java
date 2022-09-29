@@ -72,6 +72,14 @@ public class EventRepositoryImpl implements EventRepository {
 		entityManager.merge(eventAModifier);
 		
 	}
+	
+	@Override
+	public List<Event> findByTask(Long taskId){
+		return entityManager
+			.createQuery("select u from Event u where u.task.id = :taskIdParam", Event.class)
+			.setParameter("taskIdParam", taskId)
+			.getResultList();
+	}
 
 	
 
