@@ -55,7 +55,7 @@ public class UserPageBean  implements Serializable {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
-		this.setTasksList(taskRep.findAll());
+		this.setTasksList(taskRep.findTasksToDo());
 	}
 	
 	public Boolean skillNote1(int score){
@@ -150,6 +150,8 @@ public class UserPageBean  implements Serializable {
 		}
 	}
 	
+	
+	
 	public boolean isOkDoButton(Task task) {
 	
 		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && ((task.getStatus()==1) || ((task.getStatus()==2)&&(task.getWhoDidIt().getId()==user.getId())))) {
@@ -159,8 +161,18 @@ public class UserPageBean  implements Serializable {
 		}
 	}
 	
+	
+	
 	public boolean isOkCheckButton(Task task) {
 		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt()!=this.user) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isOkPlanButton(Task task) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==0) {
 			return true;
 		} else {
 			return false;
@@ -179,7 +191,7 @@ public class UserPageBean  implements Serializable {
 				task,
 				null,
 				null,				
-				user.getUserName()+" réserve la tâche "+task.getName()	
+				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		System.out.println(savedNewEvent);
@@ -200,7 +212,7 @@ public class UserPageBean  implements Serializable {
 				task,
 				null,
 				null,				
-				user.getUserName()+" réalise la tâche "+task.getName()	
+				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		System.out.println(savedNewEvent);
@@ -220,13 +232,23 @@ public class UserPageBean  implements Serializable {
 				task,
 				null,
 				null,				
-				user.getUserName()+" valide la tâche "+task.getName()	
+				user.getUserName()+" a validé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		System.out.println(savedNewEvent);
 		
 		return "user/userPage.xhtml?faces-redirect=true";
 		
+	}
+	
+	public String modifyAction(Task taskD) {
+		this.task = taskD;
+		return "/detail/modifyTaskPage.xhtml";
+	}
+
+	public String planAction(Task taskD) {
+		this.task = taskD;
+		return "/detail/planTaskPage.xhtml";
 	}
 	
 	public String detailsAction(Task taskD) {

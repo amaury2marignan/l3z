@@ -52,6 +52,17 @@ public class TaskRepositoryImpl implements TaskRepository {
 		entityManager.remove(entityManager.find(Task.class, id));
 
 	}
+	@Override
+	public List<Task> findByStatus(int status){
+		return entityManager.createQuery("select u from Task u where u.status = :taskIdParam", Task.class)
+				.setParameter("taskIdParam", status).getResultList();
+	}
+	
+	@Override
+	public List<Task> findTasksToDo(){
+		return entityManager.createQuery("select u from Task u where u.status between '1' and '3'", Task.class)
+				.getResultList();
+	}
 
 	@Override
 	public void deleteByObject(Task t) {
@@ -109,6 +120,13 @@ public class TaskRepositoryImpl implements TaskRepository {
 			return false;
 		}
 
+	}
+
+	@Override
+	public List<Task> findModels() {
+		
+		return entityManager.createQuery("select u from Task u where u.status = 0", Task.class)
+				.getResultList();
 	}
 
 }

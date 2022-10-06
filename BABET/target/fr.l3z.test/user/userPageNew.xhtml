@@ -131,11 +131,21 @@
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-							<h:graphicImage url="/resources/boutonBleu.png" width="15%" />
-							<h:graphicImage url="/resources/boutonFleche.png" width="15%" />
-							<h:graphicImage url="/resources/boutonValid.png" width="15%" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png"
-								width="15%" />
+							<h:commandLink action="#{userPageBean.modifyAction(p)}">
+								<f:param name="taskId" value="#{p.id}" />
+								<h:graphicImage url="/resources/boutonModify.png" width="15%" />
+							</h:commandLink>
+
+							<h:commandLink action="#{userPageBean.planAction(p)}">
+								<f:param name="taskId" value="#{p.id}" />
+								<h:graphicImage url="/resources/boutonPlan.png" width="15%" />
+							</h:commandLink>
+
+							<h:commandLink action="#{userPageBean.detailsAction(p)}">
+								<f:param name="taskId" value="#{p.id}" />
+								<h:graphicImage url="/resources/boutonTroisPoints.png"
+									width="15%" />
+							</h:commandLink>
 						</h:column>
 					</h:dataTable>
 
