@@ -187,9 +187,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
@@ -208,9 +206,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
@@ -228,9 +224,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);

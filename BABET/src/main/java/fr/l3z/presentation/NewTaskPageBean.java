@@ -12,17 +12,13 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import fr.l3z.models.Domain;
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
-import fr.l3z.models.Rule;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
-import fr.l3z.repositories.DomainRepository;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
-import fr.l3z.repositories.RuleRepository;
 import fr.l3z.repositories.SkillProfileRepository;
 import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.TaskRepository;
@@ -52,18 +48,14 @@ public class NewTaskPageBean  implements Serializable {
 	private SkillRepository skillRep;
 	@Inject
 	private SkillProfileRepository skillProfileRep;
-	@Inject
-	private DomainRepository domainRep;
-	@Inject
-	private RuleRepository ruleRep;
+	
+	
 	
 	private User user = new User();
 	private Family family = new Family();
 	private Task task = new Task();
 	private List<Skill> skillList = new ArrayList<Skill>();
-	private List<Domain> domainsList = new ArrayList<Domain>();
-	private List<Rule> ruleList = new ArrayList<Rule>();
-	private List<String> ruleNamesList = new ArrayList<String>();
+	
 	
 	
 	
@@ -80,11 +72,7 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
 		this.task.setStatus(0);
 		this.skillList = skillRep.findAll();
-		this.domainsList = domainRep.findAll();
-		this.ruleList = ruleRep.findAll();
-		for (Rule r:ruleList) {
-			this.ruleNamesList.add(r.getName());
-		}
+		
 	}
 	
 	
@@ -349,32 +337,6 @@ public class NewTaskPageBean  implements Serializable {
 	}
 
 
-	public List<Domain> getDomainsList() {
-		return domainsList;
-	}
+	
 
-
-	public void setDomainsList(List<Domain> domainsList) {
-		this.domainsList = domainsList;
-	}
-
-
-	public List<Rule> getRuleList() {
-		return ruleList;
-	}
-
-
-	public void setRuleList(List<Rule> ruleList) {
-		this.ruleList = ruleList;
-	}
-
-
-	public List<String> getRuleNamesList() {
-		return ruleNamesList;
-	}
-
-
-	public void setRuleNamesList(List<String> ruleNamesList) {
-		this.ruleNamesList = ruleNamesList;
-	}
 }

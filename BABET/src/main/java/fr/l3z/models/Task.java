@@ -24,8 +24,6 @@ public class Task {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne
-	private Rule rule;
 	private String name;
 	private String description;
 	private LocalDateTime nextDate;
@@ -157,16 +155,6 @@ public class Task {
 
 	public void setWhoDidIt(User whoDidIt) {
 		this.whoDidIt = whoDidIt;
-	}
-
-
-	public Rule getRule() {
-		return rule;
-	}
-
-
-	public void setRule(Rule rule) {
-		this.rule = rule;
 	}
 
 

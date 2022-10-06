@@ -57,7 +57,6 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 	@Override
 	public void update(Long idAModifier, Project t) {
 		Project projectAModifier=entityManager.find(Project.class,idAModifier);
-		projectAModifier.setRule(t.getRule());
 		projectAModifier.setVote(t.getVote());
 		projectAModifier.setOpen(t.getOpen());
 		

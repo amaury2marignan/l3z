@@ -14,30 +14,21 @@ public class Project {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToOne
-	private Rule rule;
+	
 	
 	@OneToOne
 	private Vote vote;
 
 	private Boolean open;
 	
-	public Project(Rule rule) {
-		super();
-		this.rule = rule;
-		this.open = true;
-	}
+	
 	
 	public Project() {
 	}
 
-	public Rule getRule() {
-		return rule;
-	}
+	
 
-	public void setRule(Rule rule) {
-		this.rule = rule;
-	}
+	
 
 	public Vote getVote() {
 		return vote;
@@ -64,8 +55,6 @@ public class Project {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Project [id=");
 		builder.append(id);
-		builder.append(", rule=");
-		builder.append(rule);
 		builder.append(", vote=");
 		builder.append(vote);
 		builder.append(", open=");

@@ -12,17 +12,14 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import fr.l3z.models.Domain;
+
 import fr.l3z.models.Family;
-import fr.l3z.models.Rule;
 import fr.l3z.models.Skill;
 import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
-import fr.l3z.repositories.DomainRepository;
 import fr.l3z.repositories.FamilyRepository;
-import fr.l3z.repositories.RuleRepository;
 import fr.l3z.repositories.SkillNoteRepository;
 import fr.l3z.repositories.SkillProfileRepository;
 import fr.l3z.repositories.SkillRepository;
@@ -41,14 +38,12 @@ public class Launcher {
 	private SkillRepository skillRep;
 	@Inject
 	private SkillNoteRepository skillNoteRep;
-	@Inject
-	private DomainRepository domainRep;
+	
 	@Inject
 	private TaskRepository taskRep;
 	@Inject
 	private SkillProfileRepository skillProfileRep;
-	@Inject
-	private RuleRepository ruleRep;
+	
 	
 	
 	@PostConstruct
@@ -152,7 +147,7 @@ public class Launcher {
 		System.out.println("nouvelle entrée : " + savedU3);
 		
 		
-		User u4 = new User("fereBabet","0000");
+		User u4 = new User("frereBabet","0000");
 		User savedU4 = userRep.save(u4);
 		List<Family> list4 = new ArrayList<Family>();
 		list4.add(savedF2);
@@ -187,9 +182,7 @@ public class Launcher {
 		SkillNote savedMenageLevelNotreCuisine = skillNoteRep.save(menageLevelNotreCuisine);
 		notreCuisineSkillProfile.getSkillNoteList().add(savedMenageLevelNotreCuisine);
 		SkillProfile savedNotreCuisineSkillProfile = skillProfileRep.save(notreCuisineSkillProfile);
-		Domain notreCuisine = new Domain("Cuisine","Lieu de préaration et consommation des repas",savedF2,savedNotreCuisineSkillProfile);
-			
-		Domain notreCuisineSaved = domainRep.save(notreCuisine);
+		
 		
 		SkillProfile petitDejMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelPetitDej = skillNoteRep.save(new SkillNote(savedCuisine,2));
@@ -203,20 +196,14 @@ public class Launcher {
 		petitDejMinimumSkillProfileToCheck.getSkillNoteList().add(savedCuisineLevelPetitDejCheck);
 		SkillProfile savedPetitDejMinimumSkillProfileToCheck = skillProfileRep.save(petitDejMinimumSkillProfileToCheck);
 		
-		Rule preparerRepas = new Rule();
-		preparerRepas.setName("Preparation des Repas");
-		preparerRepas.setDescription("règles et tâches concernantla préparation des repas");
+		
 		SkillNote savedCuisinePreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedCuisine,5));
 		SkillNote savedParentPreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedParent,5));
 		SkillProfile preparerRepasSkillProfile = new SkillProfile();
 		preparerRepasSkillProfile.getSkillNoteList().add(savedParentPreparerRepasSkillNote);
 		preparerRepasSkillProfile.getSkillNoteList().add(savedCuisinePreparerRepasSkillNote);
 		SkillProfile savedPreparerRepasSkillProfile = skillProfileRep.save(preparerRepasSkillProfile);
-		preparerRepas.setSkillProfileMinimumToUpdate(savedPreparerRepasSkillProfile);
-		preparerRepas.setDomain(notreCuisineSaved);
-		Rule savedPreparerRepas = ruleRep.save(preparerRepas);
 		
-		System.out.println(savedPreparerRepas);
 		
 		Task preparerPetitDej = new Task(
 				"Préparer le petit déjeuner",
@@ -233,7 +220,6 @@ public class Launcher {
 				savedPetitDejMinimumSkillProfileToDo,
 				savedPetitDejMinimumSkillProfileToCheck);
 		Task savedNettoyerPetitDej =taskRep.save(nettoyerPetitDej);
-		preparerPetitDej.setRule(preparerRepas);
 		preparerPetitDej.setNextTask(savedNettoyerPetitDej);
 		preparerPetitDej.setStatus(1);
 		Task savedPreparerPetitDej = taskRep.save(preparerPetitDej);
@@ -355,7 +341,6 @@ public class Launcher {
 		Task savedPreparerPasserVadorEnBas = taskRep.save(preparerPasserVadorEnBas);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPasserVadorEnBas);
 		savedPreparerPasserVadorEnBas.setStatus(1);
-		savedPreparerPasserVadorEnBas.setRule(savedPreparerRepas);
 		Task ToDoSavedPreparerPAsserVadorEnBas = taskRep.save(savedPreparerPasserVadorEnBas);
 		
 		SkillProfile passerVadorEnHautMinimumSkillProfileToDo = new SkillProfile();
