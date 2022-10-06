@@ -2,10 +2,12 @@ package fr.l3z.repositories;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Family;
+import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.User;
 
@@ -13,6 +15,8 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Inject
+	private SkillRepository skillRep;
 	
 	public SkillProfileRepositoryImpl() {
 		
@@ -64,7 +68,43 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 		entityManager.merge(skillProfileAModifier);
 		
 	}
+	@Override
+	public boolean isThisSkillIn(Long skillId,SkillProfile skillProfileToCheck) {
+		for (SkillNote sn : skillProfileToCheck.getSkillNoteList()) {
+			if (sn.getSkill().getId()==skillId){
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
 
+	@Override
+	public int getScore(Long skillId, SkillProfile skillProfileToCheck) {
+		for (SkillNote sn: skillProfileToCheck.getSkillNoteList()) {
+			if (sn.getSkill().getId()==skillId){
+				return sn.getScore();
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public void setSkillScore(Long skillId, SkillProfile skillProfileToUpdate, int score) {
+	
+		
+		if (this.isThisSkillIn(skillId,skillProfileToUpdate)) {
+			for (SkillNote sn: skillProfileToUpdate.getSkillNoteList()) {
+				if (sn.getSkill().getId()==skillId){
+					sn.setScore(score);
+				}
+			}
+		} else {
+			skillProfileToUpdate.getSkillNoteList().add(new SkillNote(skillRep.find(skillId),score));
+		}
+		
+	}
 	
 
 }

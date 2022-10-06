@@ -2,19 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
 	<h:outputStylesheet library="css" name="babetCss.css" />
 
-	<title>Page Nouvelle Tâche</title>
+	<title>Création d'une nouvelle Tache</title>
 </h:head>
-
 <body>
-	<div class="content">
+<h:form>
+	<div class="dtpContent">
+	
 
 		<div class="dtpTopLeft">
 			<a href="../index.xhtml"> <img
@@ -24,98 +22,95 @@
 
 		<div class="dtpTop">
 
-			<div class="dtpTaskName">Planifier une nouvelle Tache</div>
-					
-		</div>
+			<div class="dtpTaskName">
 			
+			<h:inputText value="#{newTaskPageBean.task.name}" style="font-family: Berlin Sans FB Demi;width:78%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:30px;color:#FFD966;padding-left:5px;"/>
+			
+				</div>
+			<div class="dtpTaskInfo">
+				<h:selectOneMenu  value="#{newTaskPageBean.task.rule.name}" style="font-family: Berlin Sans FB Demi;width:95%;	height:55%;	margin:2px;	border-radius: 5px;	border:hidden;	color:#44546A;	font-size:2px;	align-items:center;    justify-content:center;">
+				<f:selectItems value="#{newTaskPageBean.ruleNamesList}"/>
+				</h:selectOneMenu>
+				</div>
+
+			<div class="dtpSkillProfile">
+				<ui:repeat
+					value="#{newTaskPageBean.skillList}"
+					var="p">
+					<div class="dtpTaskSkill">
+						<div class="dtpSkillName">#{p.name}</div>
+
+						<div class="stars">
+						<h:commandLink action="#{newTaskPageBean.star0Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote1(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star2Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote2(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star3Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote3(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star4Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote4(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star5Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote5(p.id)}" />
+								</h:commandLink>
+								
+						<h:commandLink action="#{newTaskPageBean.star1Action(p)}">	
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote1Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star2Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote2Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star3Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote3Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star4Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote4Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{newTaskPageBean.star5Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{newTaskPageBean.skillNote5Inverted(p.id)}" />
+								</h:commandLink>
+						</div>
+					</div>
+				</ui:repeat>
+
+
+			</div>
+		</div>
 		<div class="dtpLogoPerso">
 			<a href="../user/userPage.xhtml"> <img
 				src="../resources/babetid3.png" width="95%" />
 			</a>
 		</div>
+		<div class="dtpLeft">
 			
-
-		<div class="actions">
-
-			<div class="boutonGauche">
-				<a href="../user/userPage.xhtml"> <img
-					src="../resources/babetid3.png" width="95%" />
-				</a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../family/familyPage.xhtml"> <img
-					src="../resources/babetidfamily.png" width="95%" />
-				</a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageShoppingList.xhtml"><img
-					src="../resources/boutonCourses.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageVote.xhtml"><img
-					src="../resources/boutonVote.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageRules.xhtml"><img
-					src="../resources/logoRegles.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGauche">
-				<a href="../user/userPageHistoric.xhtml"><img
-					src="../resources/boutonHistorique.png" width="95%" /> </a>
-			</div>
-			<div class="boutonGaucheLong">
-				<a href="../user/userPageNew.xhtml"><img
-					src="../resources/boutonNewTask.png" width="95%" /> </a>
-			</div>
 		</div>
 
 
 
-
-
-		<div class="tasksListContener">
-			Liste des modèles
-			<div class="TasksList">
-				<h:form>
-
-					<h:dataTable value="#{newTaskPageBean.tasksList}" var="p"
-						columnClasses="column1,column2,column3">
-						<h:column>
-							<f:facet name="header"></f:facet>
-					#{p.name}
-				</h:column>
-						<h:column>
-							<f:facet name="header"></f:facet>
-					#{p.nextDate}
-				</h:column>
-						<h:column>
-							<f:facet name="header"></f:facet>
-						<h:commandLink action="#{newTaskPageBean.modifyAction(p)}">
-						<h:graphicImage url="/resources/boutonModify.png" width="15%" rendered="#{newTaskPageBean.isOkModifyButton(p)}" />
-						</h:commandLink>
-						<h:commandLink action="#{newTaskPageBean.planAction(p)}">
-						<h:graphicImage url="/resources/boutonPlan.png" width="15%" rendered="#{newTaskPageBean.isOkPlanButton(p)}" />
-						</h:commandLink>
-						<h:commandLink action="#{userPageBean.doAction(p)}">
-							<h:graphicImage url="/resources/boutonFleche.png" width="15%" rendered="#{userPageBean.isOkDoButton(p)}"/>
-						</h:commandLink>
-						<h:commandLink action="#{userPageBean.detailsAction(p)}">
-							<f:param name="taskId" value="#{p.id}" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
-						</h:commandLink>
-						</h:column>
-					</h:dataTable>
-
-				</h:form>
-			</div>
+		<div class="dtpMiddle">
+			Détails<br/>
+			<h:inputTextarea value="#{newTaskPageBean.task.description}" style="font-family: Berlin Sans FB Demi;width:95%;height:90%;margin:2px;border-radius:5px;border:hidden;font-size:15px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			
 		</div>
 
+</div>
 
+	
+</h:form>
 
-
-
-
-	</div>
 
 </body>
 </html>

@@ -260,7 +260,7 @@ body{
 }
 
 .dtpTop{
-	width:75%;
+	width:76%;
 	height:74px;
 	background-color:#44546A;
 	display:flex;
@@ -650,3 +650,5 @@ body{
 	flex-wrap: wrap;
 	vertical-align:middle;
 }
+
+

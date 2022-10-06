@@ -54,8 +54,10 @@ public class PlanTaskPageBean implements Serializable {
 		Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String taskIdStr = map.get("taskId");
 		System.out.println("id de la tache : "+taskIdStr);
+		if(taskIdStr!=null) {
 		Long taskId = Long.valueOf(taskIdStr);
 		this.task = taskRep.find(taskId);
+		} 
 	
 	}
 	
