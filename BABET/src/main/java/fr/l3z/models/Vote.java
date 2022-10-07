@@ -21,6 +21,12 @@ public class Vote {
 	@OneToOne
 	private SkillProfile skillProfile;
 	
+	@OneToOne
+	private Task originalTask;
+	
+	@OneToOne
+	private Task newTask;
+	
 	private Boolean openToVote;
 
 	public Vote() {
@@ -46,6 +52,22 @@ public class Vote {
 
 	public void setOpenToVote(Boolean openToVote) {
 		this.openToVote = openToVote;
+	}
+
+	public Task getOriginalTask() {
+		return originalTask;
+	}
+
+	public void setOriginalTask(Task originalTask) {
+		this.originalTask = originalTask;
+	}
+
+	public Task getNewTask() {
+		return newTask;
+	}
+
+	public void setNewTask(Task newTask) {
+		this.newTask = newTask;
 	}
 
 	@Override

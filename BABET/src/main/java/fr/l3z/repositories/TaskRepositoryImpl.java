@@ -81,6 +81,8 @@ public class TaskRepositoryImpl implements TaskRepository {
 		taskAModifier.setSkillProfileMinimumToCheck(t.getSkillProfileMinimumToCheck());
 		taskAModifier.setStatus(t.getStatus());
 		taskAModifier.setWhoDidIt(t.getWhoDidIt());
+		taskAModifier.setNextTask(t.getNextTask());
+		taskAModifier.setNbPoints(t.getNbPoints());
 
 		entityManager.merge(taskAModifier);
 
@@ -127,6 +129,13 @@ public class TaskRepositoryImpl implements TaskRepository {
 		
 		return entityManager.createQuery("select u from Task u where u.status = 0", Task.class)
 				.getResultList();
+	}
+
+	@Override
+	public Task findByName(String nextTaskName) {
+		return entityManager.createQuery("select u from Task u where u.name = :taskNameParam", Task.class)
+				.setParameter("taskNameParam", nextTaskName).getSingleResult();
+		
 	}
 
 }

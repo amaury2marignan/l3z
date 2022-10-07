@@ -29,10 +29,10 @@ public class Task {
 	private LocalDateTime nextDate;
 	private int repeatAfter;
 	
-	@OneToOne
+	@ManyToOne
 	private SkillProfile skillProfileMinimumToDo;
 	
-	@OneToOne
+	@ManyToOne
 	private SkillProfile skillProfileMinimumToCheck;
 	
 	@ManyToOne
@@ -124,6 +124,8 @@ public class Task {
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
+		builder.append(", nbpoints=");
+		builder.append(nbPoints);
 		builder.append(", nextDate=");
 		builder.append(nextDate);
 		builder.append(", repeatAfter=");

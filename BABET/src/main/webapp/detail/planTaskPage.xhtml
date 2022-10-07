@@ -21,10 +21,7 @@
 		<div class="dtpTop">
 
 			<div class="dtpTaskName">#{planTaskPageBean.task.name}</div>
-			<div class="dtpTaskInfo">
-				<div class="dtpDomain">#{planTaskPageBean.task.rule.domain.name}</div>
-				<div class="dtpRule">#{planTaskPageBean.task.rule.name}</div>
-			</div>
+			
 
 			<div class="dtpSkillProfile">
 				<ui:repeat
@@ -101,11 +98,19 @@
 				<h:panelGroup class="ptpMaintenant" layout="block">
 					<div class="statusText">Maintenant</div>
 				</h:panelGroup>
+				<h:form>
+				<h:commandLink action="#{planTaskPageBean.boutonPlanNow()}">
 				<h:graphicImage url="/resources/boutonPlan.png" width="30%" style="margin-left:7px" />
-				<h:graphicImage url="/resources/boutonBleu.png" width="30%"
+				</h:commandLink>
+				<h:commandLink action="#{planTaskPageBean.boutonPlanReservation()}">
+					<h:graphicImage url="/resources/boutonBleu.png" width="30%" 
 					rendered="#{planTaskPageBean.isOkReservationButton()}" />
-				<h:graphicImage url="/resources/boutonFleche.png" width="30%"
+				</h:commandLink>
+				<h:commandLink action="#{planTaskPageBean.boutonPlanDo()}">
+					<h:graphicImage url="/resources/boutonFleche.png" width="30%" 
 					rendered="#{planTaskPageBean.isOkDoButton()}" />
+				</h:commandLink>
+				</h:form>
 			</div>
 
 			<div class="ptpDown3">

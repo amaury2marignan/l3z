@@ -11,13 +11,11 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import fr.l3z.models.Family;
-import fr.l3z.models.Project;
 import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Vote;
 import fr.l3z.models.User;
 import fr.l3z.repositories.FamilyRepository;
-import fr.l3z.repositories.ProjectRepository;
 import fr.l3z.repositories.VoteRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -35,11 +33,11 @@ public class UserPageVoteBean  {
 	@Inject
 	private FamilyRepository familyRep;
 	@Inject
-	private ProjectRepository projectRep;
+	private VoteRepository voteRep;
 	
 	private User user = new User();
 	private Family family = new Family();
-	private List<Project> projectsList = new ArrayList<Project>();
+	private List<Vote> votesList = new ArrayList<Vote>();
 	
 	
 	
@@ -50,7 +48,7 @@ public class UserPageVoteBean  {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
-		this.setProjectsList(projectRep.findAll());
+		this.setVotesList(voteRep.findAll());
 	}
 	
 	public Boolean skillNote1(int score){
@@ -113,12 +111,14 @@ public class UserPageVoteBean  {
 		this.family = family;
 	}
 
-	public List<Project> getProjectsList() {
-		return projectsList;
+	
+
+	public List<Vote> getVotesList() {
+		return votesList;
 	}
 
-	public void setProjectsList(List<Project> projectsList) {
-		this.projectsList = projectsList;
+	public void setVotesList(List<Vote> votesList) {
+		this.votesList = votesList;
 	}
 
 

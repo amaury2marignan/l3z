@@ -64,7 +64,7 @@ public class EventRepositoryImpl implements EventRepository {
 		eventAModifier.setUser(t.getUser());
 		eventAModifier.setDate(t.getDate());
 		eventAModifier.setTask(t.getTask());
-		eventAModifier.setProject(t.getProject());
+		eventAModifier.setVote(t.getVote());
 		eventAModifier.setAction(t.getAction());
 
 		entityManager.merge(eventAModifier);

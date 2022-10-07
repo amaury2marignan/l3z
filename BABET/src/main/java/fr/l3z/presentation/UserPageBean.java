@@ -164,7 +164,7 @@ public class UserPageBean  implements Serializable {
 	
 	
 	public boolean isOkCheckButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt()!=this.user) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt().getId()!=this.user.getId()) {
 			return true;
 		} else {
 			return false;

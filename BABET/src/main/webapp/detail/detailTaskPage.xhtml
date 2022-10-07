@@ -21,10 +21,7 @@
 		<div class="dtpTop">
 
 			<div class="dtpTaskName">#{detailTaskPageBean.task.name}</div>
-			<div class="dtpTaskInfo">
-				<div class="dtpDomain">#{detailTaskPageBean.task.rule.domain.name}</div>
-				<div class="dtpRule">#{detailTaskPageBean.task.rule.name}</div>
-			</div>
+			
 
 			<div class="dtpSkillProfile">
 				<ui:repeat
@@ -92,7 +89,7 @@
 		<div class="dtpDownLeft">
 			Historique
 			<div class="dtpEventList">
-				<h:form>
+				
 
 					<h:dataTable value="#{detailTaskPageBean.eventList}" var="p"
 						columnClasses="eventListColumn1,eventListColumn2">
@@ -107,7 +104,7 @@
 
 					</h:dataTable>
 
-				</h:form>
+				
 			</div>
 		</div>
 
@@ -120,20 +117,35 @@
 			<h:panelGroup class="dtpStatusCancelled" layout="block"	rendered="#{detailTaskPageBean.status5()}"><div class="statusText">Annulé</div></h:panelGroup>
 			
 			<div class="dtpButtons">
+			<h:form>
+			<h:commandLink action="#{detailTaskPageBean.reservationAction()}">
 				<h:graphicImage url="/resources/boutonBleu.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkReservationButton()}" />
+				</h:commandLink>
+				<h:commandLink action="#{detailTaskPageBean.doAction()}">
 				<h:graphicImage url="/resources/boutonFleche.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkDoButton()}" />
+				</h:commandLink>
+				<h:commandLink action="#{detailTaskPageBean.cancelAction()}">
 				<h:graphicImage url="/resources/boutonCancel.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkCancelButton()}" />
+				</h:commandLink>
+				<h:commandLink action="#{detailTaskPageBean.validAction()}">
 				<h:graphicImage url="/resources/boutonValid.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkCheckButton()}" />
+				</h:commandLink>
+				<h:commandLink action="#{detailTaskPageBean.modifyAction()}">
+					<f:param name="taskId" value="#{detailTaskPageBean.task.id}" />
 				<h:graphicImage url="/resources/boutonModify.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkModifyButton()}" />
+				
+				</h:commandLink>
+				<h:commandLink action="#{detailTaskPageBean.planAction(detailTaskPageBean.task)}">
+				<f:param name="taskId" value="#{detailTaskPageBean.task.id}" />
 				<h:graphicImage url="/resources/boutonPlan.png" width="50%"
 								rendered="#{detailTaskPageBean.isOkPlanButton()}" />
-
-			
+				</h:commandLink>
+			</h:form>
 			</div>
 		</div>
 	</div>

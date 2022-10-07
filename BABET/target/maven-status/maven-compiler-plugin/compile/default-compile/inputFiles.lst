@@ -5,14 +5,12 @@ C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\prese
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\Skill.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\SkillProfile.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillProfileRepositoryImpl.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\Domain.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\FamilyRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\EventRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\User.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\EventRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\VoteRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\VoteRepositoryImpl.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\RuleRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\UserRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\NewTaskPageBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\ProjectRepository.java
@@ -23,7 +21,6 @@ C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repos
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\UserPageNewBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\PlanTaskPageBean.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\DomainRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\GenericRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\FamilyPageBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\FamilyRepository.java
@@ -33,11 +30,8 @@ C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\prese
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillNoteRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\session\SessionUtils.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillNoteRepositoryImpl.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\Rule.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\Family.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\RuleRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillRepository.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\DomainRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\test\Launcher.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\SkillNote.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\UserRepository.java

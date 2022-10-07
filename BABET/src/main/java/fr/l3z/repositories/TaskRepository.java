@@ -16,6 +16,8 @@ public interface TaskRepository extends GenericRepository<Long, Task> {
 	List<Task> findByStatus(int i);
 
 	List<Task> findTasksToDo();
+
+	Task findByName(String nextTaskName);
 	
 	
 }

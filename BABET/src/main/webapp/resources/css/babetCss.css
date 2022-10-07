@@ -651,4 +651,14 @@ body{
 	vertical-align:middle;
 }
 
+.ntpDownLeft{
+	width:75%;
+	color:#FFD966;
+	
+}
 
+.ntpDown{
+	width:100%;
+	display:flex;
+	justify-content:flex-end;
+}

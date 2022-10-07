@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Modification d'une Tache</title>
+</h:head>
+<body>
+<h:form>
+	<div class="dtpContent">
+	
+
+		<div class="dtpTopLeft">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="dtpTop">
+
+			<div class="dtpTaskName">
+			
+			<h:inputText value="#{modifyTaskPageBean.task.name}" style="font-family: Berlin Sans FB Demi;width:78%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:30px;color:#FFD966;padding-left:5px;"/>
+			
+				</div>
+			
+			<div class="dtpSkillProfile">
+				<ui:repeat
+					value="#{modifyTaskPageBean.skillList}"
+					var="p">
+					<div class="dtpTaskSkill">
+						<div class="dtpSkillName">#{p.name}</div>
+
+						<div class="stars">
+						<h:commandLink action="#{modifyTaskPageBean.star0Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote1(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star2Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote2(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star3Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote3(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star4Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote4(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star5Action(p)}">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote5(p.id)}" />
+								</h:commandLink>
+								
+						<h:commandLink action="#{modifyTaskPageBean.star1Action(p)}">	
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote1Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star2Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote2Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star3Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote3Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star4Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote4Inverted(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{modifyTaskPageBean.star5Action(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{modifyTaskPageBean.skillNote5Inverted(p.id)}" />
+								</h:commandLink>
+						</div>
+					</div>
+				</ui:repeat>
+
+
+			</div>
+		</div>
+		<div class="dtpLogoPerso">
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid3.png" width="95%" />
+			</a>
+		</div>
+		<div class="dtpLeft">
+			<h:panelGroup class="dtpPeriod" layout="block">tous les <h:inputText value="#{modifyTaskPageBean.task.repeatAfter}" style="font-family: Berlin Sans FB Demi;width:25%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:12px;color:black;background-color:white;padding-left:5px;"/>
+			 jours</h:panelGroup>
+			<h:panelGroup class="dtpNext" layout="block">tâche suivante
+				<h:selectOneMenu value="#{modifyTaskPageBean.nextTaskName}" style="font-family: Berlin Sans FB Demi;width:95%;height:20px;margin:2px;border-radius:5px;border:hidden;font-size:9px;color:black;background-color:white;padding-left:5px;overflow:auto;">
+				<f:selectItems value="#{modifyTaskPageBean.allTaskNames}"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+			<div class="dtpPoints">
+				<div class="dtpScore">#{modifyTaskPageBean.task.nbPoints}</div>
+				points
+			</div>
+
+		</div>
+
+
+
+		<div class="dtpMiddle">
+			Détails<br/>
+			<h:inputTextarea value="#{modifyTaskPageBean.task.description}" style="font-family: Berlin Sans FB Demi;width:95%;height:90%;margin:2px;border-radius:5px;border:hidden;font-size:15px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			
+		</div>
+		
+
+		<div class="ntpDown">
+			<h:commandLink action="#{modifyTaskPageBean.boutonCancel()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonCancel.png" width="100%"/>
+			</h:commandLink>
+			<h:commandLink action="#{modifyTaskPageBean.saveTask()}" style="width:12%;">
+				<f:param name="taskId" value="#{modifyTaskPageBean.task.id}" />
+				<h:graphicImage url="/resources/boutonSaveChanges.png" width="100%"
+				rendered="#{modifyTaskPageBean.isOkSaveButton()}"/>
+				</h:commandLink>
+			<h:commandLink action="#{modifyTaskPageBean.newProject()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonVote.png" width="100%"
+				rendered="#{modifyTaskPageBean.isOkNewProjectButton()}"/>
+				</h:commandLink>
+		</div>
+</div>
+
+	
+</h:form>
+
+
+</body>
+</html>

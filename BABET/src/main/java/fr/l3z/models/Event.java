@@ -28,18 +28,18 @@ public class Event {
 	private Task task;
 	
 	@ManyToOne
-	private Project project;
+	private Vote vote;
 	
 	
 	
 	private String action;
 
-	public Event(User user, LocalDateTime date,  Task task, Project project,  String action) {
+	public Event(User user, LocalDateTime date,  Task task, Vote vote,  String action) {
 		super();
 		this.user = user;
 		this.date = date;
 		this.task = task;
-		this.project = project;
+		this.vote = vote;
 		this.action = action;
 	}
 
@@ -73,15 +73,15 @@ public class Event {
 		this.task = task;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
 	
+
+	public Vote getVote() {
+		return vote;
+	}
+
+	public void setVote(Vote vote) {
+		this.vote = vote;
+	}
 
 	public String getAction() {
 		return action;

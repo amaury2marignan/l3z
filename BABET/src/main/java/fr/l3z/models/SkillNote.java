@@ -3,6 +3,7 @@ package fr.l3z.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +15,7 @@ public class SkillNote {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	private Skill skill;
 	private int score;
 	
@@ -64,8 +65,10 @@ public class SkillNote {
 		StringBuilder builder = new StringBuilder();
 		builder.append("SkillNote [id=");
 		builder.append(id);
-		builder.append(", skill=");
-		builder.append(skill);
+		builder.append(", skill Name =");
+		builder.append(skill.getName());
+		builder.append(", skill Id =");
+		builder.append(skill.getId());
 		builder.append(", score=");
 		builder.append(score);
 
