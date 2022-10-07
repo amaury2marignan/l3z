@@ -285,16 +285,19 @@ public boolean isOkNewProjectButton() {
 	}
 	
 	public String saveTask() {
+		
+		
 		if(this.nextTaskName.equals(" ")) {
 			this.task.setNextTask(null);
 		} else {
-		this.task.setNextTask(taskRep.findByName(this.nextTaskName));
+			this.task.setNextTask(taskRep.findByName(this.nextTaskName));
 		}
 		
 		this.task.setStatus(0);
-		System.out.println("saveTask : "+this.task);
-		
+		skillProfileRep.update(this.task.getSkillProfileMinimumToDo().getId(),this.task.getSkillProfileMinimumToDo());
+		skillProfileRep.update(this.task.getSkillProfileMinimumToCheck().getId(),this.task.getSkillProfileMinimumToCheck());
 		taskRep.update(this.task.getId(), this.task);
+		System.out.println();
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
