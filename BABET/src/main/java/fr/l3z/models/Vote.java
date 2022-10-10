@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,20 +19,30 @@ public class Vote {
 	@GeneratedValue
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	private SkillProfile skillProfile;
 	
-	@OneToOne
+	@ManyToOne
 	private Task originalTask;
 	
-	@OneToOne
-	private Task newTask;
-	
 	private Boolean openToVote;
-
+	
+	private String taskNewName;
+	
+	private String taskNewDescription;
+	
+	private int taskNewRepeatAfter;
+	
+	@OneToOne
+	private SkillProfile taskNewSPMDo;
+	
+	
+	
 	public Vote() {
 		super();
 	}
+	
+	
 
 	public SkillProfile getSkillProfile() {
 		return skillProfile;
@@ -62,13 +73,11 @@ public class Vote {
 		this.originalTask = originalTask;
 	}
 
-	public Task getNewTask() {
-		return newTask;
-	}
+	
 
-	public void setNewTask(Task newTask) {
-		this.newTask = newTask;
-	}
+	
+
+
 
 	@Override
 	public String toString() {
@@ -79,8 +88,66 @@ public class Vote {
 		builder.append(skillProfile);
 		builder.append(", openToVote=");
 		builder.append(openToVote);
+		builder.append(", oldTaskId=");
+		builder.append(originalTask.getId());
+		builder.append(", taskNewName=");
+		builder.append(taskNewName);
+		builder.append(", taskNewDescription=");
+		builder.append(taskNewDescription);
+		builder.append(", taskNewRepeatAfter=");
+		builder.append(taskNewRepeatAfter);
+		builder.append(", taskNewSPMDo=");
+		builder.append(taskNewSPMDo);
 		builder.append("]");
 		return builder.toString();
+	}
+
+
+
+	public String getTaskNewName() {
+		return taskNewName;
+	}
+
+
+
+	public void setTaskNewName(String taskNewName) {
+		this.taskNewName = taskNewName;
+	}
+
+
+
+	public String getTaskNewDescription() {
+		return taskNewDescription;
+	}
+
+
+
+	public void setTaskNewDescription(String taskNewDescription) {
+		this.taskNewDescription = taskNewDescription;
+	}
+
+
+
+	public int getTaskNewRepeatAfter() {
+		return taskNewRepeatAfter;
+	}
+
+
+
+	public void setTaskNewRepeatAfter(int taskNewRepeatAfter) {
+		this.taskNewRepeatAfter = taskNewRepeatAfter;
+	}
+
+
+
+	public SkillProfile getTaskNewSPMDo() {
+		return taskNewSPMDo;
+	}
+
+
+
+	public void setTaskNewSPMDo(SkillProfile taskNewSPMDo) {
+		this.taskNewSPMDo = taskNewSPMDo;
 	}
 	
 	

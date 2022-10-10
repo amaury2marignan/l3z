@@ -58,6 +58,8 @@ public class ModifyTaskPageBean  implements Serializable {
 	private SkillProfileRepository skillProfileRep;
 	@Inject
 	private VoteRepository voteRep;
+	@Inject
+	private SkillNoteRepository skillNoteRep;
 	
 	private User user = new User();
 	private Family family = new Family();
@@ -309,14 +311,30 @@ public boolean isOkNewProjectButton() {
 		return "/user/userPageNew.xhtml";
 	}
 	
-	public String newProject(Long oldTaskId, Task newTask) {
-		Vote newProject = new Vote();
-		newProject.setOpenToVote(true);
-		newProject.setOriginalTask(taskRep.find(oldTaskId));
-		newProject.setNewTask(newTask);
-		newProject.setSkillProfile(taskRep.find(oldTaskId).getSkillProfileMinimumToCheck());
-		Vote savedNewProject=voteRep.save(newProject);
-		
+	public String newProject() {
+		Vote vote = new Vote();
+		SkillProfile voteSp =new SkillProfile();
+		for (Skill s : this.skillList) {
+				SkillNote sN = new SkillNote(s,0);
+				
+				voteSp.getSkillNoteList().add(sN);
+		}
+		vote.setSkillProfile(skillProfileRep.save(voteSp));
+		vote.setOriginalTask(taskRep.find(this.task.getId()));
+		vote.setOpenToVote(true);
+		vote.setTaskNewName(this.task.getName());
+		vote.setTaskNewDescription(this.task.getDescription());
+		vote.setTaskNewRepeatAfter(this.task.getRepeatAfter());
+		SkillProfile sp = new SkillProfile();
+		for (SkillNote s : this.task.getSkillProfileMinimumToDo().getSkillNoteList()) {
+			SkillNote s2 = new SkillNote(s.getSkill(),s.getScore());
+			sp.getSkillNoteList().add(s2);
+			}
+		vote.setTaskNewSPMDo(sp);
+		System.out.println(this.task.getSkillProfileMinimumToDo());
+		System.out.println("vote : "+vote);
+		Vote savedVote = voteRep.save(vote);
+		System.out.println("savedVote : "+savedVote);
 		return "/user/userPageVote.xhtml";
 	}
 	

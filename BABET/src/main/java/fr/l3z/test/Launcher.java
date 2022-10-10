@@ -49,6 +49,8 @@ public class Launcher {
 	@PostConstruct
 	public void data() {
 		
+		
+		
 		Family f1 = new Family("Famille1","0000");
 		Family savedF1 = familyRep.save(f1);
 		Family f2 = new Family("Famille2","0000");
