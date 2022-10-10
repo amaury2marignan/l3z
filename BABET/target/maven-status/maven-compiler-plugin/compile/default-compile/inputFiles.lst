@@ -10,10 +10,10 @@ C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repos
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\User.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\EventRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\VoteRepository.java
+C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\ModifyTaskPageBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\VoteRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\UserRepositoryImpl.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\NewTaskPageBean.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\ProjectRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\UserPageVoteBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillProfileRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\DetailTaskPageBean.java
@@ -24,8 +24,6 @@ C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\prese
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\GenericRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\FamilyPageBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\FamilyRepository.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\ProjectRepositoryImpl.java
-C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\models\Project.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\presentation\UserPageBean.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\repositories\SkillNoteRepository.java
 C:\Users\Amaury\Documents\DEV\PROJETS\BABET GIT\BABET\src\main\java\fr\l3z\session\SessionUtils.java

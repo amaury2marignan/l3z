@@ -644,6 +644,21 @@ body{
 	margin:5px;
 }
 
+.ptpPtcText2{
+	font-family:"Berlin Sans FB Demi";
+	background-color:#A6A6A6;
+	color:white;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	text-align:center;
+	height:25px;
+	margin:5px;
+	width:12%;
+	
+}
+
+
+
 .ptpPlusTardContent{
 	width:100%;
 	display:flex;

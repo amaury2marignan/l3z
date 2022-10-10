@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<h:outputStylesheet library="css" name="babetCss.css" />
@@ -118,17 +119,31 @@
 				<h:panelGroup class="ptpPlusTard" layout="block">
 					<div class="statusText">Plus tard</div>
 				</h:panelGroup>
-				<div class="ptpPlusTardContent">
+				
+				
+				<h:form class="ptpPlusTardContent">
+					
 					<div class="ptpPtcText">demain</div>
-					<h:graphicImage url="/resources/boutonPlan.png" width="8%"  />
+					<h:commandLink action="#{planTaskPageBean.boutonPlanTomorrow()}" style="width:8%;">
+					<h:graphicImage url="/resources/boutonPlan.png" width="100%"  />
+					</h:commandLink>
 					<div class="ptpPtcText">dans une semaine</div>
-					<h:graphicImage url="/resources/boutonPlan.png" width="8%" />
+					<h:commandLink action="#{planTaskPageBean.boutonPlanWeek()}" style="width:8%;">
+					<h:graphicImage url="/resources/boutonPlan.png" width="100%" />
+					</h:commandLink>
 					<div class="ptpPtcText">dans un mois</div>
-					<h:graphicImage url="/resources/boutonPlan.png" width="8%" />
-					<h:inputText class="ptpPtcInput"
-						style="font-size:10px;border-radius: 5px; margin:5px;border:hidden;width:38%;box-shadow: 2px 2px 2px #FFD966" />
-					<h:graphicImage url="/resources/boutonPlan.png" width="8%" />
-				</div>
+					<h:commandLink action="#{planTaskPageBean.boutonPlanMonth()}" style="width:8%;">
+					<h:graphicImage url="/resources/boutonPlan.png" width="100%" />
+					</h:commandLink>
+					<div class="ptpPtcText2">dans </div>
+					<h:inputText value="#{planTaskPageBean.planDays}" style="font-family:Berlin Sans FB Demi;color:black;border-radius: 5px;box-shadow: 2px 2px 2px #7F7F7F;text-align:center;width:12%;height:25px;margin:5px;"/>
+					<div class="ptpPtcText2">jours </div>
+					<h:commandLink action="#{planTaskPageBean.boutonPlanDate()}" style="width:8%;">
+					<h:graphicImage url="/resources/boutonPlan.png" width="100%" />
+					</h:commandLink>
+				</h:form>
+				
+				
 
 			</div>
 

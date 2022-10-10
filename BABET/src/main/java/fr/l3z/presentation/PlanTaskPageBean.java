@@ -2,8 +2,12 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +47,7 @@ public class PlanTaskPageBean implements Serializable {
 	private User user = new User();
 	private Family family = new Family();
 	private Task task = new Task();
-	
+	private int planDays;
 	
 	
 	
@@ -91,11 +95,10 @@ public class PlanTaskPageBean implements Serializable {
 	
 	
 	public String boutonPlanNow() {
-		System.out.println("debut methode boutanPLan taskID = "+this.task.getId());
 		Task planTask = new Task(
 				this.task.getName(),
 				this.task.getDescription(),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
 				this.task.getSkillProfileMinimumToCheck()
@@ -117,7 +120,7 @@ public class PlanTaskPageBean implements Serializable {
 		Task planTask = new Task(
 				this.task.getName(),
 				this.task.getDescription(),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
 				this.task.getSkillProfileMinimumToCheck()
@@ -150,7 +153,7 @@ public class PlanTaskPageBean implements Serializable {
 		Task planTask = new Task(
 				this.task.getName(),
 				this.task.getDescription(),
-				LocalDateTime.now(),
+				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
 				this.task.getSkillProfileMinimumToCheck()
@@ -177,9 +180,100 @@ public class PlanTaskPageBean implements Serializable {
 		return "/user/userPage.xhtml";
 	}
 	
+	public String boutonPlanTomorrow() {
+		System.out.println(LocalDateTime.now());
+		System.out.println(LocalDateTime.now().plusDays(1));
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusDays(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
+	}
 	
+	public String boutonPlanWeek() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusWeeks(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
+	}
 	
+	public String boutonPlanMonth() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusMonths(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
+	}
 	
+	public String boutonPlanDate() {
+		
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusDays(this.planDays),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
+	}
 	
 	
 	public Boolean repeat() {
@@ -316,6 +410,22 @@ public class PlanTaskPageBean implements Serializable {
 
 	public void setEventRep(EventRepository eventRep) {
 		this.eventRep = eventRep;
+	}
+
+
+
+
+
+
+	public int getPlanDays() {
+		return planDays;
+	}
+
+
+
+
+	public void setPlanDays(int planDays) {
+		this.planDays = planDays;
 	}
 
 	

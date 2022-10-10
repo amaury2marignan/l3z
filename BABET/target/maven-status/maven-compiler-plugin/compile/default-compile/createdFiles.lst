@@ -14,16 +14,13 @@ fr\l3z\models\User.class
 fr\l3z\repositories\EventRepositoryImpl.class
 fr\l3z\repositories\SkillRepositoryImpl.class
 fr\l3z\repositories\TaskRepository.class
-fr\l3z\repositories\ProjectRepositoryImpl.class
 fr\l3z\models\SkillNote.class
 fr\l3z\repositories\FamilyRepository.class
 fr\l3z\repositories\UserRepositoryImpl.class
-fr\l3z\repositories\ProjectRepository.class
 fr\l3z\repositories\GenericRepository.class
 fr\l3z\models\Family.class
 fr\l3z\repositories\FamilyRepositoryImpl.class
 fr\l3z\repositories\SkillRepository.class
-fr\l3z\models\Project.class
 fr\l3z\models\SkillProfile.class
 fr\l3z\models\Vote.class
 fr\l3z\repositories\VoteRepositoryImpl.class
