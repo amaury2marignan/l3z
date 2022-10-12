@@ -139,7 +139,7 @@ public class ModifyTaskPageBean  implements Serializable {
 	
 	public boolean isOkSaveButton() {
 		
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) ) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),taskRep.find(this.task.getId()).getSkillProfileMinimumToCheck()) ) {
 			return true;
 		} else {
 			return false;
@@ -148,7 +148,7 @@ public class ModifyTaskPageBean  implements Serializable {
 	
 public boolean isOkNewProjectButton() {
 		
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToCheck()) ) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),taskRep.find(this.task.getId()).getSkillProfileMinimumToCheck()) ) {
 			return false;
 		} else {
 			return true;
@@ -325,16 +325,33 @@ public boolean isOkNewProjectButton() {
 		vote.setTaskNewName(this.task.getName());
 		vote.setTaskNewDescription(this.task.getDescription());
 		vote.setTaskNewRepeatAfter(this.task.getRepeatAfter());
+		
+		if(nextTaskName.equals(" ")) {
+			vote.setTaskNewNextTask(null);
+		} else {
+			vote.setTaskNewNextTask(taskRep.findByName(nextTaskName));
+		}
+		
 		SkillProfile sp = new SkillProfile();
 		for (SkillNote s : this.task.getSkillProfileMinimumToDo().getSkillNoteList()) {
 			SkillNote s2 = new SkillNote(s.getSkill(),s.getScore());
 			sp.getSkillNoteList().add(s2);
 			}
-		vote.setTaskNewSPMDo(sp);
+		vote.setTaskNewSPMDo(skillProfileRep.save(sp));
 		System.out.println(this.task.getSkillProfileMinimumToDo());
 		System.out.println("vote : "+vote);
 		Vote savedVote = voteRep.save(vote);
 		System.out.println("savedVote : "+savedVote);
+		
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				savedVote,				
+				user.getUserName()+" a proposé une modification de la tâche "+taskRep.find(this.task.getId()).getName()
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		
 		return "/user/userPageVote.xhtml";
 	}
 	

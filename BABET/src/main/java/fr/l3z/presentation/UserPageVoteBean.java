@@ -38,7 +38,7 @@ public class UserPageVoteBean  {
 	private User user = new User();
 	private Family family = new Family();
 	private List<Vote> votesList = new ArrayList<Vote>();
-	
+	private Vote vote = new Vote();
 	
 	
 	
@@ -51,6 +51,12 @@ public class UserPageVoteBean  {
 		this.setVotesList(voteRep.findAll());
 	}
 	
+	public String detailVote(Vote voteD) {
+		this.vote=voteD;
+		
+		return "/detail/detailVotePage.xhtml";
+	}
+	
 	public Boolean skillNote1(int score){
 		if(score>=1) {
 			return true;
@@ -58,6 +64,8 @@ public class UserPageVoteBean  {
 			return false;
 		}
 	}
+	
+	
 	
 	public Boolean skillNote2(int score){
 		if(score>=2) {
@@ -91,6 +99,46 @@ public class UserPageVoteBean  {
 		}
 	}
 
+	public Boolean skillNote1Inverted(int score){
+		if(score>=1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote2Inverted(int score){
+		if(score>=2) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote3Inverted(int score){
+		if(score>=3) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote4Inverted(int score){
+		if(score>=4) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean skillNote5Inverted(int score){
+		if(score>=5) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 
 	public User getUser() {
 		return user;
@@ -119,6 +167,14 @@ public class UserPageVoteBean  {
 
 	public void setVotesList(List<Vote> votesList) {
 		this.votesList = votesList;
+	}
+
+	public Vote getVote() {
+		return vote;
+	}
+
+	public void setVote(Vote vote) {
+		this.vote = vote;
 	}
 
 

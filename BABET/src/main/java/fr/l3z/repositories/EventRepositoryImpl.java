@@ -79,6 +79,14 @@ public class EventRepositoryImpl implements EventRepository {
 			.getResultList();
 	}
 
+	@Override
+	public List<Event> findByVote(Long voteId) {
+		return entityManager
+				.createQuery("select u from Event u where u.vote.id = :voteIdParam", Event.class)
+				.setParameter("voteIdParam", voteId)
+				.getResultList();
+	}
+
 	
 
 }
