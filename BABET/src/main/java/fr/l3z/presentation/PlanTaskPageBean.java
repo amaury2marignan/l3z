@@ -2,7 +2,12 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +47,7 @@ public class PlanTaskPageBean implements Serializable {
 	private User user = new User();
 	private Family family = new Family();
 	private Task task = new Task();
-	
+	private int planDays;
 	
 	
 	
@@ -89,60 +94,187 @@ public class PlanTaskPageBean implements Serializable {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	public Boolean status0() {
-		if (this.task.getStatus()==0) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanNow() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now(),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
 	}
 	
-	public Boolean status1() {
-		if (this.task.getStatus()==1) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanReservation() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now(),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(2);
+		planTask.setWhoDidIt(this.user);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		Event newEvent2 = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a réservé la tâche "+task.getName()	
+				);
+		Event savedNewEvent2 = eventRep.save(newEvent2);
+		
+				
+		return "/user/userPage.xhtml";
 	}
 	
-	public Boolean status2() {
-		if (this.task.getStatus()==2) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanDo() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now(),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(3);
+		planTask.setWhoDidIt(this.user);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		Event newEvent2 = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a réalisé la tâche "+task.getName()	
+				);
+		Event savedNewEvent2 = eventRep.save(newEvent2);		
+		return "/user/userPage.xhtml";
 	}
 	
-	public Boolean status3() {
-		if (this.task.getStatus()==3) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanTomorrow() {
+		System.out.println(LocalDateTime.now());
+		System.out.println(LocalDateTime.now().plusDays(1));
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusDays(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
 	}
 	
-	public Boolean status4() {
-		if (this.task.getStatus()==4) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanWeek() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusWeeks(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
 	}
 	
-	public Boolean status5() {
-		if (this.task.getStatus()==5) {
-			return true;
-				} else {
-					return false;
-				}
+	public String boutonPlanMonth() {
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusMonths(1),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
 	}
+	
+	public String boutonPlanDate() {
+		
+		Task planTask = new Task(
+				this.task.getName(),
+				this.task.getDescription(),
+				LocalDate.now().plusDays(this.planDays),
+				this.task.getRepeatAfter(),
+				this.task.getSkillProfileMinimumToDo(),
+				this.task.getSkillProfileMinimumToCheck()
+				);
+		planTask.setStatus(1);
+		Task savedPlanTask = taskRep.save(planTask);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedPlanTask,
+				null,				
+				user.getUserName()+" a planifié la tâche "+task.getName()
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+				
+		return "/user/userPage.xhtml";
+	}
+	
 	
 	public Boolean repeat() {
 		if(this.task.getRepeatAfter()>1) {
@@ -278,6 +410,22 @@ public class PlanTaskPageBean implements Serializable {
 
 	public void setEventRep(EventRepository eventRep) {
 		this.eventRep = eventRep;
+	}
+
+
+
+
+
+
+	public int getPlanDays() {
+		return planDays;
+	}
+
+
+
+
+	public void setPlanDays(int planDays) {
+		this.planDays = planDays;
 	}
 
 	

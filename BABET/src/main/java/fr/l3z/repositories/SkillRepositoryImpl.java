@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Family;
 import fr.l3z.models.Skill;
+import fr.l3z.models.SkillNote;
+import fr.l3z.models.SkillProfile;
 import fr.l3z.models.User;
 
 public class SkillRepositoryImpl implements SkillRepository {
@@ -70,6 +72,15 @@ public class SkillRepositoryImpl implements SkillRepository {
 		
 		entityManager.merge(skillAModifier);
 		
+	}
+
+	@Override
+	public int getNbPoints(SkillProfile sp) {
+		int nbPoints = 0;
+		for(SkillNote s : sp.getSkillNoteList()) {
+			nbPoints = s.getScore()+nbPoints;
+		}
+		return nbPoints;
 	}
 
 	

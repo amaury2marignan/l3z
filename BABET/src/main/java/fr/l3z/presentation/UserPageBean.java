@@ -164,7 +164,7 @@ public class UserPageBean  implements Serializable {
 	
 	
 	public boolean isOkCheckButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt()!=this.user) {
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt().getId()!=this.user.getId()) {
 			return true;
 		} else {
 			return false;
@@ -187,9 +187,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
@@ -208,9 +206,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
@@ -228,9 +224,7 @@ public class UserPageBean  implements Serializable {
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
-				task.getRule(),
 				task,
-				null,
 				null,				
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);

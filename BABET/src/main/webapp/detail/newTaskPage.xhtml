@@ -27,12 +27,7 @@
 			<h:inputText value="#{newTaskPageBean.task.name}" style="font-family: Berlin Sans FB Demi;width:78%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:30px;color:#FFD966;padding-left:5px;"/>
 			
 				</div>
-			<div class="dtpTaskInfo">
-				<h:selectOneMenu  value="#{newTaskPageBean.task.rule.name}" style="font-family: Berlin Sans FB Demi;width:95%;	height:55%;	margin:2px;	border-radius: 5px;	border:hidden;	color:#44546A;	font-size:2px;	align-items:center;    justify-content:center;">
-				<f:selectItems value="#{newTaskPageBean.ruleNamesList}"/>
-				</h:selectOneMenu>
-				</div>
-
+			
 			<div class="dtpSkillProfile">
 				<ui:repeat
 					value="#{newTaskPageBean.skillList}"
@@ -95,7 +90,18 @@
 			</a>
 		</div>
 		<div class="dtpLeft">
-			
+			<h:panelGroup class="dtpPeriod" layout="block">tous les <h:inputText value="#{newTaskPageBean.task.repeatAfter}" style="font-family: Berlin Sans FB Demi;width:25%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:12px;color:black;background-color:white;padding-left:5px;"/>
+			 jours</h:panelGroup>
+			<h:panelGroup class="dtpNext" layout="block">tâche suivante
+				<h:selectOneMenu value="#{newTaskPageBean.nextTaskName}" style="font-family: Berlin Sans FB Demi;width:95%;height:20px;margin:2px;border-radius:5px;border:hidden;font-size:9px;color:black;background-color:white;padding-left:5px;overflow:auto;">
+				<f:selectItems value="#{newTaskPageBean.allTaskNames}"/>
+				</h:selectOneMenu>
+			</h:panelGroup>
+			<div class="dtpPoints">
+				<div class="dtpScore">#{newTaskPageBean.task.nbPoints}</div>
+				points
+			</div>
+
 		</div>
 
 
@@ -105,7 +111,16 @@
 			<h:inputTextarea value="#{newTaskPageBean.task.description}" style="font-family: Berlin Sans FB Demi;width:95%;height:90%;margin:2px;border-radius:5px;border:hidden;font-size:15px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
 			
 		</div>
+		
 
+		<div class="ntpDown">
+			<h:commandLink action="#{newTaskPageBean.boutonCancel()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonCancel.png" width="100%"/>
+			</h:commandLink>
+			<h:commandLink action="#{newTaskPageBean.newTask()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonSauvegarde.png" width="100%"/>
+			</h:commandLink>
+		</div>
 </div>
 
 	

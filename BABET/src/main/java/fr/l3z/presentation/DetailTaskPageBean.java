@@ -2,6 +2,7 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,10 +72,80 @@ public class DetailTaskPageBean implements Serializable {
 	
 	public String giveDate(Event event) {
 		
-	return "le "+event.getDate().getDayOfMonth()+" / "+event.getDate().getMonthValue()+" à "+event.getDate().getHour()+":"+event.getDate().getMinute();
-	
-	
+		return "le "+event.getDate().getDayOfMonth()+" / "+event.getDate().getMonthValue()+" à "+event.getDate().getHour()+":"+event.getDate().getMinute();
 	}
+	
+	public String reservationAction() {
+		this.task.setStatus(2);
+		this.task.setWhoDidIt(this.user);
+		System.out.println("reservation en cours,task : "+this.task);
+		taskRep.update(this.task.getId(),this.task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				null,				
+				user.getUserName()+" a réservé la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
+	}
+	
+	public String validAction() {
+		this.task.setStatus(4);
+		taskRep.update(this.task.getId(),this.task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				null,				
+				user.getUserName()+" a validé la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
+	}
+	
+	public String doAction() {
+		this.task.setStatus(3);
+		this.task.setWhoDidIt(this.user);
+		taskRep.update(this.task.getId(),this.task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				null,				
+				user.getUserName()+" a réalisé la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
+	}
+	
+	public String cancelAction() {
+		this.task.setStatus(5);
+		taskRep.update(this.task.getId(),this.task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				null,				
+				user.getUserName()+" a annulé la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
+	}
+	
+	public String modifyAction() {
+		
+		return "/detail/modifyTaskPage.xhtml";
+	}
+	
+	public String planAction(Task taskD) {
+		System.out.println("this.task = "+this.task);
+		System.out.println("taskD = "+taskD);
+		this.task=taskD;
+		return "/detail/planTaskPage.xhtml";
+	}
+	
 	
 	public boolean isOkReservationButton() {
 		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),this.task.getSkillProfileMinimumToDo()) && this.task.getStatus()==1 ) {

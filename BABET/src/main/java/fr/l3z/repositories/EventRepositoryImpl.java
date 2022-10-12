@@ -64,9 +64,7 @@ public class EventRepositoryImpl implements EventRepository {
 		eventAModifier.setUser(t.getUser());
 		eventAModifier.setDate(t.getDate());
 		eventAModifier.setTask(t.getTask());
-		eventAModifier.setProject(t.getProject());
-		eventAModifier.setRule(t.getRule());
-		eventAModifier.setDomain(t.getDomain());
+		eventAModifier.setVote(t.getVote());
 		eventAModifier.setAction(t.getAction());
 
 		entityManager.merge(eventAModifier);
@@ -79,6 +77,14 @@ public class EventRepositoryImpl implements EventRepository {
 			.createQuery("select u from Event u where u.task.id = :taskIdParam", Event.class)
 			.setParameter("taskIdParam", taskId)
 			.getResultList();
+	}
+
+	@Override
+	public List<Event> findByVote(Long voteId) {
+		return entityManager
+				.createQuery("select u from Event u where u.vote.id = :voteIdParam", Event.class)
+				.setParameter("voteIdParam", voteId)
+				.getResultList();
 	}
 
 	

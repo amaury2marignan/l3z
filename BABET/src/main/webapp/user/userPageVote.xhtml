@@ -24,35 +24,35 @@
 
 		<div class="topBox">
 
-			<div class="userName">Bienvenue #{userPageBean.user.userName}</div>
+			<div class="userName">Bienvenue #{userPageVoteBean.user.userName}</div>
 
 			<div class="userSkillProfile">
-				<ui:repeat value="#{userPageBean.user.skillProfile.skillNoteList}"
+				<ui:repeat value="#{userPageVoteBean.user.skillProfile.skillNoteList}"
 					var="p">
 					<div class="userSkill">
 						<div class="skillName">#{p.skill.name}</div>
 
 						<div class="stars">
 							<h:graphicImage url="/resources/star.png" width="20%"
-								rendered="#{userPageBean.skillNote1(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote1(p.score)}" />
 							<h:graphicImage url="/resources/star.png" width="20%"
-								rendered="#{userPageBean.skillNote2(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote2(p.score)}" />
 							<h:graphicImage url="/resources/star.png" width="20%"
-								rendered="#{userPageBean.skillNote3(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote3(p.score)}" />
 							<h:graphicImage url="/resources/star.png" width="20%"
-								rendered="#{userPageBean.skillNote4(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote4(p.score)}" />
 							<h:graphicImage url="/resources/star.png" width="20%"
-								rendered="#{userPageBean.skillNote5(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote5(p.score)}" />
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
-								rendered="#{userPageBean.skillNote1Inverted(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote1Inverted(p.score)}" />
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
-								rendered="#{userPageBean.skillNote2Inverted(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote2Inverted(p.score)}" />
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
-								rendered="#{userPageBean.skillNote3Inverted(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote3Inverted(p.score)}" />
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
-								rendered="#{userPageBean.skillNote4Inverted(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote4Inverted(p.score)}" />
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
-								rendered="#{userPageBean.skillNote5Inverted(p.score)}" />
+								rendered="#{userPageVoteBean.skillNote5Inverted(p.score)}" />
 						</div>
 					</div>
 				</ui:repeat>
@@ -119,23 +119,22 @@
 			<div class="tasksList">
 				<h:form>
 
-					<h:dataTable value="#{userPageBean.tasksList}" var="p"
-						columnClasses="column1,column2,column3">
+					<h:dataTable value="#{userPageVoteBean.votesList}" var="p"
+						columnClasses="voteListColumn1,voteListColumn2">
 						<h:column>
 							<f:facet name="header"></f:facet>
-					#{p.name}
+					#{p.originalTask.name}
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-					#{p.nextDate}
+					#{p.whoDidIt}
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-							<h:graphicImage url="/resources/boutonBleu.png" width="15%" />
-							<h:graphicImage url="/resources/boutonFleche.png" width="15%" />
-							<h:graphicImage url="/resources/boutonValid.png" width="15%" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png"
-								width="15%" />
+							<h:commandLink action="#{userPageVoteBean.detailVote(p)}">
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
+								<f:param name="voteId" value="#{p.id}" />
+								</h:commandLink>
 						</h:column>
 					</h:dataTable>
 

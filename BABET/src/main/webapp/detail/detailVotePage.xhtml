@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Detail Vote</title>
+</h:head>
+<body>
+	<div class="dtpContent">
+
+		<div class="dtpTopLeft">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="dtpTop">
+
+			<div class="dtpTaskName">Modification de
+				#{detailVotePageBean.vote.originalTask.name}</div>
+
+
+			
+		</div>
+		<div class="dtpLogoPerso">
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid3.png" width="95%" />
+			</a>
+		</div>
+
+		<div class="dvpMiddle">
+
+			<div class="dvpMiddleTitleLeft">Tâche existante</div>
+			<div class="dvpMiddleTitleRight">Proposition</div>
+			
+			<div class="dvpMiddleLeft">
+				<div class="dvpName">
+				<div class="dvpNameTitle">Nom</div>
+				<div class="dvpMiddleName">#{detailVotePageBean.vote.originalTask.name}</div>
+				</div>
+				<div class="dvpSkillProfile">
+				<ui:repeat
+					value="#{detailVotePageBean.vote.originalTask.skillProfileMinimumToDo.skillNoteList}"
+					var="p">
+					<div class="dvpTaskSkill">
+						<div class="dvpSkillName">#{p.skill.name}</div>
+
+						<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote1(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote2(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote3(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote4(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote5(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote1Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote2Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote3Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote4Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote5Inverted(p.score)}" />
+						</div>
+					</div>
+				</ui:repeat>
+
+
+			</div>
+				<div class="dvpName">
+				<div class="dvpNameTitle">Détails</div>
+				<div class="dvpMiddleDetails">#{detailVotePageBean.vote.originalTask.description}</div>
+				</div>
+				<div class="dvpRepeat">
+				<div class="dvpNameTitle">Répétition</div>
+					<div class="dvpMiddleRepeatAfter">
+						<h:panelGroup  layout="block"
+						rendered="#{detailVotePageBean.repeatDayNew()}">tous les jours</h:panelGroup>
+						<h:panelGroup layout="block"
+						rendered="#{detailVotePageBean.repeatNew()}">tous les #{detailVotePageBean.vote.originalTask.repeatAfter} jours</h:panelGroup>
+					</div>
+				</div>
+				<div class ="dvpRepeat">
+				<div class="dvpNameTitle">Tâche suivante</div>
+					<div class="dvpMiddleNextTask">
+					<h:panelGroup  layout="block"
+					rendered="#{detailVotePageBean.next()}">#{detailVotePageBean.vote.originalTask.nextTask.name}</h:panelGroup>
+					</div>
+				</div>
+				
+			</div>
+
+
+
+			<div class="dvpMiddleRight">
+				<div class="dvpName">
+				<div class="dvpNameTitleRight">Nom</div>
+				<div class="dvpMiddleName">#{detailVotePageBean.vote.taskNewName}</div>
+				</div>
+				<div class="dvpSkillProfile">
+				<ui:repeat
+					value="#{detailVotePageBean.vote.taskNewSPMDo.skillNoteList}"
+					var="p">
+					<div class="dvpTaskSkill">
+						<div class="dvpSkillName">#{p.skill.name}</div>
+
+						<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote1(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote2(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote3(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote4(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote5(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote1Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote2Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote3Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote4Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.skillNote5Inverted(p.score)}" />
+						</div>
+					</div>
+				</ui:repeat>
+
+
+			</div>
+				<div class="dvpName">
+				<div class="dvpNameTitleRight">Détails</div>
+				<div class="dvpMiddleDetails">#{detailVotePageBean.vote.taskNewDescription}</div>
+				</div>
+				<div class="dvpRepeat">
+				<div class="dvpNameTitleRight">Répétition</div>
+					<div class="dvpMiddleRepeatAfter">
+						<h:panelGroup  layout="block"
+						rendered="#{detailVotePageBean.repeatDayNew()}">tous les jours</h:panelGroup>
+						<h:panelGroup layout="block"
+						rendered="#{detailVotePageBean.repeatNew()}">tous les #{detailVotePageBean.vote.taskNewRepeatAfter} jours</h:panelGroup>
+					</div>
+				</div>
+				<div class ="dvpRepeat">
+				<div class="dvpNameTitleRight">Tâche suivante</div>
+					<div class="dvpMiddleNextTask">
+					<h:panelGroup  layout="block"
+					rendered="#{detailVotePageBean.nextNew()}">#{detailVotePageBean.vote.taskNewNextTask.name}</h:panelGroup>
+					</div>
+				</div>
+				
+			</div>
+
+
+		</div>
+		<div class="dvpVote">Vote
+			<div class="dvpSkillProfileVote">
+				<ui:repeat
+					value="#{detailVotePageBean.vote.originalTask.skillProfileMinimumToCheck.skillNoteList}"
+					var="p">
+					<div class="dvpTaskSkillVote">
+						<div class="dvpSkillNameVote">#{p.skill.name}</div>
+
+						<div class="stars">
+						
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.yellow1(p.id)}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.yellow2(p.id)}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.yellow3(p.id)}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.yellow4(p.id)}" />
+							
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailVotePageBean.yellow5(p.id)}" />
+							
+								
+							<h:commandLink action="#{detailVotePageBean.starAction1(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.grey1(p.id)}" />
+								</h:commandLink>
+								<h:commandLink action="#{detailVotePageBean.starAction2(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.grey2(p.id)}" />
+								</h:commandLink>
+									<h:commandLink action="#{detailVotePageBean.starAction3(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.grey3(p.id)}" />
+								</h:commandLink>
+									<h:commandLink action="#{detailVotePageBean.starAction4(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.grey4(p.id)}" />
+								</h:commandLink>
+									<h:commandLink action="#{detailVotePageBean.starAction5(p)}">
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailVotePageBean.grey5(p.id)}" />
+								</h:commandLink>
+								
+							
+							<h:graphicImage url="/resources/starWhite.png" width="20%"
+								rendered="#{detailVotePageBean.white1(p.id)}" />
+							
+							<h:graphicImage url="/resources/starWhite.png" width="20%"
+								rendered="#{detailVotePageBean.white2(p.id)}" />
+							
+							<h:graphicImage url="/resources/starWhite.png" width="20%"
+								rendered="#{detailVotePageBean.white3(p.id)}" />
+							
+							<h:graphicImage url="/resources/starWhite.png" width="20%"
+								rendered="#{detailVotePageBean.white4(p.id)}" />
+							
+							<h:graphicImage url="/resources/starWhite.png" width="20%"
+								rendered="#{detailVotePageBean.white5(p.id)}" />
+								
+						</div>
+					</div>
+				</ui:repeat>
+
+				</div>
+			</div>
+		<div class="dvpDown">
+
+			<div class="dvpDownLeft">
+				Historique
+				<div class="dtpEventList">
+
+
+					<h:dataTable value="#{detailVotePageBean.eventList}" var="p"
+						columnClasses="eventVoteListColumn1,eventVoteListColumn2">
+						<h:column>
+							<f:facet name="header"></f:facet>
+							#{detailVotePageBean.giveDate(p)}
+						</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+							#{p.action}
+						</h:column>
+
+					</h:dataTable>
+
+
+				</div>
+			</div>
+
+
+			<div class="dvpDownRight">
+				<h:form>
+					<h:commandLink
+						action="#{detailVotePageBean.cancel()}">
+						<h:graphicImage url="/resources/boutonCancel.png" width="48%" />
+					</h:commandLink>
+
+					<h:commandLink
+						action="#{detailVotePageBean.save(detailVotePageBean.vote)}">
+						<f:param name="voteId" value="#{detailVotePageBean.vote.id}" />
+						<h:graphicImage url="/resources/boutonSauvegarde.png" width="48%" />
+					</h:commandLink>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</html>

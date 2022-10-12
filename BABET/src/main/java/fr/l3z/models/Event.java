@@ -22,28 +22,24 @@ public class Event {
 	
 	private LocalDateTime date;
 	
-	@ManyToOne
-	private Rule rule;
+	
 	
 	@ManyToOne
 	private Task task;
 	
 	@ManyToOne
-	private Project project;
+	private Vote vote;
 	
-	@ManyToOne
-	private Domain domain;
+	
 	
 	private String action;
 
-	public Event(User user, LocalDateTime date, Rule rule, Task task, Project project, Domain domain, String action) {
+	public Event(User user, LocalDateTime date,  Task task, Vote vote,  String action) {
 		super();
 		this.user = user;
 		this.date = date;
-		this.rule = rule;
 		this.task = task;
-		this.project = project;
-		this.domain = domain;
+		this.vote = vote;
 		this.action = action;
 	}
 
@@ -67,13 +63,7 @@ public class Event {
 		this.date = date;
 	}
 
-	public Rule getRule() {
-		return rule;
-	}
 
-	public void setRule(Rule rule) {
-		this.rule = rule;
-	}
 
 	public Task getTask() {
 		return task;
@@ -83,20 +73,14 @@ public class Event {
 		this.task = task;
 	}
 
-	public Project getProject() {
-		return project;
+	
+
+	public Vote getVote() {
+		return vote;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public Domain getDomain() {
-		return domain;
-	}
-
-	public void setDomain(Domain domain) {
-		this.domain = domain;
+	public void setVote(Vote vote) {
+		this.vote = vote;
 	}
 
 	public String getAction() {

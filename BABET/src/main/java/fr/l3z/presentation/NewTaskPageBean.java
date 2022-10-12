@@ -10,25 +10,25 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
-import fr.l3z.models.Domain;
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
-import fr.l3z.models.Rule;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
-import fr.l3z.repositories.DomainRepository;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
-import fr.l3z.repositories.RuleRepository;
+import fr.l3z.repositories.SkillNoteRepository;
 import fr.l3z.repositories.SkillProfileRepository;
 import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
 import fr.l3z.models.Skill;
+import fr.l3z.models.SkillNote;
 
 
 @ManagedBean
@@ -53,18 +53,15 @@ public class NewTaskPageBean  implements Serializable {
 	@Inject
 	private SkillProfileRepository skillProfileRep;
 	@Inject
-	private DomainRepository domainRep;
-	@Inject
-	private RuleRepository ruleRep;
+	private SkillNoteRepository skillNoteRep;
+	
 	
 	private User user = new User();
 	private Family family = new Family();
 	private Task task = new Task();
 	private List<Skill> skillList = new ArrayList<Skill>();
-	private List<Domain> domainsList = new ArrayList<Domain>();
-	private List<Rule> ruleList = new ArrayList<Rule>();
-	private List<String> ruleNamesList = new ArrayList<String>();
-	
+	private List<String> allTaskNames=new ArrayList<String>();	
+	private String nextTaskName=" ";
 	
 	
 
@@ -76,15 +73,18 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setName("Nom de la Tache");
 		this.task.setDescription("Description");
 		this.task.setRepeatAfter(0);
+		this.task.setNextTask(new Task("-","-",null,0,null,null));
 		this.task.setSkillProfileMinimumToDo(new SkillProfile());
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
 		this.task.setStatus(0);
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		this.skillList = skillRep.findAll();
-		this.domainsList = domainRep.findAll();
-		this.ruleList = ruleRep.findAll();
-		for (Rule r:ruleList) {
-			this.ruleNamesList.add(r.getName());
+		this.allTaskNames.add(" ");
+		for(Task taskD:taskRep.findAll()) {
+			this.allTaskNames.add(taskD.getName());
 		}
+		
+		
 	}
 	
 	
@@ -126,6 +126,8 @@ public class NewTaskPageBean  implements Serializable {
 	public void setTask(Task task) {
 		this.task = task;
 	}
+	
+	
 	
 	
 	public boolean isOkReservationButton() {
@@ -308,36 +310,75 @@ public class NewTaskPageBean  implements Serializable {
 	
 	public String star1Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 1);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 2);		
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 2);
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star0Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 0);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 1);			
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 1);
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star2Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 2);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 3);	
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 3);
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 				
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star3Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 3);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 4);			
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 4);	
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star4Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 4);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);				
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star5Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 5);
-		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);				
+		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
+		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 
+	public String boutonCancel() {
+		return "/user/userPageNew.xhtml";
+		
+	}
+	
+	public String newTask() {
+		if(this.nextTaskName.equals(" ")) {
+			this.task.setNextTask(null);
+		} else {
+		this.task.setNextTask(taskRep.findByName(this.nextTaskName));
+		}
+		
+		this.task.setStatus(0);
+		
+		SkillProfile savedSPMDo = skillProfileRep.save(this.task.getSkillProfileMinimumToDo());
+		this.task.setSkillProfileMinimumToDo(savedSPMDo);
+		
+
+		SkillProfile savedSPMCh = skillProfileRep.save(this.task.getSkillProfileMinimumToCheck());
+		this.task.setSkillProfileMinimumToCheck(savedSPMCh);
+		
+		
+		Task savedNewTask = taskRep.save(this.task);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				savedNewTask,
+				null,				
+				user.getUserName()+" a créé la tâche "+task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPageNew.xhtml";
+	}
 
 	public List<Skill> getSkillList() {
 		return skillList;
@@ -349,32 +390,28 @@ public class NewTaskPageBean  implements Serializable {
 	}
 
 
-	public List<Domain> getDomainsList() {
-		return domainsList;
+	
+
+	public List<String> getAllTaskNames() {
+		return allTaskNames;
 	}
 
 
-	public void setDomainsList(List<Domain> domainsList) {
-		this.domainsList = domainsList;
+	public void setAllTaskNames(List<String> allTaskNames) {
+		this.allTaskNames = allTaskNames;
 	}
 
 
-	public List<Rule> getRuleList() {
-		return ruleList;
+	public String getNextTaskName() {
+		return nextTaskName;
 	}
 
 
-	public void setRuleList(List<Rule> ruleList) {
-		this.ruleList = ruleList;
+	public void setNextTaskName(String nextTaskName) {
+		this.nextTaskName = nextTaskName;
 	}
 
 
-	public List<String> getRuleNamesList() {
-		return ruleNamesList;
-	}
+	
 
-
-	public void setRuleNamesList(List<String> ruleNamesList) {
-		this.ruleNamesList = ruleNamesList;
-	}
 }

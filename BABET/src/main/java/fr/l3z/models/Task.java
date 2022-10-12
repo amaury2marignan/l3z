@@ -24,17 +24,15 @@ public class Task {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne
-	private Rule rule;
 	private String name;
 	private String description;
-	private LocalDateTime nextDate;
+	private LocalDate nextDate;
 	private int repeatAfter;
 	
-	@OneToOne
+	@ManyToOne
 	private SkillProfile skillProfileMinimumToDo;
 	
-	@OneToOne
+	@ManyToOne
 	private SkillProfile skillProfileMinimumToCheck;
 	
 	@ManyToOne
@@ -46,7 +44,7 @@ public class Task {
 	@ManyToOne
 	private Task nextTask;
 
-	public Task(String name, String description, LocalDateTime nextDate, int repeatAfter,
+	public Task(String name, String description, LocalDate nextDate, int repeatAfter,
 			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck) {
 		super();
 		this.name = name;
@@ -82,11 +80,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public LocalDateTime getNextDate() {
+	public LocalDate getNextDate() {
 		return nextDate;
 	}
 
-	public void setNextDate(LocalDateTime nextDate) {
+	public void setNextDate(LocalDate nextDate) {
 		this.nextDate = nextDate;
 	}
 
@@ -126,6 +124,8 @@ public class Task {
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
+		builder.append(", nbpoints=");
+		builder.append(nbPoints);
 		builder.append(", nextDate=");
 		builder.append(nextDate);
 		builder.append(", repeatAfter=");
@@ -157,16 +157,6 @@ public class Task {
 
 	public void setWhoDidIt(User whoDidIt) {
 		this.whoDidIt = whoDidIt;
-	}
-
-
-	public Rule getRule() {
-		return rule;
-	}
-
-
-	public void setRule(Rule rule) {
-		this.rule = rule;
 	}
 
 

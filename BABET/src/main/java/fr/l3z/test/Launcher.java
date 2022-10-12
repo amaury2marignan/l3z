@@ -12,17 +12,14 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import fr.l3z.models.Domain;
+
 import fr.l3z.models.Family;
-import fr.l3z.models.Rule;
 import fr.l3z.models.Skill;
 import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
-import fr.l3z.repositories.DomainRepository;
 import fr.l3z.repositories.FamilyRepository;
-import fr.l3z.repositories.RuleRepository;
 import fr.l3z.repositories.SkillNoteRepository;
 import fr.l3z.repositories.SkillProfileRepository;
 import fr.l3z.repositories.SkillRepository;
@@ -41,28 +38,28 @@ public class Launcher {
 	private SkillRepository skillRep;
 	@Inject
 	private SkillNoteRepository skillNoteRep;
-	@Inject
-	private DomainRepository domainRep;
+	
 	@Inject
 	private TaskRepository taskRep;
 	@Inject
 	private SkillProfileRepository skillProfileRep;
-	@Inject
-	private RuleRepository ruleRep;
+	
 	
 	
 	@PostConstruct
 	public void data() {
+		
+		
 		
 		Family f1 = new Family("Famille1","0000");
 		Family savedF1 = familyRep.save(f1);
 		Family f2 = new Family("Famille2","0000");
 		Family savedF2 = familyRep.save(f2);
 		
-		Skill menage = new Skill("ménage", "aptitude à être autonome sur le ménage", "sait participer à un chantier ménage", "sait nettoyer la cuisine après un repas, passer l'aspirateur et faire la poussière","sait nettoyer les vitres et une salle de bain", "Peut prendre en charge le nettoyage d'un étage complet","Capable de superviser le ménage de toute la maison", savedF1);
-		Skill cuisine = new Skill("cuisine", "aptitude à être autonome sur la préparation des repas", "sait participer à un chantier cuisine", "sait préparer des pâtes ou du riz","sait faire un gateau ou un plat complet", "Peut préparer un repas complet","Capable de préparer les menus, de mettre à jour la liste de course et de superviser toute activité liée à la cuisine", savedF1);
+		Skill menage = new Skill("ménage", "aptitude à être autonome sur le ménage", "sait participer à un chantier ménage", "sait nettoyer la cuisine après un repas, passer l'aspirateur et faire la poussière","sait nettoyer les vitres et une salle de bain", "Peut prendre en charge le nettoyage d'un étage complet","Capable de superviser le ménage de toute la maison", savedF2);
+		Skill cuisine = new Skill("cuisine", "aptitude à être autonome sur la préparation des repas", "sait participer à un chantier cuisine", "sait préparer des pâtes ou du riz","sait faire un gateau ou un plat complet", "Peut préparer un repas complet","Capable de préparer les menus, de mettre à jour la liste de course et de superviser toute activité liée à la cuisine", savedF2);
 		Skill parent = new Skill("parent", "compétence spéciale réservée aux parents", " ", " "," ", " ","fait partie de la caste des parents", savedF1);
-		Skill animaux = new Skill("animaux", "aptitude à être autonome sur la gestion des animaux domestiques", "sait nourrir les animaux domestiques", "sait nettoyer les lieux de vie ou objets des animaux domestiques","sait donner des médicaments aux animaux domestiques", "Peut identifier les besoins spéciaux d'un animal domestique, gérer les visites vétérinaires et l'y emmener le cas échéant","Peut prendre des décisions d'adoption sur de nouveaux animaux", savedF1);
+		Skill animaux = new Skill("animaux", "aptitude à être autonome sur la gestion des animaux domestiques", "sait nourrir les animaux domestiques", "sait nettoyer les lieux de vie ou objets des animaux domestiques","sait donner des médicaments aux animaux domestiques", "Peut identifier les besoins spéciaux d'un animal domestique, gérer les visites vétérinaires et l'y emmener le cas échéant","Peut prendre des décisions d'adoption sur de nouveaux animaux", savedF2);
 		Skill savedMenage = skillRep.save(menage);
 		Skill savedCuisine = skillRep.save(cuisine);
 		Skill savedParent = skillRep.save(parent);
@@ -152,7 +149,7 @@ public class Launcher {
 		System.out.println("nouvelle entrée : " + savedU3);
 		
 		
-		User u4 = new User("fereBabet","0000");
+		User u4 = new User("frereBabet","0000");
 		User savedU4 = userRep.save(u4);
 		List<Family> list4 = new ArrayList<Family>();
 		list4.add(savedF2);
@@ -187,9 +184,7 @@ public class Launcher {
 		SkillNote savedMenageLevelNotreCuisine = skillNoteRep.save(menageLevelNotreCuisine);
 		notreCuisineSkillProfile.getSkillNoteList().add(savedMenageLevelNotreCuisine);
 		SkillProfile savedNotreCuisineSkillProfile = skillProfileRep.save(notreCuisineSkillProfile);
-		Domain notreCuisine = new Domain("Cuisine","Lieu de préaration et consommation des repas",savedF2,savedNotreCuisineSkillProfile);
-			
-		Domain notreCuisineSaved = domainRep.save(notreCuisine);
+		
 		
 		SkillProfile petitDejMinimumSkillProfileToDo = new SkillProfile();
 		SkillNote savedCuisineLevelPetitDej = skillNoteRep.save(new SkillNote(savedCuisine,2));
@@ -203,37 +198,30 @@ public class Launcher {
 		petitDejMinimumSkillProfileToCheck.getSkillNoteList().add(savedCuisineLevelPetitDejCheck);
 		SkillProfile savedPetitDejMinimumSkillProfileToCheck = skillProfileRep.save(petitDejMinimumSkillProfileToCheck);
 		
-		Rule preparerRepas = new Rule();
-		preparerRepas.setName("Preparation des Repas");
-		preparerRepas.setDescription("règles et tâches concernantla préparation des repas");
+		
 		SkillNote savedCuisinePreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedCuisine,5));
 		SkillNote savedParentPreparerRepasSkillNote = skillNoteRep.save(new SkillNote(savedParent,5));
 		SkillProfile preparerRepasSkillProfile = new SkillProfile();
 		preparerRepasSkillProfile.getSkillNoteList().add(savedParentPreparerRepasSkillNote);
 		preparerRepasSkillProfile.getSkillNoteList().add(savedCuisinePreparerRepasSkillNote);
 		SkillProfile savedPreparerRepasSkillProfile = skillProfileRep.save(preparerRepasSkillProfile);
-		preparerRepas.setSkillProfileMinimumToUpdate(savedPreparerRepasSkillProfile);
-		preparerRepas.setDomain(notreCuisineSaved);
-		Rule savedPreparerRepas = ruleRep.save(preparerRepas);
 		
-		System.out.println(savedPreparerRepas);
 		
 		Task preparerPetitDej = new Task(
 				"Préparer le petit déjeuner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedPetitDejMinimumSkillProfileToDo,
 				savedPetitDejMinimumSkillProfileToCheck);
 		Task nettoyerPetitDej = new Task(
 				"Nettoyer le petit déjeuner",
 				"Mettre les couverts à la machine,ranger les aliments, nettoyer la table et le sol",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				3,
 				savedPetitDejMinimumSkillProfileToDo,
 				savedPetitDejMinimumSkillProfileToCheck);
 		Task savedNettoyerPetitDej =taskRep.save(nettoyerPetitDej);
-		preparerPetitDej.setRule(preparerRepas);
 		preparerPetitDej.setNextTask(savedNettoyerPetitDej);
 		preparerPetitDej.setStatus(1);
 		Task savedPreparerPetitDej = taskRep.save(preparerPetitDej);
@@ -257,7 +245,7 @@ public class Launcher {
 		Task preparerDej = new Task(
 				"Préparer le déjeuner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedDejMinimumSkillProfileToDo,
 				savedDejMinimumSkillProfileToCheck);
@@ -281,7 +269,7 @@ public class Launcher {
 		Task preparerDiner = new Task(
 				"Préparer le diner",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedDinerMinimumSkillProfileToDo,
 				savedDinerMinimumSkillProfileToCheck);
@@ -303,7 +291,7 @@ public class Launcher {
 		Task preparerNourrirChat = new Task(
 				"Nourrir le Chat",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedNourrirChatMinimumSkillProfileToDo,
 				savedNourrirChatMinimumSkillProfileToCheck);
@@ -325,7 +313,7 @@ public class Launcher {
 		Task preparerLaverVitres = new Task(
 				"Laver les vitres",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedLaverVitresMinimumSkillProfileToDo,
 				savedLaverVitresMinimumSkillProfileToCheck);
@@ -347,7 +335,7 @@ public class Launcher {
 		Task preparerPasserVadorEnBas = new Task(
 				"Passer Aspirateur en bas",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1,20,52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedPasserVadorEnBasMinimumSkillProfileToDo,
 				savedPasserVadorEnBasMinimumSkillProfileToCheck);
@@ -355,7 +343,6 @@ public class Launcher {
 		Task savedPreparerPasserVadorEnBas = taskRep.save(preparerPasserVadorEnBas);
 		System.out.println("Nouvelle Tâche ajoutée : " + savedPreparerPasserVadorEnBas);
 		savedPreparerPasserVadorEnBas.setStatus(1);
-		savedPreparerPasserVadorEnBas.setRule(savedPreparerRepas);
 		Task ToDoSavedPreparerPAsserVadorEnBas = taskRep.save(savedPreparerPasserVadorEnBas);
 		
 		SkillProfile passerVadorEnHautMinimumSkillProfileToDo = new SkillProfile();
@@ -372,7 +359,7 @@ public class Launcher {
 		Task preparerPasserVadorEnHaut = new Task(
 				"Passer Aspirateur en haut",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedPasserVadorEnHautMinimumSkillProfileToDo,
 				savedPasserVadorEnHautMinimumSkillProfileToCheck);
@@ -398,7 +385,7 @@ public class Launcher {
 		Task preparerLaverSdBHaut = new Task(
 				"Nettoyer la SdB en haut",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1, 20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedLaverSdBHautMinimumSkillProfileToDo,
 				savedLaverSdBHautMinimumSkillProfileToCheck);
@@ -423,7 +410,7 @@ public class Launcher {
 		Task preparerLaverSdBBas = new Task(
 				"Nettoyer la SdB en bas",
 				"Mettre le couvert, couper les fruits, preparer la carafe, le pain, le beurre et les confitures",
-				LocalDateTime.of(2022, 9, 1,20, 52),
+				LocalDate.of(2022, 9, 1),
 				1,
 				savedLaverSdBBasMinimumSkillProfileToDo,
 				savedLaverSdBBasMinimumSkillProfileToCheck);
