@@ -2,6 +2,8 @@ package fr.l3z.repositories;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +11,8 @@ import javax.persistence.PersistenceContext;
 import fr.l3z.models.Family;
 import fr.l3z.models.User;
 
+@ApplicationScoped
+@Stateless
 public class UserRepositoryImpl implements UserRepository {
 
 	@PersistenceContext
@@ -51,6 +55,8 @@ public class UserRepositoryImpl implements UserRepository {
 		entityManager.remove(entityManager.find(User.class, id));
 		
 	}
+	
+	
 
 	@Override
 	public void deleteByObject(User t) {

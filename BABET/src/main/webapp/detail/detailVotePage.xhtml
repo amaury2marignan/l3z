@@ -174,7 +174,7 @@
 						<div class="dvpSkillNameVote">#{p.skill.name}</div>
 
 						<div class="stars">
-						
+						<h:form>
 							<h:graphicImage url="/resources/star.png" width="20%"
 								rendered="#{detailVotePageBean.yellow1(p.id)}" />
 								
@@ -191,23 +191,23 @@
 								rendered="#{detailVotePageBean.yellow5(p.id)}" />
 							
 								
-							<h:commandLink action="#{detailVotePageBean.starAction1(p)}">
+							<h:commandLink action="#{detailVotePageBean.starAction1(p.id)}">
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
 								rendered="#{detailVotePageBean.grey1(p.id)}" />
 								</h:commandLink>
-								<h:commandLink action="#{detailVotePageBean.starAction2(p)}">
+								<h:commandLink action="#{detailVotePageBean.starAction2(p.id)}">
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
 								rendered="#{detailVotePageBean.grey2(p.id)}" />
 								</h:commandLink>
-									<h:commandLink action="#{detailVotePageBean.starAction3(p)}">
+									<h:commandLink action="#{detailVotePageBean.starAction3(p.id)}">
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
 								rendered="#{detailVotePageBean.grey3(p.id)}" />
 								</h:commandLink>
-									<h:commandLink action="#{detailVotePageBean.starAction4(p)}">
+									<h:commandLink action="#{detailVotePageBean.starAction4(p.id)}">
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
 								rendered="#{detailVotePageBean.grey4(p.id)}" />
 								</h:commandLink>
-									<h:commandLink action="#{detailVotePageBean.starAction5(p)}">
+									<h:commandLink action="#{detailVotePageBean.starAction5(p.id)}">
 							<h:graphicImage url="/resources/starGrey.png" width="20%"
 								rendered="#{detailVotePageBean.grey5(p.id)}" />
 								</h:commandLink>
@@ -227,7 +227,7 @@
 							
 							<h:graphicImage url="/resources/starWhite.png" width="20%"
 								rendered="#{detailVotePageBean.white5(p.id)}" />
-								
+							</h:form>
 						</div>
 					</div>
 				</ui:repeat>
@@ -267,9 +267,15 @@
 					</h:commandLink>
 
 					<h:commandLink
-						action="#{detailVotePageBean.save(detailVotePageBean.vote)}">
-						<f:param name="voteId" value="#{detailVotePageBean.vote.id}" />
-						<h:graphicImage url="/resources/boutonSauvegarde.png" width="48%" />
+						action="#{detailVotePageBean.save()}">
+						<h:graphicImage url="/resources/boutonSauvegarde.png" width="48%"
+						rendered="#{detailVotePageBean.isOkSaveButton()}" />
+					</h:commandLink>
+					
+					<h:commandLink
+						action="#{detailVotePageBean.saveModify()}">
+						<h:graphicImage url="/resources/boutonSaveChanges.png" width="48%"
+						rendered="#{detailVotePageBean.isOkModifyButton()}" />
 					</h:commandLink>
 				</h:form>
 			</div>

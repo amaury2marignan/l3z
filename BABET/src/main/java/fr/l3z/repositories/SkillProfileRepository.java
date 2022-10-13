@@ -8,7 +8,7 @@ public interface SkillProfileRepository extends GenericRepository<Long, SkillPro
 
 	boolean isThisSkillIn(Long skillId, SkillProfile skillProfileToCheck);
 	int getScore(Long skillId,SkillProfile skillProfileToCheck);
-	void setSkillScore(Long skillId,SkillProfile skillProfileToUpdate,int score);
+	SkillProfile setSkillScore(Long skillId,SkillProfile skillProfileToUpdate,int score);
 	
 	
 }

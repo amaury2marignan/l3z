@@ -299,12 +299,12 @@ public boolean isOkNewProjectButton() {
 		skillProfileRep.update(this.task.getSkillProfileMinimumToDo().getId(),this.task.getSkillProfileMinimumToDo());
 		skillProfileRep.update(this.task.getSkillProfileMinimumToCheck().getId(),this.task.getSkillProfileMinimumToCheck());
 		taskRep.update(this.task.getId(), this.task);
-		System.out.println();
+		
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),
 				this.task,
-				null,				
+				null,
 				user.getUserName()+" a modifié la tâche "+this.task.getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -326,6 +326,7 @@ public boolean isOkNewProjectButton() {
 		vote.setTaskNewDescription(this.task.getDescription());
 		vote.setTaskNewRepeatAfter(this.task.getRepeatAfter());
 		
+		
 		if(nextTaskName.equals(" ")) {
 			vote.setTaskNewNextTask(null);
 		} else {
@@ -342,7 +343,6 @@ public boolean isOkNewProjectButton() {
 		System.out.println("vote : "+vote);
 		Vote savedVote = voteRep.save(vote);
 		System.out.println("savedVote : "+savedVote);
-		
 		Event newEvent = new Event(
 				this.user,
 				LocalDateTime.now(),

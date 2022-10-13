@@ -95,7 +95,7 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 	}
 
 	@Override
-	public void setSkillScore(Long skillId, SkillProfile skillProfileToUpdate, int score) {
+	public SkillProfile setSkillScore(Long skillId, SkillProfile skillProfileToUpdate, int score) {
 	
 		
 		if (this.isThisSkillIn(skillId,skillProfileToUpdate)) {
@@ -108,6 +108,7 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 			skillProfileToUpdate.getSkillNoteList().add(new SkillNote(skillRep.find(skillId),score));
 		}
 		
+		return skillProfileToUpdate;
 	}
 	
 

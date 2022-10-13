@@ -2,6 +2,8 @@ package fr.l3z.repositories;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,6 +13,8 @@ import fr.l3z.models.SkillNote;
 import fr.l3z.models.SkillProfile;
 import fr.l3z.models.User;
 
+@ApplicationScoped
+@Stateless
 public class SkillRepositoryImpl implements SkillRepository {
 
 	@PersistenceContext

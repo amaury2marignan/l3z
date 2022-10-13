@@ -1,14 +1,18 @@
 package fr.l3z.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,11 +44,14 @@ public class Vote {
 	@OneToOne
 	private SkillProfile taskNewSPMDo;
 	
-	@OneToOne
+	@ManyToOne
 	private User whoDidIt;
 	
-	@ManyToMany
-	private List<User> whoVote = new ArrayList<User>();
+	private Boolean didSom1Vot = false;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<User> whoVote = new HashSet<User>();
 	
 	
 	public Vote() {
@@ -95,6 +102,27 @@ public class Vote {
 
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(whoVote);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vote other = (Vote) obj;
+		return Objects.equals(whoVote, other.whoVote);
+	}
+
+
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Vote [id=");
@@ -117,8 +145,8 @@ public class Vote {
 		builder.append(taskNewSPMDo);
 		builder.append(", whoDidIt=");
 		builder.append(whoDidIt);
-		builder.append(", whoVote=");
-		builder.append(whoVote);
+		builder.append(", whoVoted=");
+		builder.append(whoVote);		
 		builder.append("]");
 		return builder.toString();
 	}
@@ -197,14 +225,26 @@ public class Vote {
 
 
 
-	public List<User> getWhoVote() {
+	public Set<User> getWhoVote() {
 		return whoVote;
 	}
 
 
 
-	public void setWhoVote(List<User> whoVote) {
+	public void setWhoVote(Set<User> whoVote) {
 		this.whoVote = whoVote;
+	}
+
+
+
+	public Boolean getDidSom1Vot() {
+		return didSom1Vot;
+	}
+
+
+
+	public void setDidSom1Vot(Boolean didSom1Vot) {
+		this.didSom1Vot = didSom1Vot;
 	}
 	
 	
