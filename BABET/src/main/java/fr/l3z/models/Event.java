@@ -30,34 +30,50 @@ public class Event {
 	@ManyToOne
 	private Vote vote;
 	
+	@ManyToOne
+	private Purchase purchase;
+	
 	
 	
 	private String action;
 
-	public Event(User user, LocalDateTime date,  Task task, Vote vote,  String action) {
+
+
+	public Event(User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, String action) {
 		super();
 		this.user = user;
 		this.date = date;
 		this.task = task;
 		this.vote = vote;
+		this.purchase = purchase;
 		this.action = action;
 	}
+
+
 
 	public Event() {
 		super();
 	}
 
+
+
 	public User getUser() {
 		return user;
 	}
+
+
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+
+
 	public LocalDateTime getDate() {
 		return date;
 	}
+
+
 
 	public void setDate(LocalDateTime date) {
 		this.date = date;
@@ -69,31 +85,55 @@ public class Event {
 		return task;
 	}
 
+
+
 	public void setTask(Task task) {
 		this.task = task;
 	}
 
-	
+
 
 	public Vote getVote() {
 		return vote;
 	}
 
+
+
 	public void setVote(Vote vote) {
 		this.vote = vote;
 	}
+
+
+
+	public Purchase getPurchase() {
+		return purchase;
+	}
+
+
+
+	public void setPurchase(Purchase purchase) {
+		this.purchase = purchase;
+	}
+
+
 
 	public String getAction() {
 		return action;
 	}
 
+
+
 	public void setAction(String action) {
 		this.action = action;
 	}
 
+
+
 	public Long getId() {
 		return id;
 	}
+
+
 
 	@Override
 	public String toString() {
@@ -104,12 +144,18 @@ public class Event {
 		builder.append(user);
 		builder.append(", date=");
 		builder.append(date);
+		builder.append(", task=");
+		builder.append(task);
+		builder.append(", vote=");
+		builder.append(vote);
+		builder.append(", purchase=");
+		builder.append(purchase);
 		builder.append(", action=");
 		builder.append(action);
 		builder.append("]");
 		return builder.toString();
 	}
 
-
+	
 	
 }

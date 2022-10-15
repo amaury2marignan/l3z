@@ -109,7 +109,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,		
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -132,7 +133,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -140,7 +142,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent2 = eventRep.save(newEvent2);
@@ -165,7 +168,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -173,7 +177,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent2 = eventRep.save(newEvent2);		
@@ -197,7 +202,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -220,7 +226,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -243,7 +250,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -267,7 +275,8 @@ public class PlanTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

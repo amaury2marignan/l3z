@@ -373,7 +373,8 @@ public class NewTaskPageBean  implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				savedNewTask,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a créé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

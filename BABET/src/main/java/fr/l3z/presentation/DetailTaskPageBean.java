@@ -84,7 +84,8 @@ public class DetailTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				this.task,
-				null,				
+				null,
+				null,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -98,7 +99,8 @@ public class DetailTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				this.task,
-				null,				
+				null,
+				null,
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -113,7 +115,8 @@ public class DetailTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				this.task,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -127,7 +130,8 @@ public class DetailTaskPageBean implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				this.task,
-				null,				
+				null,	
+				null,
 				user.getUserName()+" a annulé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

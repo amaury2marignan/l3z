@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Ajout à la liste de courses</title>
+</h:head>
+
+<body>
+	<div class="content">
+
+		<div class="logoIndex">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="topBox">
+
+			<div class="userName">A ajouter à la liste de courses</div>
+
+			
+
+		</div>
+
+		<div class="topRight">
+
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid5.png" width="100%" />
+			</a>
+		</div>
+
+
+
+		<div class="actions">
+
+			<div class="boutonGauche">
+				<a href="../user/userPage.xhtml"> <img
+					src="../resources/babetid3.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../family/familyPage.xhtml"> <img
+					src="../resources/babetidfamily.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+					<a href="../user/userPagePurchase.xhtml"><img
+					src="../resources/boutonCourses.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageVote.xhtml"><img
+					src="../resources/boutonVote.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageRules.xhtml"><img
+					src="../resources/logoRegles.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageHistoric.xhtml"><img
+					src="../resources/boutonHistorique.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGaucheLong">
+				<a href="../detail/newTaskPage.xhtml"><img
+					src="../resources/boutonNewTask.png" width="95%" /> </a>
+			</div>
+		</div>
+
+
+
+
+
+		<div class="tasksListContener">
+			Liste des achats possible
+			<div class="tasksList">
+				<h:form>
+
+					<h:dataTable value="#{newPurchasePageBean.purchaseList}" var="p"
+						columnClasses="column1,column2,column3">
+						<h:column>
+							<f:facet name="header"></f:facet>
+					#{p.description}
+				</h:column>
+					
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<h:commandLink action="#{newPurchasePageBean.planPurchase(p.id)}">
+								<f:param name="purchaseId" value="#{p.id}" />
+								<h:graphicImage url="/resources/boutonPlan.png" width="15%" />
+							</h:commandLink>
+
+							
+						</h:column>
+					</h:dataTable>
+					<h:inputText class="newPurchaseInput" value="#{newPurchasePageBean.purchase.description}"></h:inputText>
+					<h:commandLink action="#{newPurchasePageBean.planPurchaseText(newPurchasePageBean.purchase.description)}">
+								<f:param name="purchaseDescription" value="#{newPurchasePageBean.purchase.description}" />
+								<h:graphicImage url="/resources/boutonPlan.png" width="15%" />
+							</h:commandLink>
+				</h:form>
+			</div>
+		</div>
+		
+
+
+
+
+
+
+	</div>
+
+</body>
+</html>

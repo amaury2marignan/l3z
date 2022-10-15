@@ -87,6 +87,16 @@ public class SkillRepositoryImpl implements SkillRepository {
 		return nbPoints;
 	}
 
+	@Override
+	public List<Skill> findWithFamily(Long id) {
+		
+		return entityManager
+				.createQuery("select u from Skill u where u.family.id = :familyIdParam", Skill.class)
+				.setParameter("familyIdParam", id)
+				.getResultList();
+		
+	}
+
 	
 
 }

@@ -138,13 +138,15 @@ body{
 	padding:2px;
 	padding-bottom:0px;
 	width:83%;
-	height:320px;
+	height:300px;
 	background-color: #A6A6A6;
 	border-radius: 9px;
 	text-align:center;
 	box-shadow: 2px 2px 2px #7F7F7F;
 	
 }
+
+
 
 
 
@@ -168,11 +170,22 @@ body{
 	flex-wrap:wrap;
 	margin:2px;
 	margin-top:0px;
-	height:200px;
 	width:15%;
+	height:115px;
 	
 	
 }
+.actions6buttons{
+	display:flex;
+	flex-wrap:wrap;
+	margin:2px;
+	margin-top:0px;
+	width:15%;
+	height:50px;
+	
+}
+
+
 
 .topBox{
 	background-color: #44546A; 
@@ -239,6 +252,13 @@ body{
 .boutonGauche{
 	width:40%;
 	margin:2px;
+
+}
+
+.boutonGauche2{
+	
+	margin:2px;
+	height:100%;
 }
 
 .boutonGaucheLong{
@@ -953,3 +973,51 @@ body{
 	font-size:12px;
 }
 
+.newPurchaseInput{
+	margin:2px;
+	background-color: white;
+	border-radius: 5px;
+	border:hidden;
+	width:80%;
+	height:30px;
+	color:black;
+   box-shadow: inset 2px 2px #7F7F7F;
+	font-size:16px;
+	text-align:left;
+	font-family: "Berlin Sans FB Demi";
+	}
+
+.purchaseList{
+	color:black;
+	font-size:25px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:230px;
+	overflow:auto;
+	width:95%;
+	margin-left:20px;
+	background-color: white;
+	border-radius: 9px;
+	box-shadow: inset 2px 2px #7F7F7F;
+}
+.purchaseListColumn1{
+	width:90%;
+	
+}
+.purchasePlanButton{
+	width:5%;
+	margin:2px;
+	border-radius: 5px;
+	border:hidden;
+	justify-content:left;
+	background-color:pink;
+}
+
+.bottomPurchase{
+	width:100%;
+	height:40px;
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+}
