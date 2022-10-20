@@ -111,9 +111,9 @@
 
 
 
-		<div class="tasksListContener">
+		<div class="votesListContener">
 			Liste des votes
-			<div class="tasksList">
+			<div class="votesList">
 				<h:form>
 
 					<h:dataTable value="#{userPageVoteBean.votesList}" var="p"
@@ -132,6 +132,61 @@
 							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
 								<f:param name="voteId" value="#{p.id}" />
 								</h:commandLink>
+						</h:column>
+					</h:dataTable>
+
+				</h:form>
+			</div>
+		</div>
+		
+		<div class="skillVotesListContener">
+			Liste des demandes d'étoiles
+			<div class="skillVotesList">
+				<h:form>
+
+					<h:dataTable value="#{userPageVoteBean.skillVotesList}" var="p"
+						columnClasses="skillVoteListColumn1,skillVoteListColumn2,skillVoteListColumn3,skillVoteListColumn4">
+						<h:column>
+							<f:facet name="header"></f:facet>
+					demande d'une étoile pour #{p.whoAsked.userName}
+				</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+					 en #{p.skill.name}
+				</h:column>
+				<h:column>
+							<f:facet name="header"></f:facet>
+					<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote1(p)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote2(p)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote3(p)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote4(p)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote5(p)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote1Inverted(p)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote2Inverted(p)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote3Inverted(p)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote4Inverted(p)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userPageVoteBean.skillVoteNote5Inverted(p)}" />
+						</div>
+				</h:column>
+						<h:column>
+							<f:facet name="header"></f:facet>
+							<h:commandLink action="#{userPageVoteBean.cancelSkillVote(p)}">
+							<h:graphicImage url="/resources/boutonCancel.png" width="40%" rendered="#{userPageVoteBean.cancelSkillVoteOK(p)}"/>
+							</h:commandLink>
+							<h:commandLink action="#{userPageVoteBean.validSkillVote(p)}">
+							<h:graphicImage url="/resources/boutonValid.png" width="40%" rendered="#{userPageVoteBean.validSkillVoteOK(p)}"/>
+							</h:commandLink>
 						</h:column>
 					</h:dataTable>
 

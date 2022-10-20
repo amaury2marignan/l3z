@@ -33,19 +33,21 @@ public class Event {
 	@ManyToOne
 	private Purchase purchase;
 	
-	
+	@ManyToOne
+	private Skill skill;
 	
 	private String action;
 
 
 
-	public Event(User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, String action) {
+	public Event(User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, String action) {
 		super();
 		this.user = user;
 		this.date = date;
 		this.task = task;
 		this.vote = vote;
 		this.purchase = purchase;
+		this.skill = skill;
 		this.action = action;
 	}
 
@@ -150,6 +152,8 @@ public class Event {
 		builder.append(vote);
 		builder.append(", purchase=");
 		builder.append(purchase);
+		builder.append(", skill=");
+		builder.append(skill);
 		builder.append(", action=");
 		builder.append(action);
 		builder.append("]");

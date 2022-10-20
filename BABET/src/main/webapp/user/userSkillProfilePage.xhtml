@@ -57,7 +57,10 @@
 					</div>
 				</ui:repeat>
 				<div class="espace5px"></div>
-				
+			<div>
+					<a href="../user/userSkillProfilePage.xhtml"><img
+						src="../resources/boutonTroisPoints.png" height="30px" /> </a>
+				</div>
 			</div>
 
 		</div>
@@ -103,8 +106,11 @@
 					src="../resources/boutonHistorique.png" width="95%" /> </a>
 			</div>
 			<div class="boutonGaucheLong">
-				<a href="../user/userPageNew.xhtml"><img
-					src="../resources/boutonNewTask.png" width="95%" /> </a>
+				<h:form>
+				<h:commandLink action="#{userSkillProfilePageBean.newSkill()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonNewTask.png" width="100%" rendered="#{userSkillProfilePageBean.newSkillButtonOK()}"/>
+			</h:commandLink>
+			</h:form>
 			</div>
 		</div>
 
@@ -118,7 +124,7 @@
 				<h:form>
 
 					<h:dataTable value="#{userSkillProfilePageBean.skillsList}" var="p"
-						columnClasses="column1,column2, column3">
+						columnClasses="userSPcolumn1,userSPcolumn2, userSPcolumn3">
 						<h:column>
 							<f:facet name="header"></f:facet>
 					#{p.name}
@@ -129,13 +135,13 @@
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-						<h:commandLink action="#{userPageBean.askForStar(p)}">
-						<h:graphicImage url="/resources/boutonNewStar.png" width="15%" />
+						<h:commandLink action="#{userSkillProfilePageBean.askForStar(p)}">
+						<h:graphicImage url="/resources/boutonNewStar.png" width="50%" rendered="#{userSkillProfilePageBean.buttonAskOK(p)}"/>
 						</h:commandLink>
 						
-						<h:commandLink action="#{userPageBean.detailsAction(p.id)}">
+						<h:commandLink action="#{userSkillProfilePageBean.detailsAction(p)}">
 							<f:param name="skillId" value="#{p.id}" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="50%" />
 						</h:commandLink>
 						</h:column>
 					</h:dataTable>

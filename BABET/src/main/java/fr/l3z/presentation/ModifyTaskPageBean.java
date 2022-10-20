@@ -306,6 +306,7 @@ public boolean isOkNewProjectButton() {
 				this.task,
 				null,
 				null,
+				null,
 				user.getUserName()+" a modifié la tâche "+this.task.getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -349,6 +350,7 @@ public boolean isOkNewProjectButton() {
 				LocalDateTime.now(),
 				this.task,
 				savedVote,	
+				null,
 				null,
 				user.getUserName()+" a proposé une modification de la tâche "+taskRep.find(this.task.getId()).getName()
 				);

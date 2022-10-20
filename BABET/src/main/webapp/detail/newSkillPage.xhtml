@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Création d'une nouvelle Compétence</title>
+</h:head>
+<body>
+<h:form>
+	<div class="dtpContent">
+	
+
+		<div class="dtpTopLeft">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="dtpTop">
+
+			<div class="sppSkillName">
+			
+			<h:inputText value="#{newSkillPageBean.skill.name}" style="font-family: Berlin Sans FB Demi;width:100%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:30px;color:#FFD966;padding-left:5px;"/>
+			
+				</div>
+			
+			
+		</div>
+		<div class="dtpLogoPerso">
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid3.png" width="95%" />
+			</a>
+		</div>
+		
+
+
+
+		<div class="sppMiddle">
+			Description<br/>
+			<h:inputText value="#{newSkillPageBean.skill.description}" style="font-family: Berlin Sans FB Demi;width:95%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:15px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			<div class="newTaskLevels">
+			<br/><br/><h:graphicImage url="/resources/star.png" width="3%"/>
+			<h:inputText value="#{newSkillPageBean.skill.descriptionLevel1}" style="font-family: Berlin Sans FB Demi;width:40%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:10px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			<h:inputText value="#{newSkillPageBean.skill.descriptionLevel2}" style="font-family: Berlin Sans FB Demi;width:40%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:10px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			<h:inputText value="#{newSkillPageBean.skill.descriptionLevel3}" style="font-family: Berlin Sans FB Demi;width:40%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:10px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			<h:inputText value="#{newSkillPageBean.skill.descriptionLevel4}" style="font-family: Berlin Sans FB Demi;width:40%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:10px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			<h:inputText value="#{newSkillPageBean.skill.descriptionLevel5}" style="font-family: Berlin Sans FB Demi;width:40%;height:30px;margin:2px;border-radius:5px;border:hidden;font-size:10px;color:black;padding-left:5px;background-color:white;overflow:auto;"/>
+			</div>
+		</div>
+		
+
+		<div class="ntpDown">
+			<h:commandLink action="#{newSkillPageBean.boutonCancel()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonCancel.png" width="100%"/>
+			</h:commandLink>
+			<h:commandLink action="#{newSkillPageBean.newSkill()}" style="width:12%;">
+				<h:graphicImage url="/resources/boutonSauvegarde.png" width="100%" rendered="#{newSkillPageBean.saveButtonOK()}"/>
+			</h:commandLink>
+			
+		</div>
+</div>
+
+	
+</h:form>
+
+
+</body>
+</html>

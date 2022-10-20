@@ -15,11 +15,16 @@ import javax.inject.Inject;
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
 import fr.l3z.models.Skill;
+import fr.l3z.models.SkillNote;
+import fr.l3z.models.SkillProfile;
+import fr.l3z.models.SkillVote;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
+import fr.l3z.repositories.SkillProfileRepository;
 import fr.l3z.repositories.SkillRepository;
+import fr.l3z.repositories.SkillVoteRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -42,6 +47,12 @@ public class UserSkillProfilePageBean  implements Serializable {
 	private SkillRepository skillRep;
 	@Inject 
 	private EventRepository eventRep;
+	@Inject
+	private SkillProfileRepository skillProfileRep;
+	@Inject
+	private TaskRepository taskRep;
+	@Inject
+	private SkillVoteRepository skillVoteRep;
 	
 	private User user = new User();
 	private Family family = new Family();
@@ -58,6 +69,68 @@ public class UserSkillProfilePageBean  implements Serializable {
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
 		this.setSkillsList(skillRep.findWithFamily(this.family.getId()));
+	}
+	
+	public Boolean newSkillButtonOK() {
+		SkillNote parentSkillNote = new SkillNote(skillRep.findByName("parent"),5);
+		SkillProfile parentSkillProfile = new SkillProfile();
+		skillProfileRep.setSkillScore(parentSkillNote.getSkill().getId(), parentSkillProfile, 5);
+		
+		if(taskRep.compareSkillProfile(this.user.getSkillProfile(), parentSkillProfile)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String newSkill() {
+		return "/detail/newSkillPage.xhtml";
+	}
+	
+	public Boolean buttonAskOK(Skill s) {
+		Boolean lessThan5 = false;
+		for(SkillNote sN:this.user.getSkillProfile().getSkillNoteList()) {
+			if(sN.getSkill().getId()==s.getId()&&(sN.getScore()<5)) {
+				lessThan5=true;
+			} 
+		}
+		
+		Boolean notAlreadyAsked = true;
+		for(SkillVote sV:skillVoteRep.findAll()) {
+			if((sV.getSkill().getId()==s.getId())&&(sV.getWhoAsked().getId()==this.user.getId())&&(sV.getStatus()==1)){
+				notAlreadyAsked=false;
+			}
+		}
+		
+		if(lessThan5&&notAlreadyAsked) {
+			return true;
+		} else {
+		return false;
+		}
+	}
+	
+	
+	
+	public String askForStar(Skill s) {
+		SkillVote newSkillVote = new SkillVote(this.user,s);
+		newSkillVote.setStatus(1);
+		SkillVote savedNewSkillVote=skillVoteRep.save(newSkillVote);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				null,
+				null,	
+				null,
+				s,
+				user.getUserName()+" a demandé une étoile pour la compétence "+s.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		
+		return "/user/userSkillProfilePage.xhtml";
+	}
+	public String detailsAction(Skill skillD) {
+		this.skill = skillD;
+		return "/detail/skillPage.xhtml";
 	}
 	
 	public Boolean skillNote1(int score){

@@ -375,6 +375,7 @@ public class NewTaskPageBean  implements Serializable {
 				savedNewTask,
 				null,	
 				null,
+				null,
 				user.getUserName()+" a créé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

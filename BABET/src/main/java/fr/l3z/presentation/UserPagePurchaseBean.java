@@ -67,7 +67,27 @@ public class UserPagePurchaseBean  {
 				null,
 				null,
 				purchaseRep.find(purchaseId),
-				user.getUserName()+" a acheté : "+purchase.getDescription()	
+				null,
+				user.getUserName()+" a acheté : "+donePurchase.getDescription()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		this.setPurchasesList(purchaseRep.findPurchasesToDo());
+		return "user/userPagePurchase.xhtml";
+	}
+	
+	public String cancelPurchase(Long purchaseId) {
+		Purchase cancelledPurchase = purchaseRep.find(purchaseId);
+		
+		cancelledPurchase.setStatus(3);
+		purchaseRep.update(purchaseId,cancelledPurchase);
+		Event newEvent = new Event(
+				this.user,
+				LocalDateTime.now(),
+				null,
+				null,
+				cancelledPurchase,
+				null,
+				user.getUserName()+" a enlevé de la liste de courses : "+cancelledPurchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		this.setPurchasesList(purchaseRep.findPurchasesToDo());
@@ -85,6 +105,7 @@ public class UserPagePurchaseBean  {
 				null,
 				null,
 				this.purchase,
+				null,
 				user.getUserName()+" a ajouté à la liste de courses : "+purchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

@@ -111,6 +111,7 @@ public class PlanTaskPageBean implements Serializable {
 				savedPlanTask,
 				null,		
 				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -135,6 +136,7 @@ public class PlanTaskPageBean implements Serializable {
 				savedPlanTask,
 				null,	
 				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -143,6 +145,7 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDateTime.now(),
 				savedPlanTask,
 				null,	
+				null,
 				null,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
@@ -170,6 +173,7 @@ public class PlanTaskPageBean implements Serializable {
 				savedPlanTask,
 				null,
 				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -178,6 +182,7 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDateTime.now(),
 				savedPlanTask,
 				null,	
+				null,
 				null,
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
@@ -204,6 +209,7 @@ public class PlanTaskPageBean implements Serializable {
 				savedPlanTask,
 				null,
 				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -227,6 +233,7 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDateTime.now(),
 				savedPlanTask,
 				null,	
+				null,
 				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
@@ -252,6 +259,7 @@ public class PlanTaskPageBean implements Serializable {
 				savedPlanTask,
 				null,	
 				null,
+				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -276,6 +284,7 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDateTime.now(),
 				savedPlanTask,
 				null,	
+				null,
 				null,
 				user.getUserName()+" a planifié la tâche "+task.getName()
 				);

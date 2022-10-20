@@ -127,10 +127,16 @@
 					
 						<h:column>
 							<f:facet name="header"></f:facet>
-							<h:commandLink action="#{userPagePurchaseBean.doPurchase(p.id)}">
-							<h:graphicImage url="/resources/boutonFleche.png" width="60%" />
+						
+							<h:commandLink action="#{userPagePurchaseBean.cancelPurchase(p.id)}">
+							<h:graphicImage url="/resources/boutonCancel.png" width="40%" />
 								<f:param name="purchaseId" value="#{p.id}" />
 								</h:commandLink>
+							<h:commandLink action="#{userPagePurchaseBean.doPurchase(p.id)}">
+							<h:graphicImage url="/resources/boutonFleche.png" width="40%" />
+								<f:param name="purchaseId" value="#{p.id}" />
+								</h:commandLink>
+								
 						</h:column>
 					</h:dataTable>
 					</div>

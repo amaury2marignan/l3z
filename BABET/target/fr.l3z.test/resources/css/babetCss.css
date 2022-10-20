@@ -1002,7 +1002,11 @@ body{
 	box-shadow: inset 2px 2px #7F7F7F;
 }
 .purchaseListColumn1{
-	width:90%;
+	width:85%;
+	
+}
+.purchaseListColumn2{
+	width:15%;
 	
 }
 .purchasePlanButton{
@@ -1011,7 +1015,7 @@ body{
 	border-radius: 5px;
 	border:hidden;
 	justify-content:left;
-	background-color:pink;
+	
 }
 
 .bottomPurchase{
@@ -1020,4 +1024,132 @@ body{
 	display:flex;
 	flex-direction:row;
 	justify-content:center;
+}
+
+.userSPcolumn1{
+	width:20%;
+	font-size:20px;
+}
+
+.userSPcolumn2{
+	width:70%;
+	font-size:14px;
+}
+
+.userSPcolumn3{
+	width:10%;
+
+}
+
+.sppSkillName{
+	margin:2px;
+	padding-top:0px;
+	height:90%;
+	width:95%;
+}
+
+.sppMiddle{
+	width:95%;
+	height:270px;
+	background-color:#A6A6A6;
+	margin:2px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	padding:5px;
+	color:white;
+	text-align:center;
+	
+	
+}
+
+.newTaskLevels{
+	margin-left:10px;
+	text-align:left;
+	font-size:10px;
+	justify-content:flex-start;
+}
+
+.spDescription{
+	width:95%;
+	height:30px;
+	margin:2px;
+	border-radius:5px;
+	border:hidden;
+	font-size:15px;
+	color:black;
+	padding-left:5px;
+	background-color:white;
+	overflow:auto;
+}
+
+.votesListContener{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	margin-top:0px;
+	padding:2px;
+	width:83%;
+	height:210px;
+	background-color: #A6A6A6;
+	border-radius: 9px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	
+}
+
+
+.skillVotesListContener{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	padding:2px;
+	width:95%;
+	height:120px;
+	background-color: #A6A6A6;
+	border-radius: 9px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	
+}
+
+.skillVoteListColumn1{
+	width:40%;
+}
+
+.skillVoteListColumn2{
+	width:20%;
+}
+
+.skillVoteListColumn3{
+	width:30%;
+}
+
+.votesList{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:80%;
+	overflow:auto;
+	width:95%;
+	margin-left:20px;
+	background-color: white;
+	border-radius: 9px;
+	box-shadow: inset 2px 2px #7F7F7F;
+}
+
+.skillVotesList{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:70%;
+	overflow:auto;
+	width:95%;
+	margin-left:20px;
+	background-color: white;
+	border-radius: 9px;
+	box-shadow: inset 2px 2px #7F7F7F;
 }

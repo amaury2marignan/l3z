@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Page Compétence</title>
+</h:head>
+<body>
+<h:form>
+	<div class="dtpContent">
+	
+
+		<div class="dtpTopLeft">
+			<a href="../index.xhtml"> <img
+				src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="dtpTop">
+
+			<div class="sppSkillName">
+				#{SkillPageBean.skill.name}
+			</div>
+			
+			
+		</div>
+		<div class="dtpLogoPerso">
+			<a href="../user/userPage.xhtml"> <img
+				src="../resources/babetid3.png" width="95%" />
+			</a>
+		</div>
+		
+
+
+
+		<div class="sppMiddle">
+			Description<br/>
+			<div class="spDescription">#{SkillPageBean.skill.description}</div> 
+			<div class="newTaskLevels">
+			<br/><br/><h:graphicImage url="/resources/star.png" width="3%"/>
+			#{SkillPageBean.skill.descriptionLevel1}
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			#{SkillPageBean.skill.descriptionLevel2}
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			#{SkillPageBean.skill.descriptionLevel3}
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			#{SkillPageBean.skill.descriptionLevel4}
+			<br/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/><h:graphicImage url="/resources/star.png" width="3%"/>
+			#{SkillPageBean.skill.descriptionLevel5}</div>
+		</div>
+		
+
+		<div class="ntpDown">
+			
+			<h:commandLink action="#{skillPageBean.modifySkill(skillPageBean.skill.id)}" style="width:12%;">
+					<f:param name="skillId" value="#{skillPageBean.skill.id}" />
+				<h:graphicImage url="/resources/boutonModify.png" width="100%" rendered="#{skillPageBean.modifyButtonOK()}"/>
+			
+			</h:commandLink>
+			
+		</div>
+</div>
+
+	
+</h:form>
+
+
+</body>
+</html>

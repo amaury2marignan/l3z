@@ -13,5 +13,7 @@ public interface PurchaseRepository extends GenericRepository<Long, Purchase> {
 
 	List<Purchase> findPurchasesToDo();
 
+	
+
 
 }

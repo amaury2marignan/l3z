@@ -97,6 +97,15 @@ public class SkillRepositoryImpl implements SkillRepository {
 		
 	}
 
+	@Override
+	public Skill findByName(String string) {
+		return entityManager
+				.createQuery("select u from Skill u where u.name = :skillNameParam", Skill.class)
+				.setParameter("skillNameParam", string)
+				.getSingleResult();
+		
+	}
+
 	
 
 }
