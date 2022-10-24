@@ -38,15 +38,19 @@ public class Task {
 	@ManyToOne
 	private User whoDidIt;
 	
+	@ManyToOne
+	private Family family;
+	
 	private int status;
 	private int nbPoints;
 	
 	@ManyToOne
 	private Task nextTask;
 
-	public Task(String name, String description, LocalDate nextDate, int repeatAfter,
+	public Task(Family family, String name, String description, LocalDate nextDate, int repeatAfter,
 			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck) {
 		super();
+		this.family=family;
 		this.name = name;
 		this.description = description;
 		this.nextDate = nextDate;
@@ -178,5 +182,17 @@ public class Task {
 	public void setNbPoints(int nbPoints) {
 		this.nbPoints = nbPoints;
 	}
+
+
+	public Family getFamily() {
+		return family;
+	}
+
+
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+	
+	
 
 }

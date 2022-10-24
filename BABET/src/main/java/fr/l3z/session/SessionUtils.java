@@ -8,6 +8,7 @@ public class SessionUtils {
 
 	private static final String USER_ID = "userId";
 	private static final String FAMILY_ID = "familyId";
+	private static final String ADMIN_CONNECT = "adminConnect";
 
 	public static HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance()
@@ -47,9 +48,30 @@ public class SessionUtils {
 		session.setAttribute(USER_ID, userId);
 	}
 	
+	public static Long getAdminConnect() {
+		HttpSession session = getSession();
+		if (session != null)
+			return (Long) session.getAttribute(ADMIN_CONNECT );
+		else
+			return null;
+	}
+
+	public static void setAdminConnect(Long adminConnect) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(false);
+		session.setAttribute(ADMIN_CONNECT, adminConnect);
+	}
 
 	public static boolean isFamilyLogged() {
 		return getFamilyId() != null;
+	}
+	
+	public static boolean isAdminLogged() {
+		if((getAdminConnect()==0)|(getAdminConnect()==null)) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public static boolean isUserLogged() {

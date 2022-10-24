@@ -67,13 +67,10 @@ public class LoginBean {
 	
 	
 	public String doLogin() {
-		User user = userRep.findByUserName(userName);
-		System.out.println("user trouvé : "+user);
-		if((user != null)&&(user.getPassword().equals(password))){
-			SessionUtils.setUserId(user.getId());
-			System.out.println("connecté : " + userRep.find(SessionUtils.getUserId()));
-			
-			return "user/userPage.xhtml?faces-redirect=true";
+		
+		if((userName.equals("BabetAdmin"))&&(password.equals("Gyne301"))){
+			SessionUtils.setAdminConnect(Long.valueOf(1));
+			return "/admin/adminPage.xhtml?faces-redirect=true";
 		}
 		return "index.xhtml";
 	}

@@ -85,6 +85,7 @@ public class ModifySkillPageBean  implements Serializable {
 		skillRep.update(this.skill.getId(), this.skill);
 		
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,

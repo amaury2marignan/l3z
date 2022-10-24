@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Event;
+import fr.l3z.models.Family;
 
 @ApplicationScoped
 @Stateless
@@ -85,6 +86,22 @@ public class EventRepositoryImpl implements EventRepository {
 		return entityManager
 				.createQuery("select u from Event u where u.vote.id = :voteIdParam", Event.class)
 				.setParameter("voteIdParam", voteId)
+				.getResultList();
+	}
+
+	@Override
+	public List<Event> findByFamily(Long id) {
+		return entityManager
+				.createQuery("select u from Event u where u.family.id = :familyIdParam", Event.class)
+				.setParameter("familyIdParam", id)
+				.getResultList();
+	}
+
+	@Override
+	public List<Event> findByUser(Long id) {
+		return entityManager
+				.createQuery("select u from Event u where u.user.id = :userIdParam", Event.class)
+				.setParameter("userIdParam", id)
 				.getResultList();
 	}
 

@@ -81,6 +81,7 @@ public class DetailTaskPageBean implements Serializable {
 		System.out.println("reservation en cours,task : "+this.task);
 		taskRep.update(this.task.getId(),this.task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,
@@ -97,6 +98,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setStatus(4);
 		taskRep.update(this.task.getId(),this.task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,
@@ -114,6 +116,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setWhoDidIt(this.user);
 		taskRep.update(this.task.getId(),this.task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,
@@ -130,6 +133,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setStatus(5);
 		taskRep.update(this.task.getId(),this.task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,

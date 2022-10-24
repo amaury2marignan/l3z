@@ -15,6 +15,8 @@ public interface SkillRepository extends GenericRepository<Long, Skill> {
 	List<Skill> findWithFamily(Long id);
 
 	Skill findByName(String string);
+
+	Skill findByNameAndFamily(Long id, String string);
 	
 	
 	

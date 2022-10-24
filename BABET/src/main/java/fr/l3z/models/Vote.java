@@ -45,6 +45,9 @@ public class Vote {
 	private SkillProfile taskNewSPMDo;
 	
 	@ManyToOne
+	private Family family;
+	
+	@ManyToOne
 	private User whoDidIt;
 	
 	private Boolean didSom1Vot = false;
@@ -245,6 +248,18 @@ public class Vote {
 
 	public void setDidSom1Vot(Boolean didSom1Vot) {
 		this.didSom1Vot = didSom1Vot;
+	}
+
+
+
+	public Family getFamily() {
+		return family;
+	}
+
+
+
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 	
 	

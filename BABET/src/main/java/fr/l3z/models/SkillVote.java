@@ -24,6 +24,8 @@ public class SkillVote {
 	@GeneratedValue
 	private Long id;
 
+	@ManyToOne
+	private Family family;
 	
 	@ManyToOne
 	private User whoAsked;
@@ -36,10 +38,19 @@ public class SkillVote {
 	
 	private int status=0;
 
-	public SkillVote(User whoAsked, Skill skill) {
+	public SkillVote(Family family, User whoAsked, Skill skill) {
 		super();
+		this.family=family;
 		this.whoAsked = whoAsked;
 		this.skill = skill;
+	}
+
+	public Family getFamily() {
+		return family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 
 	public SkillVote() {

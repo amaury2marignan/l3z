@@ -73,7 +73,7 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setName("Nom de la Tache");
 		this.task.setDescription("Description");
 		this.task.setRepeatAfter(0);
-		this.task.setNextTask(new Task("-","-",null,0,null,null));
+		this.task.setNextTask(new Task(this.family,"-","-",null,0,null,null));
 		this.task.setSkillProfileMinimumToDo(new SkillProfile());
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
 		this.task.setStatus(0);
@@ -359,7 +359,7 @@ public class NewTaskPageBean  implements Serializable {
 		}
 		
 		this.task.setStatus(0);
-		
+		this.task.setFamily(this.family);
 		SkillProfile savedSPMDo = skillProfileRep.save(this.task.getSkillProfileMinimumToDo());
 		this.task.setSkillProfileMinimumToDo(savedSPMDo);
 		
@@ -370,6 +370,7 @@ public class NewTaskPageBean  implements Serializable {
 		
 		Task savedNewTask = taskRep.save(this.task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedNewTask,

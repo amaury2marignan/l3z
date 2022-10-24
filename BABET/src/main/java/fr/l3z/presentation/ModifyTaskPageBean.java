@@ -301,6 +301,7 @@ public boolean isOkNewProjectButton() {
 		taskRep.update(this.task.getId(), this.task);
 		
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,
@@ -315,6 +316,7 @@ public boolean isOkNewProjectButton() {
 	
 	public String newProject() {
 		Vote vote = new Vote();
+		vote.setFamily(this.family);
 		SkillProfile voteSp =new SkillProfile();
 		for (Skill s : this.skillList) {
 				SkillNote sN = new SkillNote(s,0);
@@ -346,6 +348,7 @@ public boolean isOkNewProjectButton() {
 		Vote savedVote = voteRep.save(vote);
 		System.out.println("savedVote : "+savedVote);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.task,

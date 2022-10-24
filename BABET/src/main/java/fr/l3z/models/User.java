@@ -28,8 +28,8 @@ public class User {
 	private int score;
 	
 	
-	@ManyToMany
-	private List<Family> familyList = new ArrayList<Family>();
+	@ManyToOne
+	private Family family;
  
 	
 	@OneToOne
@@ -65,12 +65,12 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Family> getFamilyList() {
-		return familyList;
+	public Family getFamily() {
+		return family;
 	}
 
-	public void setFamilyList(List<Family> familyList) {
-		this.familyList = familyList;
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 
 	public SkillProfile getSkillProfile() {
@@ -92,12 +92,6 @@ public class User {
 		builder.append(id);
 		builder.append(", userName=");
 		builder.append(userName);
-//		builder.append(", password=");
-//		builder.append(password);
-//		builder.append(", familyList=");
-//		builder.append(familyList);
-//		builder.append(", skillProfile=");
-//		builder.append(skillProfile);
 		builder.append("]");
 		return builder.toString();
 	}

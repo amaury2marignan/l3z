@@ -105,6 +105,7 @@ public class DetailVotePageBean implements Serializable {
 		voteRep.update(this.vote.getId(),this.vote);
 		
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.vote.getOriginalTask(),
@@ -166,6 +167,7 @@ public class DetailVotePageBean implements Serializable {
 		taskRep.update(this.vote.getOriginalTask().getId(), newTask);
 		
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				this.vote.getOriginalTask(),

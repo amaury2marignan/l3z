@@ -96,6 +96,7 @@ public class PlanTaskPageBean implements Serializable {
 	
 	public String boutonPlanNow() {
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now(),
@@ -106,6 +107,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setStatus(1);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -120,6 +122,7 @@ public class PlanTaskPageBean implements Serializable {
 	
 	public String boutonPlanReservation() {
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now(),
@@ -131,6 +134,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setWhoDidIt(this.user);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -141,6 +145,7 @@ public class PlanTaskPageBean implements Serializable {
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		Event newEvent2 = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -157,6 +162,7 @@ public class PlanTaskPageBean implements Serializable {
 	
 	public String boutonPlanDo() {
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now(),
@@ -168,6 +174,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setWhoDidIt(this.user);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -178,6 +185,7 @@ public class PlanTaskPageBean implements Serializable {
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		Event newEvent2 = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -194,6 +202,7 @@ public class PlanTaskPageBean implements Serializable {
 		System.out.println(LocalDateTime.now());
 		System.out.println(LocalDateTime.now().plusDays(1));
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now().plusDays(1),
@@ -204,6 +213,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setStatus(1);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -219,6 +229,7 @@ public class PlanTaskPageBean implements Serializable {
 	
 	public String boutonPlanWeek() {
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now().plusWeeks(1),
@@ -229,6 +240,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setStatus(1);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -244,6 +256,7 @@ public class PlanTaskPageBean implements Serializable {
 	
 	public String boutonPlanMonth() {
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now().plusMonths(1),
@@ -254,6 +267,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setStatus(1);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,
@@ -270,6 +284,7 @@ public class PlanTaskPageBean implements Serializable {
 	public String boutonPlanDate() {
 		
 		Task planTask = new Task(
+				this.family,
 				this.task.getName(),
 				this.task.getDescription(),
 				LocalDate.now().plusDays(this.planDays),
@@ -280,6 +295,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setStatus(1);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				savedPlanTask,

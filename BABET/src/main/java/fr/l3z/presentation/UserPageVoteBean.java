@@ -77,6 +77,7 @@ public class UserPageVoteBean  {
 		sV.setStatus(0);
 		skillVoteRep.update(sV.getId(), sV);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,
@@ -95,6 +96,7 @@ public class UserPageVoteBean  {
 		SkillProfile newSP=skillProfileRep.setSkillScore(sV.getSkill().getId(), sV.getWhoAsked().getSkillProfile(),1+skillProfileRep.getScore(sV.getSkill().getId(), sV.getWhoAsked().getSkillProfile()));
 		skillProfileRep.update(sV.getWhoAsked().getSkillProfile().getId(), newSP);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,

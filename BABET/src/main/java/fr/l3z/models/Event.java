@@ -22,7 +22,8 @@ public class Event {
 	
 	private LocalDateTime date;
 	
-	
+	@ManyToOne
+	private Family family;
 	
 	@ManyToOne
 	private Task task;
@@ -40,8 +41,9 @@ public class Event {
 
 
 
-	public Event(User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, String action) {
+	public Event(Family family, User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, String action) {
 		super();
+		this.family=family;
 		this.user = user;
 		this.date = date;
 		this.task = task;
@@ -137,6 +139,30 @@ public class Event {
 
 
 
+	public Family getFamily() {
+		return family;
+	}
+
+
+
+	public void setFamily(Family family) {
+		this.family = family;
+	}
+
+
+
+	public Skill getSkill() {
+		return skill;
+	}
+
+
+
+	public void setSkill(Skill skill) {
+		this.skill = skill;
+	}
+
+
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -146,6 +172,8 @@ public class Event {
 		builder.append(user);
 		builder.append(", date=");
 		builder.append(date);
+		builder.append(", family=");
+		builder.append(family);
 		builder.append(", task=");
 		builder.append(task);
 		builder.append(", vote=");
@@ -159,6 +187,10 @@ public class Event {
 		builder.append("]");
 		return builder.toString();
 	}
+
+
+
+	
 
 	
 	

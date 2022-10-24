@@ -185,6 +185,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				task,
@@ -206,6 +207,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				task,
@@ -226,6 +228,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				task,

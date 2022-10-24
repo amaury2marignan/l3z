@@ -62,6 +62,7 @@ public class UserPagePurchaseBean  {
 		donePurchase.setWhoDidIt(this.user);
 		purchaseRep.update(purchaseId, donePurchase);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,
@@ -81,6 +82,7 @@ public class UserPagePurchaseBean  {
 		cancelledPurchase.setStatus(3);
 		purchaseRep.update(purchaseId,cancelledPurchase);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,
@@ -95,11 +97,12 @@ public class UserPagePurchaseBean  {
 	}
 	
 	public String planPurchaseText(String purchaseDescription) {
-		this.purchase=new Purchase(purchaseDescription);
+		this.purchase=new Purchase(this.family,purchaseDescription);
 		this.purchase.setStatus(1);
 		purchaseRep.save(this.purchase);
 		
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,

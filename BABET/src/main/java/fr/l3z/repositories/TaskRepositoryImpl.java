@@ -133,7 +133,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 	@Override
 	public Task findByName(String nextTaskName) {
-		return entityManager.createQuery("select u from Task u where u.name = :taskNameParam", Task.class)
+		return entityManager.createQuery("select u from Task u where u.name = :taskNameParam AND u.family", Task.class)
 				.setParameter("taskNameParam", nextTaskName).getSingleResult();
 		
 	}

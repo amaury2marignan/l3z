@@ -1112,6 +1112,12 @@ body{
 	
 }
 
+.admineventListColumn1{
+	font-size:9px;
+	width:100%;
+}
+
+
 .skillVoteListColumn1{
 	width:40%;
 }
@@ -1153,3 +1159,156 @@ body{
 	border-radius: 9px;
 	box-shadow: inset 2px 2px #7F7F7F;
 }
+
+.adminListContener{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	margin-top:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:24%;
+	height:350px;
+	background-color: #A6A6A6;
+	border-radius: 9px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	
+}
+
+.adminListContenerSkill{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	margin-top:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:19%;
+	height:350px;
+	background-color: #A6A6A6;
+	border-radius: 9px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	
+}
+
+.adminListContenerEvent{
+	font-size:22px;
+	color:#FFD966;
+	margin:2px;
+	margin-top:0px;
+	padding:2px;
+	padding-bottom:0px;
+	width:29%;
+	height:350px;
+	background-color: #A6A6A6;
+	border-radius: 9px;
+	text-align:center;
+	box-shadow: 2px 2px 2px #7F7F7F;
+	
+}
+
+
+
+.adminList{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:78%;
+	overflow:auto;
+	width:85%;
+	margin-left:12px;
+	margin-bottom:7px;
+	background-color: white;
+	border-radius: 9px;
+	}
+	
+	.adminList2{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:69%;
+	overflow:auto;
+	width:85%;
+	margin-left:12px;
+	margin-bottom:7px;
+	margin-top:2px;
+	background-color: white;
+	border-radius: 9px;
+	}
+	
+	.adminList3{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:78%;
+	overflow:auto;
+	width:85%;
+	margin-left:12px;
+	margin-bottom:7px;
+	margin-top:2px;
+	background-color: white;
+	border-radius: 9px;
+	}
+	
+	.adminList4{
+	color:black;
+	font-size:16px;
+	text-align:left;
+	margin:2px;
+	padding:2px;
+	height:70%;
+	overflow:auto;
+	width:85%;
+	margin-left:12px;
+	margin-bottom:7px;
+	margin-top:2px;
+	background-color: white;
+	border-radius: 9px;
+	}
+	
+	.adminSubtitle{
+	color:black;
+	background-color:white;
+	border-radius: 9px;
+	width:85%;
+	height:25px;
+	margin:2px;
+	margin-left:12px;
+	font-size:16px;
+	}
+
+	.adminNewForm{
+	width:85%;
+	display:flex;
+	flex-wrap:nowrap;
+	margin-left:12px;
+	font-size:12px;
+	}
+	
+	.adminNewFormInput{
+	width:60%;
+	margin:2px;
+	
+	}
+	.adminNewFormRight{
+	width:38%;
+	}
+	.adminNewFormButton{
+	width:100%;
+	margin:2px;
+	}
+	.adminNewFormCheck{
+	color:white;
+	width:100%;
+	margin:2px;
+	margin-top:0px;
+	font-size:10px;
+	vertical-align:top;
+	}

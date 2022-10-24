@@ -26,6 +26,8 @@ public class Purchase {
 	private Long id;
 	private String description;
 	
+	@ManyToOne
+	private Family family;
 		
 	@ManyToOne
 	private User whoDidIt;
@@ -36,10 +38,19 @@ public class Purchase {
 		super();
 	}
 
-	public Purchase(String description) {
+	public Purchase(Family family, String description) {
 		super();
+		this.family=family;
 		this.description = description;
 		
+	}
+
+	public Family getFamily() {
+		return family;
+	}
+
+	public void setFamily(Family family) {
+		this.family = family;
 	}
 
 	public String getDescription() {

@@ -72,7 +72,7 @@ public class UserSkillProfilePageBean  implements Serializable {
 	}
 	
 	public Boolean newSkillButtonOK() {
-		SkillNote parentSkillNote = new SkillNote(skillRep.findByName("parent"),5);
+		SkillNote parentSkillNote = new SkillNote(skillRep.findByNameAndFamily(this.family.getId(),"parent"),5);
 		SkillProfile parentSkillProfile = new SkillProfile();
 		skillProfileRep.setSkillScore(parentSkillNote.getSkill().getId(), parentSkillProfile, 5);
 		
@@ -112,10 +112,11 @@ public class UserSkillProfilePageBean  implements Serializable {
 	
 	
 	public String askForStar(Skill s) {
-		SkillVote newSkillVote = new SkillVote(this.user,s);
+		SkillVote newSkillVote = new SkillVote(this.family,this.user,s);
 		newSkillVote.setStatus(1);
 		SkillVote savedNewSkillVote=skillVoteRep.save(newSkillVote);
 		Event newEvent = new Event(
+				this.family,
 				this.user,
 				LocalDateTime.now(),
 				null,

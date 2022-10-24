@@ -106,6 +106,15 @@ public class SkillRepositoryImpl implements SkillRepository {
 		
 	}
 
+	@Override
+	public Skill findByNameAndFamily(Long id, String string) {
+		return entityManager
+				.createQuery("select u from Skill u where u.name = :skillNameParam AND u.family.id= :familyIdParam", Skill.class)
+				.setParameter("skillNameParam", string)
+				.setParameter("familyIdParam", id)
+				.getSingleResult();
+	}
+ 
 	
 
 }

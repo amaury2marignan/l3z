@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository {
 		User userAModifier=entityManager.find(User.class,idAModifier);
 		userAModifier.setUserName(t.getUserName());
 		userAModifier.setPassword(t.getPassword());
-		userAModifier.setFamilyList(t.getFamilyList());
+		userAModifier.setFamily(t.getFamily());
 		userAModifier.setSkillProfile(t.getSkillProfile());
 		userAModifier.setScore(t.getScore());
 		
@@ -89,7 +89,7 @@ public class UserRepositoryImpl implements UserRepository {
 	public List<User> usersByFamily(Long idFamily) {
 		Family f = familyRep.find(idFamily);
 		return entityManager
-				.createQuery("select u from User u where :familyParam member of u.familyList", User.class)
+				.createQuery("select u from User u where u.family = :familyParam", User.class)
 				.setParameter("familyParam", f)
 				.getResultList();
 	}
