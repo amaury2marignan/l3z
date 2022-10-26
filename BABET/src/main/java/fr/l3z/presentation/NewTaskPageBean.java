@@ -78,9 +78,9 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
 		this.task.setStatus(0);
 		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
-		this.skillList = skillRep.findAll();
+		this.skillList = skillRep.findWithFamily(this.family.getId());
 		this.allTaskNames.add(" ");
-		for(Task taskD:taskRep.findAll()) {
+		for(Task taskD:taskRep.findByStatus0(this.family.getId())) {
 			this.allTaskNames.add(taskD.getName());
 		}
 		
@@ -362,7 +362,7 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setFamily(this.family);
 		SkillProfile savedSPMDo = skillProfileRep.save(this.task.getSkillProfileMinimumToDo());
 		this.task.setSkillProfileMinimumToDo(savedSPMDo);
-		
+		this.task.setNbPoints(skillRep.getNbPoints(savedSPMDo));
 
 		SkillProfile savedSPMCh = skillProfileRep.save(this.task.getSkillProfileMinimumToCheck());
 		this.task.setSkillProfileMinimumToCheck(savedSPMCh);

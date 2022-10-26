@@ -15,6 +15,8 @@ public interface EventRepository extends GenericRepository<Long, Event> {
 	List<Event> findByFamily(Long id);
 
 	List<Event> findByUser(Long id);
+
+	
 	
 	
 	

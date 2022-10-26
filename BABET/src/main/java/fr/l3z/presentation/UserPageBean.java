@@ -2,8 +2,10 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -55,7 +57,9 @@ public class UserPageBean  implements Serializable {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
-		this.setTasksList(taskRep.findTasksToDo());
+		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
+		tasksList.sort(Comparator.comparing(Task::getNextDate));
+		
 	}
 	
 	public Boolean skillNote1(int score){
@@ -223,6 +227,51 @@ public class UserPageBean  implements Serializable {
 		
 	}
 	
+	public Boolean today(Task task) {
+		if((task.getNextDate().getYear()==(LocalDate.now().getYear())&&(task.getNextDate().getDayOfYear()==(LocalDate.now().getDayOfYear())))){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean tomorrow(Task task) {
+		if((task.getNextDate().getYear()==(LocalDate.now().getYear())&&(task.getNextDate().getDayOfYear()==(LocalDate.now().getDayOfYear()+1)))){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean moreThanTomorrow(Task task) {
+		if((task.getNextDate().getYear()==(LocalDate.now().getYear())&&(task.getNextDate().getDayOfYear()>(1+LocalDate.now().getDayOfYear())))|(task.getNextDate().getYear()>LocalDate.now().getYear())){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean past(Task task) {
+		if((task.getNextDate().getYear()==(LocalDate.now().getYear())&&(task.getNextDate().getDayOfYear()<(LocalDate.now().getDayOfYear())))|(task.getNextDate().getYear()<LocalDate.now().getYear())){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String nbDays(Task task) {
+		if(task.getNextDate().getYear()==LocalDate.now().getYear()) {
+			String s = (task.getNextDate().getDayOfYear()-LocalDate.now().getDayOfYear())+" jours";
+			return s;
+		} else {
+			return "longtemps";
+			
+		}
+	}
+	
+	
+	
+	
 	public String checkAction(Task task) {
 		task.setStatus(4);
 		System.out.println(task);
@@ -239,7 +288,8 @@ public class UserPageBean  implements Serializable {
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		System.out.println(savedNewEvent);
-		
+		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
+		tasksList.sort(Comparator.comparing(Task::getNextDate));
 		return "user/userPage.xhtml?faces-redirect=true";
 		
 	}

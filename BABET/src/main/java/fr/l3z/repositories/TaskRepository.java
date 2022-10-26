@@ -15,9 +15,17 @@ public interface TaskRepository extends GenericRepository<Long, Task> {
 
 	List<Task> findByStatus(int i);
 
-	List<Task> findTasksToDo();
+	List<Task> findTasksToDo(Long familyId);
 
 	Task findByName(String nextTaskName);
+
+	List<Task> findByStatus0(Long id);
+
+	List<Task> findBySkillId(Long id);
+
+	List<Task> findBySkill0(Long id);
+
+	List<Task> findBySkillToDo(Long skillId);
 	
 	
 }

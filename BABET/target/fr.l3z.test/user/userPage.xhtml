@@ -121,29 +121,45 @@
 				<h:form>
 
 					<h:dataTable value="#{userPageBean.tasksList}" var="p"
-						columnClasses="column1,column2,column3">
+						columnClasses="tLcolumn1,tLcolumn2,tLcolumn3,tLcolumn4">
 						<h:column>
 							<f:facet name="header"></f:facet>
-					#{p.name}
-				</h:column>
+							<div class="taskListName">#{p.name}</div>
+						</h:column>
 						<h:column>
-							<f:facet name="header"></f:facet>
-					#{p.nextDate}
-				</h:column>
+							<h:panelGroup layout="block" rendered="#{userPageBean.today(p)}">
+							<div class="taskListDateToday">aujourd'hui</div>
+							</h:panelGroup>
+							<h:panelGroup layout="block" rendered="#{userPageBean.tomorrow(p)}">
+							<div class="taskListDateTomorrow">demain</div>
+							</h:panelGroup>
+							<h:panelGroup layout="block" rendered="#{userPageBean.moreThanTomorrow(p)}">
+							<div class="taskListDateMoreThan">dans #{userPageBean.nbDays(p)}</div>
+							</h:panelGroup>
+							<h:panelGroup layout="block" rendered="#{userPageBean.past(p)}">
+							<div class="taskListDatePast">dépassé...</div>
+							</h:panelGroup>
+						</h:column>
+						<h:column>
+						<div class="taskListScoreContener">
+							<div class="taskListScore">#{p.nbPoints}</div>
+							<div class="taskListScoreLabel">points</div>
+							</div>
+						</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
 						<h:commandLink action="#{userPageBean.reservationAction(p)}">
-						<h:graphicImage url="/resources/boutonBleu.png" width="15%" rendered="#{userPageBean.isOkReservationButton(p)}" />
+						<h:graphicImage url="/resources/boutonBleu.png" width="33%" rendered="#{userPageBean.isOkReservationButton(p)}" />
 						</h:commandLink>
 						<h:commandLink action="#{userPageBean.doAction(p)}">
-							<h:graphicImage url="/resources/boutonFleche.png" width="15%" rendered="#{userPageBean.isOkDoButton(p)}"/>
+							<h:graphicImage url="/resources/boutonFleche.png" width="33%" rendered="#{userPageBean.isOkDoButton(p)}"/>
 						</h:commandLink>
 						<h:commandLink action="#{userPageBean.checkAction(p)}">
-							<h:graphicImage url="/resources/boutonValid.png" width="15%" rendered="#{userPageBean.isOkCheckButton(p)}"/>
+							<h:graphicImage url="/resources/boutonValid.png" width="33%" rendered="#{userPageBean.isOkCheckButton(p)}"/>
 						</h:commandLink>
 						<h:commandLink action="#{userPageBean.detailsAction(p)}">
 							<f:param name="taskId" value="#{p.id}" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="33%" />
 						</h:commandLink>
 						</h:column>
 					</h:dataTable>

@@ -105,6 +105,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(1);
+		planTask.setNbPoints(this.task.getNbPoints());
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
 				this.family,
@@ -131,6 +132,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(2);
+		planTask.setNbPoints(this.task.getNbPoints());
 		planTask.setWhoDidIt(this.user);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
@@ -171,6 +173,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(3);
+		planTask.setNbPoints(this.task.getNbPoints());
 		planTask.setWhoDidIt(this.user);
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
@@ -211,6 +214,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(1);
+		planTask.setNbPoints(this.task.getNbPoints());
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
 				this.family,
@@ -238,6 +242,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(1);
+		planTask.setNbPoints(this.task.getNbPoints());
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
 				this.family,
@@ -265,6 +270,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(1);
+		planTask.setNbPoints(this.task.getNbPoints());
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
 				this.family,
@@ -293,6 +299,7 @@ public class PlanTaskPageBean implements Serializable {
 				this.task.getSkillProfileMinimumToCheck()
 				);
 		planTask.setStatus(1);
+		planTask.setNbPoints(this.task.getNbPoints());
 		Task savedPlanTask = taskRep.save(planTask);
 		Event newEvent = new Event(
 				this.family,

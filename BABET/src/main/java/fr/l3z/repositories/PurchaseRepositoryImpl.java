@@ -59,9 +59,9 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 	}
 	
 	@Override
-	public List<Purchase> findPurchasesToDo(){
-		return entityManager.createQuery("select u from Purchase u where u.status = 1", Purchase.class)
-				.getResultList();
+	public List<Purchase> findPurchasesToDo(Long familyId){
+		return entityManager.createQuery("select u from Purchase u where u.status = 1 AND u.family.id = :familyIdParam", Purchase.class)
+				.setParameter("familyIdParam",familyId).getResultList();
 	}
 
 	@Override

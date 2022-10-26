@@ -53,7 +53,7 @@ public class UserPagePurchaseBean  {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
-		this.setPurchasesList(purchaseRep.findPurchasesToDo());
+		this.setPurchasesList(purchaseRep.findPurchasesToDo(this.family.getId()));
 	}
 	
 	public String doPurchase(Long purchaseId) {
@@ -72,7 +72,7 @@ public class UserPagePurchaseBean  {
 				user.getUserName()+" a acheté : "+donePurchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		this.setPurchasesList(purchaseRep.findPurchasesToDo());
+		this.setPurchasesList(purchaseRep.findPurchasesToDo(this.family.getId()));
 		return "user/userPagePurchase.xhtml";
 	}
 	
@@ -92,7 +92,7 @@ public class UserPagePurchaseBean  {
 				user.getUserName()+" a enlevé de la liste de courses : "+cancelledPurchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		this.setPurchasesList(purchaseRep.findPurchasesToDo());
+		this.setPurchasesList(purchaseRep.findPurchasesToDo(this.family.getId()));
 		return "user/userPagePurchase.xhtml";
 	}
 	
@@ -112,7 +112,7 @@ public class UserPagePurchaseBean  {
 				user.getUserName()+" a ajouté à la liste de courses : "+purchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		this.setPurchasesList(purchaseRep.findPurchasesToDo());
+		this.setPurchasesList(purchaseRep.findPurchasesToDo(this.family.getId()));
 		return "/user/userPagePurchase.xhtml";
 	}
 	

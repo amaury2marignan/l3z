@@ -89,7 +89,7 @@
 				</a>
 			</div>
 			<div class="boutonGauche">
-					<a href="../user/userPagePurchase.xhtml"><img
+				<a href="../user/userPagePurchase.xhtml"><img
 					src="../resources/boutonCourses.png" width="95%" /> </a>
 			</div>
 			<div class="boutonGauche">
@@ -100,7 +100,7 @@
 				<a href="../user/userPageVote.xhtml"><img
 					src="../resources/boutonVote.png" width="95%" /> </a>
 			</div>
-			
+
 			<div class="boutonGauche">
 				<a href="../user/userPageHistoric.xhtml"><img
 					src="../resources/boutonHistorique.png" width="95%" /> </a>
@@ -117,7 +117,38 @@
 
 		<div class="tasksListContener">
 			Liste des taches possibles
-			<div class="tasksList">
+			<div class="tkListContener2">
+				<div class="ntSkillList">
+					<h:form>
+
+						<h:dataTable value="#{userPageNewBean.skillList2}" var="p"
+							columnClasses="column1,column2">
+							<h:column>
+								<f:facet name="header"></f:facet>
+							#{p.name}
+					
+				</h:column>
+
+							<h:column>
+								<f:facet name="header"></f:facet>
+
+
+								<h:commandLink
+									action="#{userPageNewBean.updateTaskListWithSkill(p.id)}">
+									<f:param name="skillId" value="#{p.id}" />
+									<h:graphicImage url="/resources/boutonFlecheGris.png" width="40%" />
+
+								</h:commandLink>
+
+
+							</h:column>
+						</h:dataTable>
+
+					</h:form>
+				</div>
+
+			
+			<div class="ntTasksList">
 				<h:form>
 
 					<h:dataTable value="#{userPageNewBean.tasksList}" var="p"
@@ -152,15 +183,17 @@
 
 				</h:form>
 			</div>
+			</div>
 		</div>
-		
-
-
-
-
-
-
 	</div>
+
+
+
+
+
+
+
+
 
 </body>
 </html>

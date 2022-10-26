@@ -80,23 +80,6 @@ public class AdminPageBean  implements Serializable {
 		this.usersList=userRep.usersByFamily(family.getId());
 		this.eventsList=eventRep.findByFamily(family.getId());
 		eventsList.sort(Comparator.comparing(Event::getDate).reversed());
-//		Collections.sort(eventsList, new Comparator<Event>() {
-//            @Override
-//            public int compare(Event p1, Event p2) {
-//            	if (p1.getDate().getYear()==p2.getDate().getYear()){
-//            		if(p1.getDate().getDayOfYear()==p2.getDate().getDayOfYear()) {
-//            			if(p1.getDate().getHour()==p2.getDate().getHour()) {
-//            				return p2.getDate().getMinute()-p1.getDate().getMinute();
-//            			} else { 
-//            				return p2.getDate().getHour()-p1.getDate().getHour();
-//            			} } else {
-//            				return p2.getDate().getDayOfYear()-p1.getDate().getDayOfYear();
-//            			}} else {
-//            				return p2.getDate().getYear()-p1.getDate().getYear();
-//            		}
-//            		
-//            }
-//        });
 		this.skillsList=skillRep.findWithFamily(family.getId());
 		this.family=familyRep.find(family.getId());
 		return "admin/adminPage.xhtml?faces-redirect=true";

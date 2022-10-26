@@ -1,9 +1,11 @@
 package fr.l3z.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,6 +20,11 @@ public class TaskRepositoryImpl implements TaskRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Inject
+	private SkillProfileRepository skillProfileRep;
+	@Inject
+	private SkillRepository skillRep;
 
 	public TaskRepositoryImpl() {
 
@@ -59,9 +66,9 @@ public class TaskRepositoryImpl implements TaskRepository {
 	}
 	
 	@Override
-	public List<Task> findTasksToDo(){
-		return entityManager.createQuery("select u from Task u where u.status between '1' and '3'", Task.class)
-				.getResultList();
+	public List<Task> findTasksToDo(Long familyId){
+		return entityManager.createQuery("select u from Task u where u.status between '1' and '3'AND u.family.id = :familyIdParam", Task.class)
+				.setParameter("familyIdParam", familyId).getResultList();
 	}
 
 	@Override
@@ -137,5 +144,69 @@ public class TaskRepositoryImpl implements TaskRepository {
 				.setParameter("taskNameParam", nextTaskName).getSingleResult();
 		
 	}
+
+	@Override
+	public List<Task> findByStatus0(Long familyId){
+		return entityManager.createQuery("select u from Task u where u.status = 0 AND u.family.id = :familyIdParam", Task.class)
+				.setParameter("familyIdParam", familyId).getResultList();
+	}
+
+	@Override
+	public List<Task> findBySkillId(Long id) {
+		List<SkillProfile> skListAll = skillProfileRep.findAll();
+		List<SkillProfile> skListWith = new ArrayList<SkillProfile>();
+		for(SkillProfile sp:skListAll) {
+			if (skillProfileRep.isThisSkillIn(id, sp)){
+				skListWith.add(sp);
+			}
+		}
+		List<Task> listTaskWith = new ArrayList<Task>();
+		List<Task> listTaskAll = findAll();
+		for(Task t:listTaskAll) {
+			if (skListWith.contains(t.getSkillProfileMinimumToDo())){
+				listTaskWith.add(t);
+			}
+		}
+		return listTaskWith;
+	}
+	
+	@Override
+	public List<Task> findBySkill0(Long id) {
+		List<SkillProfile> skListAll = skillProfileRep.findAll();
+		List<SkillProfile> skListWith = new ArrayList<SkillProfile>();
+		for(SkillProfile sp:skListAll) {
+			if (skillProfileRep.isThisSkillIn(id, sp)){
+				skListWith.add(sp);
+			}
+		}
+		List<Task> listTaskWith = new ArrayList<Task>();
+		List<Task> listTaskAll = findByStatus(0);
+		for(Task t:listTaskAll) {
+			if (skListWith.contains(t.getSkillProfileMinimumToDo())){
+				listTaskWith.add(t);
+			}
+		}
+		return listTaskWith;
+	}
+
+	@Override
+	public List<Task> findBySkillToDo(Long id) {
+		List<SkillProfile> skListAll = skillProfileRep.findAll();
+		List<SkillProfile> skListWith = new ArrayList<SkillProfile>();
+		for(SkillProfile sp:skListAll) {
+			if (skillProfileRep.isThisSkillIn(id, sp)){
+				skListWith.add(sp);
+			}
+		}
+		List<Task> listTaskWith = new ArrayList<Task>();
+		List<Task> listTaskAll = findTasksToDo(skillRep.find(id).getFamily().getId());
+		for(Task t:listTaskAll) {
+			if (skListWith.contains(t.getSkillProfileMinimumToDo())){
+				listTaskWith.add(t);
+			}
+		}
+		return listTaskWith;
+	}
+	
 
 }

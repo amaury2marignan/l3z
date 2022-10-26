@@ -16,7 +16,7 @@
 <body>
 	<div class="content">
 		<h:panelGroup layout="block"
-			rendered="#adminPageBean.adminNotConnect()">
+			rendered="#{adminPageBean.adminNotConnect()}">
 			<div class="logoIndex">
 				<a href="../index.xhtml"> <img
 					src="../resources/babetlogocarre.png" width="100%" />
@@ -67,7 +67,7 @@
 								
 								<h:commandLink action="#{adminPageBean.updateUserList(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonPlan.png" width="40%" />
+									<h:graphicImage url="/resources/boutonFlecheGris.png" width="40%" />
 
 								</h:commandLink>
 
@@ -122,7 +122,7 @@
 								
 								<h:commandLink action="#{adminPageBean.updateEventListWithUser(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonPlan.png" width="40%" />
+									<h:graphicImage url="/resources/boutonFlecheGris.png" width="40%" />
 
 								</h:commandLink>
 								
@@ -192,7 +192,7 @@
 					<h:form>
 
 						<h:dataTable value="#{adminPageBean.eventsList}" var="p"
-							columnClasses="admineventListColumn1">
+							columnClasses="admineventListColumn1"> 
 							<h:column>
 							<f:facet name="header"></f:facet>
 							#{adminPageBean.giveDay(p)} #{p.action}

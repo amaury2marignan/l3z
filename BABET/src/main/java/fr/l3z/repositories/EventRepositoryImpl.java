@@ -1,14 +1,18 @@
 package fr.l3z.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
+import fr.l3z.models.SkillProfile;
+import fr.l3z.models.Task;
 
 @ApplicationScoped
 @Stateless
@@ -16,6 +20,10 @@ public class EventRepositoryImpl implements EventRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	@Inject
+	private SkillProfileRepository skillProfileRep;
+	
 	
 	public EventRepositoryImpl() {
 		
@@ -104,6 +112,8 @@ public class EventRepositoryImpl implements EventRepository {
 				.setParameter("userIdParam", id)
 				.getResultList();
 	}
+
+	
 
 	
 

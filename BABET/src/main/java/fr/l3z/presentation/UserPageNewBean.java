@@ -14,10 +14,12 @@ import javax.inject.Inject;
 
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
+import fr.l3z.models.Skill;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
+import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -40,11 +42,14 @@ public class UserPageNewBean  implements Serializable {
 	private TaskRepository taskRep;
 	@Inject 
 	private EventRepository eventRep;
+	@Inject
+	private SkillRepository skillRep;
 	
 	private User user = new User();
 	private Family family = new Family();
 	private List<Task> tasksList = new ArrayList<Task>();
 	private Task task = new Task();
+	private List<Skill> skillList2= new ArrayList<Skill>();
 	
 	
 	
@@ -55,7 +60,13 @@ public class UserPageNewBean  implements Serializable {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
-		this.setTasksList(taskRep.findByStatus(0));
+		this.setTasksList(taskRep.findByStatus0(this.family.getId()));
+		this.setSkillList2(skillRep.findWithFamily(this.family.getId()));
+	}
+	
+	public String updateTaskListWithSkill(Long skillId) {
+		this.tasksList = taskRep.findBySkillId(skillId);
+		return "user/userPageNew.xhtml?faces-redirect=true";
 	}
 	
 	public Boolean skillNote1(int score){
@@ -298,5 +309,13 @@ public class UserPageNewBean  implements Serializable {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public List<Skill> getSkillList2() {
+		return skillList2;
+	}
+
+	public void setSkillList2(List<Skill> skillList2) {
+		this.skillList2 = skillList2;
 	}
 }
