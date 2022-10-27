@@ -32,6 +32,9 @@ public class Event {
 	private Vote vote;
 	
 	@ManyToOne
+	private SkillVote skillVote;
+	
+	@ManyToOne
 	private Purchase purchase;
 	
 	@ManyToOne
@@ -41,7 +44,7 @@ public class Event {
 
 
 
-	public Event(Family family, User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, String action) {
+	public Event(Family family, User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, SkillVote skillVote, String action) {
 		super();
 		this.family=family;
 		this.user = user;
@@ -50,6 +53,7 @@ public class Event {
 		this.vote = vote;
 		this.purchase = purchase;
 		this.skill = skill;
+		this.skillVote = skillVote;
 		this.action = action;
 	}
 
@@ -107,7 +111,15 @@ public class Event {
 		this.vote = vote;
 	}
 
+	public SkillVote getSkillVote() {
+		return skillVote;
+	}
 
+
+
+	public void setSkillVote(SkillVote skillVote) {
+		this.skillVote = skillVote;
+	}
 
 	public Purchase getPurchase() {
 		return purchase;

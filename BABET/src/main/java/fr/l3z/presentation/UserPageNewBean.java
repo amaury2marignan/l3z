@@ -199,6 +199,7 @@ public class UserPageNewBean  implements Serializable {
 				null,	
 				null,
 				null,
+				null,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -221,6 +222,7 @@ public class UserPageNewBean  implements Serializable {
 				null,	
 				null,
 				null,
+				null,
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -239,6 +241,7 @@ public class UserPageNewBean  implements Serializable {
 				this.user,
 				LocalDateTime.now(),
 				task,
+				null,
 				null,
 				null,
 				null,

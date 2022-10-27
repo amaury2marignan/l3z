@@ -48,7 +48,6 @@ public class UserPageHistoricBean  {
 	private List<Event> eventsList = new ArrayList<Event>();
 	private List<User> userList = new ArrayList<User>();
 	private List<Skill> skillList = new ArrayList<Skill>();
-	private List<Task> runningTaskList = new ArrayList<Task>();
 	private List<Task> modelTaskList = new ArrayList<Task>();
 	
 	
@@ -57,13 +56,11 @@ public class UserPageHistoricBean  {
 
 	@PostConstruct
 	private void init() {
-		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
 		this.setEventsList(eventRep.findByFamily(this.family.getId()));
 		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		this.setModelTaskList(taskRep.findByStatus0(this.family.getId()));
-		this.setRunningTaskList(taskRep.findTasksToDo(this.family.getId()));
 		this.setUserList(userRep.usersByFamily(this.family.getId()));
 		this.setSkillList(skillRep.findWithFamily(this.family.getId()));
 	}
@@ -73,31 +70,36 @@ public class UserPageHistoricBean  {
 		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		return "user/userPageHistoric.xhtml?faces-redirect=true";
 	}
+
 	
-	public String updateEventListWithRunningTask(Long taskId) {
-		this.setEventsList(eventRep.findByTask(taskId));
+	public String updateEventListWithModelTask(Long taskId) {
+		this.setEventsList(eventRep.findByTaskName(taskRep.find(taskId).getName()));
 		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		return "user/userPageHistoric.xhtml?faces-redirect=true";
 	}
 	
-	public String updateEventListWithModelTask(Long taskId) {
-		this.setEventsList(eventRep.findByTask(taskId));
+	public String eventsPurchase() {
+		this.setEventsList(eventRep.findPurchases(this.family.getId()));
+		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
+		return "user/userPageHistoric.xhtml?faces-redirect=true";
+	}
+	
+	public String eventVote() {
+		this.setEventsList(eventRep.findVotes(this.family.getId()));
 		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		return "user/userPageHistoric.xhtml?faces-redirect=true";
 	}
 	
 	public String updateTasksListWithSkill(Long skillId) {
 		this.setModelTaskList(taskRep.findBySkill0(skillId));
-		this.setRunningTaskList(taskRep.findBySkillToDo(skillId));
 		return "user/userPageHistoric.xhtml?faces-redirect=true";
 	}
 	
-	public String initLists() {
+	public String allLists() {
 		this.setEventsList(eventRep.findByFamily(this.family.getId()));
 		this.eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		this.setSkillList(skillRep.findWithFamily(this.family.getId()));
 		this.setModelTaskList(taskRep.findByStatus0(this.family.getId()));
-		this.setRunningTaskList(taskRep.findTasksToDo(this.family.getId()));
 		return "user/userPageHistoric.xhtml?faces-redirect=true";
 	}
 	
@@ -205,14 +207,7 @@ public class UserPageHistoricBean  {
 		this.skillList = skillList;
 	}
 
-	public List<Task> getRunningTaskList() {
-		return runningTaskList;
-	}
-
-	public void setRunningTaskList(List<Task> runningTaskList) {
-		this.runningTaskList = runningTaskList;
-	}
-
+	
 	public List<Task> getModelTaskList() {
 		return modelTaskList;
 	}

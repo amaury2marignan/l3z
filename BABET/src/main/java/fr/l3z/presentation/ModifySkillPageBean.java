@@ -92,6 +92,7 @@ public class ModifySkillPageBean  implements Serializable {
 				null,	
 				null,
 				this.skill,
+				null,
 				user.getUserName()+" a modifié la compétence "+this.skill.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

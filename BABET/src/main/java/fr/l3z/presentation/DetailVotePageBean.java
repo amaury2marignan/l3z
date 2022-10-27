@@ -112,6 +112,7 @@ public class DetailVotePageBean implements Serializable {
 				this.vote,
 				null,
 				null,
+				null,
 				user.getUserName()+" a voté pour la modification de la tâche "+this.vote.getOriginalTask().getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -172,6 +173,7 @@ public class DetailVotePageBean implements Serializable {
 				LocalDateTime.now(),
 				this.vote.getOriginalTask(),
 				this.vote,
+				null,
 				null,
 				null,
 				user.getUserName()+" a validé la modification de la tâche "+this.vote.getOriginalTask().getName()

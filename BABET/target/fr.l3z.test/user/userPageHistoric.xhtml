@@ -115,48 +115,49 @@
 		<div class="tasksListContener">
 			Evènements
 			<div class="tkListContener2">
-				<div class="historicCol1">
-					<div class="historicTitle">Membres</div>
-					<div class="historicUserList">
+				<div class="historicColumns">
+					<div class="historicCol1">
+						<div class="historicTitle">Membres</div>
+						<div class="historicUserList">
 
-						<h:form>
-							<h:dataTable value="#{userPageHistoricBean.userList}" var="p"
-								columnClasses="column1,column2">
-								<h:column>
-									<f:facet name="header"></f:facet>
+							<h:form>
+								<h:dataTable value="#{userPageHistoricBean.userList}" var="p"
+									columnClasses="column1,column2">
+									<h:column>
+										<f:facet name="header"></f:facet>
 							#{p.userName}
 					
 				</h:column>
 
-								<h:column>
-									<f:facet name="header"></f:facet>
+									<h:column>
+										<f:facet name="header"></f:facet>
 
 
-									<h:commandLink
-										action="#{userPageHistoricBean.updateEventListWithUser(p.id)}">
-										<f:param name="skillId" value="#{p.id}" />
-										<h:graphicImage url="/resources/boutonFlecheGris.png"
-											width="40%" />
+										<h:commandLink
+											action="#{userPageHistoricBean.updateEventListWithUser(p.id)}">
+											<f:param name="skillId" value="#{p.id}" />
+											<h:graphicImage url="/resources/boutonFlecheGris.png"
+												width="40%" />
 
-									</h:commandLink>
+										</h:commandLink>
 
 
-								</h:column>
-							</h:dataTable>
+									</h:column>
+								</h:dataTable>
 
-						</h:form>
-					</div>
-					<div class="historicTitle">Compétences</div>
+							</h:form>
+						</div>
+						<div class="historicTitle">Compétences</div>
 						<div class="historicUserList">
-	
+
 							<h:form>
-								<h:dataTable value="#{userPageHistoricBean.skillList}"
-									var="p" columnClasses="column1,column2">
+								<h:dataTable value="#{userPageHistoricBean.skillList}" var="p"
+									columnClasses="column1,column2">
 									<h:column>
 										<f:facet name="header"></f:facet>
 										#{p.name}
 									</h:column>
-	
+
 									<h:column>
 										<f:facet name="header"></f:facet>
 										<h:commandLink
@@ -164,86 +165,95 @@
 											<f:param name="skillId" value="#{p.id}" />
 											<h:graphicImage url="/resources/boutonFlecheGris.png"
 												width="40%" />
-	
+
 										</h:commandLink>
 									</h:column>
 								</h:dataTable>
 							</h:form>
 						</div>
-						<div class="initHistoric"><div class="textInit">tout voir</div>
-							<div class="buttonInit">
-							<h:form><h:commandLink
-										action="#{userPageHistoricBean.initLists()}">
-										<h:graphicImage url="/resources/boutonFlecheGris.png"
-													width="100%" />		
-		
-							</h:commandLink></h:form></div>
-				</div>
+
 					</div>
-					
-				<div class="historicCol2">
-					<div class="historicTitle">En cours</div>
+
+					<div class="historicCol2">
+
+
+						<div class="historicTitle">Taches</div>
 						<div class="historicTaskList">
-	
+
 							<h:form>
-								<h:dataTable value="#{userPageHistoricBean.runningTaskList}"
+								<h:dataTable value="#{userPageHistoricBean.modelTaskList}"
 									var="p" columnClasses="column1,column2">
 									<h:column>
 										<f:facet name="header"></f:facet>
-										#{p.name}
-									</h:column>
-	
-									<h:column>
-										<f:facet name="header"></f:facet>
-										<h:commandLink
-											action="#{userPageHistoricBean.updateEventListWithRunningTask(p.id)}">
-											<f:param name="skillId" value="#{p.id}" />
-											<h:graphicImage url="/resources/boutonFlecheGris.png"
-												width="40%" />
-	
-										</h:commandLink>
-									</h:column>
-								</h:dataTable>
-							</h:form>
-						</div>
-					
-					<div class="historicTitle">Modèles</div>
-					<div class="historicTaskList">
-
-						<h:form>
-							<h:dataTable value="#{userPageHistoricBean.modelTaskList}"
-								var="p" columnClasses="column1,column2">
-								<h:column>
-									<f:facet name="header"></f:facet>
 							#{p.name}
 					
 				</h:column>
 
-								<h:column>
-									<f:facet name="header"></f:facet>
+									<h:column>
+										<f:facet name="header"></f:facet>
 
 
-									<h:commandLink
-										action="#{userPageHistoricBean.updateEventListWithModelTask(p.id)}">
-										<f:param name="skillId" value="#{p.id}" />
+										<h:commandLink
+											action="#{userPageHistoricBean.updateEventListWithModelTask(p.id)}">
+											<f:param name="skillId" value="#{p.id}" />
+											<h:graphicImage url="/resources/boutonFlecheGris.png"
+												width="40%" />
+
+										</h:commandLink>
+
+
+									</h:column>
+								</h:dataTable>
+
+							</h:form>
+						</div>
+
+					</div>
+					<div class="historicColumnsBottom">
+						<div class="initHistoric">
+							<div class="textInit">tout voir</div>
+							<div class="buttonInit">
+								<h:form>
+									<h:commandLink action="#{userPageHistoricBean.allLists()}">
 										<h:graphicImage url="/resources/boutonFlecheGris.png"
-											width="40%" />
+											width="100%" />
 
 									</h:commandLink>
+								</h:form>
+							</div>
+						</div>
+						<div class="initHistoric">
+							<div class="textInit">courses</div>
+							<div class="buttonInit">
+								<h:form>
+									<h:commandLink
+										action="#{userPageHistoricBean.eventsPurchase()}">
+										<h:graphicImage url="/resources/boutonFlecheGris.png"
+											width="100%" />
 
+									</h:commandLink>
+								</h:form>
+							</div>
+						</div>
+						<div class="initHistoric">
+							<div class="textInit">votes</div>
+							<div class="buttonInit">
+								<h:form>
+									<h:commandLink action="#{userPageHistoricBean.eventVote()}">
+										<h:graphicImage url="/resources/boutonFlecheGris.png"
+											width="100%" />
 
-								</h:column>
-							</h:dataTable>
-
-						</h:form>
+									</h:commandLink>
+								</h:form>
+							</div>
+						</div>
 					</div>
-
 				</div>
 				<div class="historicEventList">
 					<h:form>
 
 						<h:dataTable value="#{userPageHistoricBean.eventsList}" var="p">
-							
+
 							<h:column>
 								<f:facet name="header"></f:facet>
 								#{userPageHistoricBean.giveDay(p)} #{p.action}
@@ -255,7 +265,7 @@
 				</div>
 			</div>
 		</div>
-		</div>
+	</div>
 
 
 </body>

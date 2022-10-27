@@ -117,19 +117,19 @@
 				<h:form>
 
 					<h:dataTable value="#{userPageVoteBean.votesList}" var="p"
-						columnClasses="voteListColumn1,voteListColumn2">
+						columnClasses="voteListColumn1,voteListColumn2, voteListColumn3">
 						<h:column>
 							<f:facet name="header"></f:facet>
-					#{p.originalTask.name}
+					modification de la tache #{p.originalTask.name}
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-					#{p.whoDidIt}
+					proposée par #{p.whoDidIt.userName}
 				</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
 							<h:commandLink action="#{userPageVoteBean.detailVote(p)}">
-							<h:graphicImage url="/resources/boutonTroisPoints.png" width="15%" />
+							<h:graphicImage url="/resources/boutonTroisPoints.png" width="30%" />
 								<f:param name="voteId" value="#{p.id}" />
 								</h:commandLink>
 						</h:column>

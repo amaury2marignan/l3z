@@ -115,6 +115,7 @@ public class NewSkillPageBean  implements Serializable {
 				null,	
 				null,
 				savedNewSkill,
+				null,
 				user.getUserName()+" a créé la compétence "+savedNewSkill.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

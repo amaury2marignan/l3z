@@ -113,6 +113,30 @@ public class EventRepositoryImpl implements EventRepository {
 				.getResultList();
 	}
 
+	@Override
+	public List<Event> findByTaskName(String name) {
+		return entityManager
+				.createQuery("select u from Event u where u.task.name = :taskNameParam", Event.class)
+				.setParameter("taskNameParam", name)
+				.getResultList();
+		}
+
+	@Override
+	public List<Event> findPurchases(Long id) {
+		return entityManager
+				.createQuery("select u from Event u where u.family.id = :familyIdParam AND u.purchase != null", Event.class)
+				.setParameter("familyIdParam", id)
+				.getResultList();
+		}
+
+	@Override
+	public List<Event> findVotes(Long id) {
+		return entityManager
+				.createQuery("select u from Event u where u.family.id = :familyIdParam AND u.vote != null OR u.skillVote != null", Event.class)
+				.setParameter("familyIdParam", id)
+				.getResultList();
+		}
+
 	
 
 	

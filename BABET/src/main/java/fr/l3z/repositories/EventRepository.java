@@ -16,6 +16,12 @@ public interface EventRepository extends GenericRepository<Long, Event> {
 
 	List<Event> findByUser(Long id);
 
+	List<Event> findByTaskName(String name);
+
+	List<Event> findPurchases(Long id);
+
+	List<Event> findVotes(Long id);
+
 	
 	
 	
