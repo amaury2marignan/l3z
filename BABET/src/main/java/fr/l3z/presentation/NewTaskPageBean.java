@@ -73,11 +73,12 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setName("Nom de la Tache");
 		this.task.setDescription("Description");
 		this.task.setRepeatAfter(0);
-		this.task.setNextTask(new Task(this.family,"-","-",null,0,null,null));
+		this.task.setNextTask(new Task(this.family,"-","-",null,0,null,null,0));
 		this.task.setSkillProfileMinimumToDo(new SkillProfile());
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
 		this.task.setStatus(0);
 		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setDifficulty(1);
 		this.skillList = skillRep.findWithFamily(this.family.getId());
 		this.allTaskNames.add(" ");
 		for(Task taskD:taskRep.findByStatus0(this.family.getId())) {
@@ -311,38 +312,38 @@ public class NewTaskPageBean  implements Serializable {
 	public String star1Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 1);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 2);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star0Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 0);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 1);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star2Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 2);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 3);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
-				
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star3Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 3);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 4);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star4Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 4);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star5Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 5);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 
@@ -362,7 +363,7 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setFamily(this.family);
 		SkillProfile savedSPMDo = skillProfileRep.save(this.task.getSkillProfileMinimumToDo());
 		this.task.setSkillProfileMinimumToDo(savedSPMDo);
-		this.task.setNbPoints(skillRep.getNbPoints(savedSPMDo));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(savedSPMDo));
 
 		SkillProfile savedSPMCh = skillProfileRep.save(this.task.getSkillProfileMinimumToCheck());
 		this.task.setSkillProfileMinimumToCheck(savedSPMCh);
@@ -378,6 +379,7 @@ public class NewTaskPageBean  implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a créé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -415,7 +417,113 @@ public class NewTaskPageBean  implements Serializable {
 		this.nextTaskName = nextTaskName;
 	}
 
-
+	public Boolean difNote1(){
+		if(this.task.getDifficulty()>0){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 	
-
+	public Boolean difNote2(){
+		if(this.task.getDifficulty()>1){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote3(){
+		if(this.task.getDifficulty()>2){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote4(){
+		if(this.task.getDifficulty()>3){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	public Boolean difNote5(){
+		if(this.task.getDifficulty()>4){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote5Inverted(){
+		if(this.task.getDifficulty()<5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote4Inverted(){
+		if(this.task.getDifficulty()<4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote3Inverted(){
+		if(this.task.getDifficulty()<3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote2Inverted(){
+		if(this.task.getDifficulty()<2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote1Inverted(){
+		if(this.task.getDifficulty()<1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String starDif5Action() {
+		this.task.setDifficulty(5);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif4Action() {
+		this.task.setDifficulty(4);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif3Action() {
+		this.task.setDifficulty(3);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif2Action() {
+		this.task.setDifficulty(2);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif1Action() {
+		this.task.setDifficulty(1);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
 }

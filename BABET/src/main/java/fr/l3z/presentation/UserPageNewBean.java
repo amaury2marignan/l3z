@@ -200,6 +200,7 @@ public class UserPageNewBean  implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -214,6 +215,8 @@ public class UserPageNewBean  implements Serializable {
 		task.setStatus(3);
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
+		this.user.setScore(this.user.getScore()+task.getNbPoints());
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -223,6 +226,7 @@ public class UserPageNewBean  implements Serializable {
 				null,
 				null,
 				null,
+				task.getNbPoints(),
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -236,6 +240,8 @@ public class UserPageNewBean  implements Serializable {
 		task.setStatus(4);
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -245,6 +251,7 @@ public class UserPageNewBean  implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

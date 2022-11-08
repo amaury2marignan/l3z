@@ -2,6 +2,7 @@ package fr.l3z.presentation;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,6 @@ public class DetailTaskPageBean implements Serializable {
 	public String reservationAction() {
 		this.task.setStatus(2);
 		this.task.setWhoDidIt(this.user);
-		System.out.println("reservation en cours,task : "+this.task);
 		taskRep.update(this.task.getId(),this.task);
 		Event newEvent = new Event(
 				this.family,
@@ -89,6 +89,7 @@ public class DetailTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -98,6 +99,9 @@ public class DetailTaskPageBean implements Serializable {
 	public String validAction() {
 		this.task.setStatus(4);
 		taskRep.update(this.task.getId(),this.task);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
+		
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -107,9 +111,12 @@ public class DetailTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
+		
+		
 		return "/user/userPage.xhtml";
 	}
 	
@@ -117,6 +124,8 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setStatus(3);
 		this.task.setWhoDidIt(this.user);
 		taskRep.update(this.task.getId(),this.task);
+		this.user.setScore(this.user.getScore()+this.task.getNbPoints());
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -126,15 +135,77 @@ public class DetailTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				this.task.getNbPoints(),
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
+		if(this.task.getRepeatAfter()!=0) {
+			Task planTask = new Task(
+					this.family,
+					this.task.getName(),
+					this.task.getDescription(),
+					LocalDate.now().plusDays(this.task.getRepeatAfter()),
+					this.task.getRepeatAfter(),
+					this.task.getSkillProfileMinimumToDo(),
+					this.task.getSkillProfileMinimumToCheck(),
+					this.task.getDifficulty()
+					);
+			planTask.setStatus(1);
+			planTask.setNbPoints(this.task.getNbPoints());
+			Task savedPlanTask = taskRep.save(planTask);
+
+			Event newEvent2 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getName()+" a été planifiée automatiquement pour dans "+this.task.getRepeatAfter()+" jours"
+					);
+			Event savedNewEvent2 = eventRep.save(newEvent2);
+		}
+		if(this.task.getNextTask()!=null) {
+			Task planTask2 = new Task(
+					this.family,
+					this.task.getNextTask().getName(),
+					this.task.getNextTask().getDescription(),
+					LocalDate.now(),
+					this.task.getNextTask().getRepeatAfter(),
+					this.task.getNextTask().getSkillProfileMinimumToDo(),
+					this.task.getNextTask().getSkillProfileMinimumToCheck(),
+					this.task.getDifficulty()
+					);
+			planTask2.setStatus(1);
+			planTask2.setNbPoints(this.task.getNextTask().getNbPoints());
+			Task savedPlanTask = taskRep.save(planTask2);
+
+			Event newEvent3 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getNextTask().getName()+" a été planifiée automatiquement"
+					);
+			Event savedNewEvent3 = eventRep.save(newEvent3);
+		}
+		
 		return "/user/userPage.xhtml";
 	}
 	
 	public String cancelAction() {
 		this.task.setStatus(5);
 		taskRep.update(this.task.getId(),this.task);
+		this.task.getWhoDidIt().setScore(this.task.getWhoDidIt().getScore()-this.task.getNbPoints());
+		userRep.update(this.task.getWhoDidIt().getId(), this.task.getWhoDidIt());
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -144,9 +215,24 @@ public class DetailTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a annulé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
+		
+		Event newEvent2 = new Event(
+				this.family,
+				this.user,
+				LocalDateTime.now(),
+				this.task,
+				null,	
+				null,
+				null,
+				null,
+				-this.task.getNbPoints(),
+				this.task.getNbPoints()+" points ont été retirés à "+this.task.getWhoDidIt().getUserName()+" pour l'annulation de la tâche "+task.getName()	
+				);
+		Event savedNewEvent2 = eventRep.save(newEvent2);
 		return "/user/userPage.xhtml";
 	}
 	
@@ -363,6 +449,86 @@ public class DetailTaskPageBean implements Serializable {
 			return false;
 		} else {
 			return true;
+		}
+	}
+	
+	public Boolean difNote1(){
+		if(this.task.getDifficulty()>0){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote2(){
+		if(this.task.getDifficulty()>1){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote3(){
+		if(this.task.getDifficulty()>2){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote4(){
+		if(this.task.getDifficulty()>3){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	public Boolean difNote5(){
+		if(this.task.getDifficulty()>4){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote5Inverted(){
+		if(this.task.getDifficulty()<5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote4Inverted(){
+		if(this.task.getDifficulty()<4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote3Inverted(){
+		if(this.task.getDifficulty()<3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote2Inverted(){
+		if(this.task.getDifficulty()<2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote1Inverted(){
+		if(this.task.getDifficulty()<1) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	

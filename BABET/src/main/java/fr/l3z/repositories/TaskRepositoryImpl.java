@@ -90,6 +90,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 		taskAModifier.setWhoDidIt(t.getWhoDidIt());
 		taskAModifier.setNextTask(t.getNextTask());
 		taskAModifier.setNbPoints(t.getNbPoints());
+		taskAModifier.setDifficulty(t.getDifficulty());
 
 		entityManager.merge(taskAModifier);
 
@@ -140,7 +141,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 	@Override
 	public Task findByName(String nextTaskName) {
-		return entityManager.createQuery("select u from Task u where u.name = :taskNameParam", Task.class)
+		return entityManager.createQuery("select u from Task u where u.name = :taskNameParam AND u.status = 0", Task.class)
 				.setParameter("taskNameParam", nextTaskName).getSingleResult();
 		
 	}

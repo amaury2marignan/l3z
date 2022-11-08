@@ -197,6 +197,7 @@ public class UserPageBean  implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -211,6 +212,8 @@ public class UserPageBean  implements Serializable {
 		task.setStatus(3);
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
+		this.user.setScore(this.user.getScore()+task.getNbPoints());
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -220,10 +223,70 @@ public class UserPageBean  implements Serializable {
 				null,
 				null,
 				null,
+				task.getNbPoints(),
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		System.out.println(savedNewEvent);
+		if(this.task.getRepeatAfter()!=0) {
+			Task planTask = new Task(
+					this.family,
+					task.getName(),
+					task.getDescription(),
+					LocalDate.now().plusDays(task.getRepeatAfter()),
+					task.getRepeatAfter(),
+					task.getSkillProfileMinimumToDo(),
+					task.getSkillProfileMinimumToCheck(),
+					task.getDifficulty()
+					);
+			planTask.setStatus(1);
+			planTask.setNbPoints(task.getNbPoints());
+			planTask.setNextTask(task.getNextTask());
+			Task savedPlanTask = taskRep.save(planTask);
+
+			Event newEvent2 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getName()+" a été planifiée automatiquement pour dans "+task.getRepeatAfter()+" jours"
+					);
+			Event savedNewEvent2 = eventRep.save(newEvent2);
+		}
+		if(task.getNextTask()!=null) {
+			Task planTask2 = new Task(
+					this.family,
+					task.getNextTask().getName(),
+					task.getNextTask().getDescription(),
+					LocalDate.now(),
+					task.getNextTask().getRepeatAfter(),
+					task.getNextTask().getSkillProfileMinimumToDo(),
+					task.getNextTask().getSkillProfileMinimumToCheck(),
+					task.getNextTask().getDifficulty()
+					);
+			planTask2.setStatus(1);
+			planTask2.setNbPoints(task.getNextTask().getNbPoints());
+			planTask2.setNextTask(task.getNextTask().getNextTask());
+			Task savedPlanTask2 = taskRep.save(planTask2);
+
+			Event newEvent3 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask2,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getNextTask().getName()+" a été planifiée automatiquement"
+					);
+			Event savedNewEvent3 = eventRep.save(newEvent3);
+		}
 		
 		return "user/userPage.xhtml?faces-redirect=true";
 		
@@ -278,6 +341,8 @@ public class UserPageBean  implements Serializable {
 		task.setStatus(4);
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -287,6 +352,7 @@ public class UserPageBean  implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a validé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

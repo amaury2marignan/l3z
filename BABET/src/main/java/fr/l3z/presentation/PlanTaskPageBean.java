@@ -102,11 +102,15 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(1);
 		planTask.setNbPoints(this.task.getNbPoints());
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -116,6 +120,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -130,12 +135,16 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(2);
 		planTask.setNbPoints(this.task.getNbPoints());
 		planTask.setWhoDidIt(this.user);
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -145,6 +154,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -157,6 +167,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a réservé la tâche "+task.getName()	
 				);
 		Event savedNewEvent2 = eventRep.save(newEvent2);
@@ -173,12 +184,16 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now(),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(3);
 		planTask.setNbPoints(this.task.getNbPoints());
 		planTask.setWhoDidIt(this.user);
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1+savedPlanTask.getNbPoints());
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -188,6 +203,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -200,9 +216,71 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				savedPlanTask.getNbPoints(),
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
-		Event savedNewEvent2 = eventRep.save(newEvent2);		
+		Event savedNewEvent2 = eventRep.save(newEvent2);
+		
+		if(this.task.getRepeatAfter()!=0) {
+			Task planTask2 = new Task(
+					this.family,
+					this.task.getName(),
+					this.task.getDescription(),
+					LocalDate.now().plusDays(this.task.getRepeatAfter()),
+					this.task.getRepeatAfter(),
+					this.task.getSkillProfileMinimumToDo(),
+					this.task.getSkillProfileMinimumToCheck(),
+					this.task.getDifficulty()
+					);
+			planTask2.setStatus(1);
+			planTask2.setNbPoints(this.task.getNbPoints());
+			planTask2.setNextTask(this.task.getNextTask());
+			Task savedPlanTask2 = taskRep.save(planTask2);
+
+			Event newEvent3 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getName()+" a été planifiée automatiquement pour dans "+this.task.getRepeatAfter()+" jours"
+					);
+			Event savedNewEvent3 = eventRep.save(newEvent3);
+		}
+		if(this.task.getNextTask()!=null) {
+			Task planTask3 = new Task(
+					this.family,
+					this.task.getNextTask().getName(),
+					this.task.getNextTask().getDescription(),
+					LocalDate.now(),
+					this.task.getNextTask().getRepeatAfter(),
+					this.task.getNextTask().getSkillProfileMinimumToDo(),
+					this.task.getNextTask().getSkillProfileMinimumToCheck(),
+					this.task.getDifficulty()
+					);
+			planTask3.setStatus(1);
+			planTask3.setNbPoints(this.task.getNextTask().getNbPoints());
+			planTask3.setNextTask(this.task.getNextTask().getNextTask());
+			Task savedPlanTask3 = taskRep.save(planTask3);
+
+			Event newEvent4 = new Event(
+					this.family,
+					this.user,
+					LocalDateTime.now(),
+					savedPlanTask,
+					null,	
+					null,
+					null,
+					null,
+					0,
+					task.getNextTask().getName()+" a été planifiée automatiquement"
+					);
+			Event savedNewEvent4 = eventRep.save(newEvent4);
+		}
 		return "/user/userPage.xhtml";
 	}
 	
@@ -216,11 +294,15 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now().plusDays(1),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(1);
 		planTask.setNbPoints(this.task.getNbPoints());
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -230,6 +312,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -245,11 +328,15 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now().plusWeeks(1),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(1);
 		planTask.setNbPoints(this.task.getNbPoints());
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -259,6 +346,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -274,11 +362,15 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now().plusMonths(1),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(1);
 		planTask.setNbPoints(this.task.getNbPoints());
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -288,6 +380,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -304,11 +397,15 @@ public class PlanTaskPageBean implements Serializable {
 				LocalDate.now().plusDays(this.planDays),
 				this.task.getRepeatAfter(),
 				this.task.getSkillProfileMinimumToDo(),
-				this.task.getSkillProfileMinimumToCheck()
+				this.task.getSkillProfileMinimumToCheck(),
+				this.task.getDifficulty()
 				);
 		planTask.setStatus(1);
 		planTask.setNbPoints(this.task.getNbPoints());
+		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
+		this.user.setScore(this.user.getScore()+1);
+		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
 				this.user,
@@ -318,6 +415,7 @@ public class PlanTaskPageBean implements Serializable {
 				null,
 				null,
 				null,
+				1,
 				user.getUserName()+" a planifié la tâche "+task.getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

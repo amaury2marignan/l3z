@@ -40,11 +40,13 @@ public class Event {
 	@ManyToOne
 	private Skill skill;
 	
+	private int nbPoints;
+	
 	private String action;
 
 
 
-	public Event(Family family, User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, SkillVote skillVote, String action) {
+	public Event(Family family, User user, LocalDateTime date, Task task, Vote vote, Purchase purchase, Skill skill, SkillVote skillVote, int nbPoints, String action) {
 		super();
 		this.family=family;
 		this.user = user;
@@ -54,6 +56,7 @@ public class Event {
 		this.purchase = purchase;
 		this.skill = skill;
 		this.skillVote = skillVote;
+		this.setNbPoints(nbPoints);
 		this.action = action;
 	}
 
@@ -198,6 +201,18 @@ public class Event {
 		builder.append(action);
 		builder.append("]");
 		return builder.toString();
+	}
+
+
+
+	public int getNbPoints() {
+		return nbPoints;
+	}
+
+
+
+	public void setNbPoints(int nbPoints) {
+		this.nbPoints = nbPoints;
 	}
 
 

@@ -82,7 +82,7 @@ public class ModifyTaskPageBean  implements Serializable {
 		Long taskId = Long.valueOf(taskIdStr);
 		this.task = taskRep.find(taskId);
 		}
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		this.skillList = skillRep.findWithFamily(this.family.getId());
 		this.allTaskNames.add(" ");
 		for(Task taskD:taskRep.findByStatus0(this.family.getId())) {
@@ -246,41 +246,151 @@ public boolean isOkNewProjectButton() {
 	public String star1Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 1);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 2);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star0Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 0);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 1);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star2Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 2);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 3);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 				
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star3Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 3);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 4);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star4Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 4);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 	public String star5Action(Skill s) {
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToDo(), 5);
 		skillProfileRep.setSkillScore(s.getId(), this.task.getSkillProfileMinimumToCheck(), 5);	
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		return "detail/newTaskPage.xhtml?faces-redirect=true";
 	}
 
+	public Boolean difNote1(){
+		if(this.task.getDifficulty()>0){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote2(){
+		if(this.task.getDifficulty()>1){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote3(){
+		if(this.task.getDifficulty()>2){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote4(){
+		if(this.task.getDifficulty()>3){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	public Boolean difNote5(){
+		if(this.task.getDifficulty()>4){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote5Inverted(){
+		if(this.task.getDifficulty()<5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote4Inverted(){
+		if(this.task.getDifficulty()<4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote3Inverted(){
+		if(this.task.getDifficulty()<3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote2Inverted(){
+		if(this.task.getDifficulty()<2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote1Inverted(){
+		if(this.task.getDifficulty()<1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String starDif5Action() {
+		this.task.setDifficulty(5);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif4Action() {
+		this.task.setDifficulty(4);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif3Action() {
+		this.task.setDifficulty(3);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif2Action() {
+		this.task.setDifficulty(2);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
+	public String starDif1Action() {
+		this.task.setDifficulty(1);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
+		return "detail/newTaskPage.xhtml?faces-redirect=true";
+	}
+	
 	public String boutonCancel() {
 		return "/user/userPageNew.xhtml";
 		
@@ -309,6 +419,7 @@ public boolean isOkNewProjectButton() {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a modifié la tâche "+this.task.getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -331,6 +442,7 @@ public boolean isOkNewProjectButton() {
 		vote.setTaskNewDescription(this.task.getDescription());
 		vote.setTaskNewRepeatAfter(this.task.getRepeatAfter());
 		vote.setWhoDidIt(this.user);
+		vote.setTaskNewDifficulty(this.task.getDifficulty());
 		
 		if(nextTaskName.equals(" ")) {
 			vote.setTaskNewNextTask(null);
@@ -357,6 +469,7 @@ public boolean isOkNewProjectButton() {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a proposé une modification de la tâche "+taskRep.find(this.task.getId()).getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

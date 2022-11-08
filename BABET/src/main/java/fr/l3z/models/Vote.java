@@ -38,6 +38,8 @@ public class Vote {
 	
 	private int taskNewRepeatAfter;
 	
+	private int taskNewDifficulty;
+	
 	@ManyToOne
 	private Task taskNewNextTask;
 	
@@ -260,6 +262,18 @@ public class Vote {
 
 	public void setFamily(Family family) {
 		this.family = family;
+	}
+
+
+
+	public int getTaskNewDifficulty() {
+		return taskNewDifficulty;
+	}
+
+
+
+	public void setTaskNewDifficulty(int taskNewDifficulty) {
+		this.taskNewDifficulty = taskNewDifficulty;
 	}
 	
 	

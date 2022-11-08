@@ -64,6 +64,45 @@
 			</a>
 		</div>
 		<div class="dtpLeft">
+		<h:panelGroup class="dtpPeriod" layout="block">difficulté 
+			
+			<div class="starsDif">
+						
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote1()}" />
+								
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote2()}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote3()}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote4()}" />
+								
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote5()}" />
+							
+								
+						
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote1Inverted()}" />
+								
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote2Inverted()}" />
+								
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote3Inverted()}" />
+							
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote4Inverted()}" />
+							
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{detailTaskPageBean.difNote5Inverted()}" />
+								
+						</div>
+			 </h:panelGroup>
 			<h:panelGroup class="dtpPeriod" layout="block"
 				rendered="#{detailTaskPageBean.repeatDay()}">tous les jours</h:panelGroup>
 			<h:panelGroup class="dtpPeriod" layout="block"

@@ -70,6 +70,7 @@ public class UserPagePurchaseBean  {
 				purchaseRep.find(purchaseId),
 				null,
 				null,
+				0,
 				user.getUserName()+" a acheté : "+donePurchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -91,6 +92,7 @@ public class UserPagePurchaseBean  {
 				cancelledPurchase,
 				null,
 				null,
+				0,
 				user.getUserName()+" a enlevé de la liste de courses : "+cancelledPurchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -112,6 +114,7 @@ public class UserPagePurchaseBean  {
 				this.purchase,
 				null,
 				null,
+				0,
 				user.getUserName()+" a ajouté à la liste de courses : "+purchase.getDescription()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

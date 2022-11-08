@@ -124,6 +124,7 @@ public class UserSkillProfilePageBean  implements Serializable {
 				null,
 				s,
 				savedNewSkillVote,
+				0,
 				user.getUserName()+" a demandé une étoile pour la compétence "+s.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

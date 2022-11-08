@@ -85,6 +85,7 @@ public class UserPageVoteBean  {
 				null,
 				sV.getSkill(),
 				sV,
+				0,
 				user.getUserName()+" a annulé la demande d'étoile en "+sV.getSkill().getName()+" de "+sV.getWhoAsked().getUserName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);this.setSkillVotesList(skillVoteRep.findAllToDecide());
@@ -105,6 +106,7 @@ public class UserPageVoteBean  {
 				null,
 				sV.getSkill(),
 				sV,
+				0,
 				user.getUserName()+" a validé une étoile en "+sV.getSkill().getName()+" pour "+sV.getWhoAsked().getUserName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);

@@ -113,6 +113,7 @@ public class DetailVotePageBean implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a voté pour la modification de la tâche "+this.vote.getOriginalTask().getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -176,6 +177,7 @@ public class DetailVotePageBean implements Serializable {
 				null,
 				null,
 				null,
+				0,
 				user.getUserName()+" a validé la modification de la tâche "+this.vote.getOriginalTask().getName()
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
@@ -219,6 +221,171 @@ public class DetailVotePageBean implements Serializable {
 		SkillNote sN = skillNoteRep.find(sNID);
 		this.vote.setSkillProfile(skillProfileRep.setSkillScore(sN.getSkill().getId(), this.vote.getSkillProfile(), 5));
 		return "detail/detailVotePage.xhtml?faces-redirect=true";
+	}
+	
+	public Boolean difNoteProposal1(){
+		if(this.vote.getTaskNewDifficulty()>0){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNoteProposal2(){
+		if(this.vote.getTaskNewDifficulty()>1){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNoteProposal3(){
+		if(this.vote.getTaskNewDifficulty()>2){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNoteProposal4(){
+		if(this.vote.getTaskNewDifficulty()>3){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNoteProposal5(){
+		if(this.vote.getTaskNewDifficulty()>4){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNoteProposal5Inverted(){
+		if(this.vote.getTaskNewDifficulty()<5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean difNoteProposal4Inverted(){
+		if(this.vote.getTaskNewDifficulty()<4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean difNoteProposal3Inverted(){
+		if(this.vote.getTaskNewDifficulty()<3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean difNoteProposal2Inverted(){
+		if(this.vote.getTaskNewDifficulty()<2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean difNoteProposal1Inverted(){
+		if(this.vote.getTaskNewDifficulty()<1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean difNote1(){
+		if(this.vote.getOriginalTask().getDifficulty()>0){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote2(){
+		if(this.vote.getOriginalTask().getDifficulty()>1){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote3(){
+		if(this.vote.getOriginalTask().getDifficulty()>2){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote4(){
+		if(this.vote.getOriginalTask().getDifficulty()>3){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	public Boolean difNote5(){
+		if(this.vote.getOriginalTask().getDifficulty()>4){
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public Boolean difNote5Inverted(){
+		if(this.vote.getOriginalTask().getDifficulty()<5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote4Inverted(){
+		if(this.vote.getOriginalTask().getDifficulty()<4) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote3Inverted(){
+		if(this.vote.getOriginalTask().getDifficulty()<3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote2Inverted(){
+		if(this.vote.getOriginalTask().getDifficulty()<2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Boolean difNote1Inverted(){
+		if(this.vote.getOriginalTask().getDifficulty()<1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	

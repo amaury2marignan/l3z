@@ -43,12 +43,13 @@ public class Task {
 	
 	private int status;
 	private int nbPoints;
+	private int difficulty;
 	
 	@ManyToOne
 	private Task nextTask;
 
 	public Task(Family family, String name, String description, LocalDate nextDate, int repeatAfter,
-			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck) {
+			SkillProfile skillProfileMinimumToDo, SkillProfile skillProfileMinimumToCheck,int difficulty) {
 		super();
 		this.family=family;
 		this.name = name;
@@ -191,6 +192,16 @@ public class Task {
 
 	public void setFamily(Family family) {
 		this.family = family;
+	}
+
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 	
 	
