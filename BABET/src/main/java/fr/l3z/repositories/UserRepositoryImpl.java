@@ -72,6 +72,8 @@ public class UserRepositoryImpl implements UserRepository {
 		userAModifier.setFamily(t.getFamily());
 		userAModifier.setSkillProfile(t.getSkillProfile());
 		userAModifier.setScore(t.getScore());
+		userAModifier.setColor(t.getColor());
+		userAModifier.setIdPicNumber(t.getIdPicNumber());
 		
 		entityManager.merge(userAModifier);
 		

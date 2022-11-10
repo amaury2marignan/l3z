@@ -62,6 +62,10 @@ public class UserPageBean  implements Serializable {
 		
 	}
 	
+	public String picString() {
+		return "../resources/idPics/"+this.user.getColor()+"/id"+this.user.getIdPicNumber()+".png";
+	}
+	
 	public Boolean skillNote1(int score){
 		if(score>=1) {
 			return true;

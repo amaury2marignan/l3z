@@ -63,19 +63,19 @@
 
 							<h:column>
 								<f:facet name="header"></f:facet>
-								
-								
+
+
 								<h:commandLink action="#{adminPageBean.updateUserList(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonFlecheGris.png" width="40%" />
+									<h:graphicImage url="/resources/boutonFlecheGris.png"
+										width="40%" />
 
 								</h:commandLink>
 
 								<h:commandLink action="#{adminPageBean.deleteFamily(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonCancel.png"
-										width="40%" 
-										rendered="#{adminPageBean.deleteFamilyOK(p.id)}"/>
+									<h:graphicImage url="/resources/boutonCancel.png" width="40%"
+										rendered="#{adminPageBean.deleteFamilyOK(p.id)}" />
 								</h:commandLink>
 							</h:column>
 						</h:dataTable>
@@ -92,11 +92,11 @@
 								style="font-family:Berlin Sans FB Demi; width:95%; font-size:10px; border-radius: 5px; border:hidden;margin:2px;" />
 						</div>
 						<div class="adminNewFormRight">
-						<div class="adminNewFormButton">
-							<h:commandLink action="#{adminPageBean.newFamily()}">
-								<h:graphicImage url="/resources/boutonNewTask.png" width="90%" />
-							</h:commandLink>
-						</div>
+							<div class="adminNewFormButton">
+								<h:commandLink action="#{adminPageBean.newFamily()}">
+									<h:graphicImage url="/resources/boutonNewTask.png" width="90%" />
+								</h:commandLink>
+							</div>
 						</div>
 					</div>
 				</h:form>
@@ -105,7 +105,7 @@
 			<div class="adminListContener">
 				Membres<br />
 				<div class="adminSubtitle">#{adminPageBean.family.familyName}</div>
-				<div class="adminList2">
+				<div class="adminList5">
 					<h:form>
 
 						<h:dataTable value="#{adminPageBean.usersList}" var="p"
@@ -118,21 +118,22 @@
 
 							<h:column>
 								<f:facet name="header"></f:facet>
-								
-								
-								<h:commandLink action="#{adminPageBean.updateEventListWithUser(p)}">
+
+
+								<h:commandLink
+									action="#{adminPageBean.updateEventListWithUser(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonFlecheGris.png" width="40%" />
+									<h:graphicImage url="/resources/boutonFlecheGris.png"
+										width="40%" />
 
 								</h:commandLink>
-								
+
 								<h:commandLink action="#{adminPageBean.deleteUser(p)}">
 									<f:param name="familyId" value="#{p.id}" />
-									<h:graphicImage url="/resources/boutonCancel.png"
-										width="40%" 
-										rendered="#{adminPageBean.deleteUserOK(p.id)}"/>
+									<h:graphicImage url="/resources/boutonCancel.png" width="40%"
+										rendered="#{adminPageBean.deleteUserOK(p.id)}" />
 								</h:commandLink>
-								
+
 							</h:column>
 						</h:dataTable>
 
@@ -150,8 +151,9 @@
 						<div class="adminNewFormRight">
 							<div class="adminNewFormCheck">
 								<h:selectBooleanCheckbox
-									value="#{adminPageBean.newUserIsParent}" 
-									style="width:10px; border:hidden;"/>Parent
+									value="#{adminPageBean.newUserIsParent}"
+									style="width:10px; border:hidden;" />
+								Parent
 							</div>
 							<div class="adminNewFormButton">
 								<h:commandLink action="#{adminPageBean.newUser()}">
@@ -159,7 +161,61 @@
 								</h:commandLink>
 							</div>
 						</div>
-					</div>
+						</div>
+						<div class="adminNewFormColor">
+							<h:commandLink action="#{adminPageBean.colorGrey}">
+								<h:graphicImage url="/resources/idPics/grey/id0.png" width="100%"
+									rendered="#{adminPageBean.greyNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorGrey}">
+								<h:graphicImage url="/resources/idPics/grey/selectid0.png"
+									width="100%" rendered="#{adminPageBean.greySelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorOrange}">
+								<h:graphicImage url="/resources/idPics/orange/id0.png"
+									width="100%" rendered="#{adminPageBean.orangeNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorOrange}">
+								<h:graphicImage url="/resources/idPics/orange/selectid0.png"
+									width="100%" rendered="#{adminPageBean.orangeSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorYellow}">
+								<h:graphicImage url="/resources/idPics/yellow/id0.png"
+									width="100%" rendered="#{adminPageBean.yellowNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorYellow}">
+								<h:graphicImage url="/resources/idPics/yellow/selectid0.png"
+									width="100%" rendered="#{adminPageBean.yellowSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorBlue}">
+								<h:graphicImage url="/resources/idPics/blue/id0.png" width="100%"
+									rendered="#{adminPageBean.blueNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorBlue}">
+								<h:graphicImage url="/resources/idPics/blue/selectid0.png"
+									width="100%" rendered="#{adminPageBean.blueSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorGreen}">
+								<h:graphicImage url="/resources/idPics/green/id0.png"
+									width="100%" rendered="#{adminPageBean.greenNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorGreen}">
+								<h:graphicImage url="/resources/idPics/green/selectid0.png"
+									width="100%" rendered="#{adminPageBean.greenSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorPink}">
+								<h:graphicImage url="/resources/idPics/pink/id0.png" width="100%"
+									rendered="#{adminPageBean.pinkNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{adminPageBean.colorPink}">
+								<h:graphicImage url="/resources/idPics/pink/selectid0.png"
+									width="100%" rendered="#{adminPageBean.pinkSelect()}" />
+							</h:commandLink>
+
+
+
+						</div>
+					
 				</h:form>
 			</div>
 			<div class="adminListContenerSkill">
@@ -176,7 +232,7 @@
 							#{p.name}
 							</h:column>
 
-							
+
 						</h:dataTable>
 
 					</h:form>
@@ -192,14 +248,14 @@
 					<h:form>
 
 						<h:dataTable value="#{adminPageBean.eventsList}" var="p"
-							columnClasses="admineventListColumn1"> 
+							columnClasses="admineventListColumn1">
 							<h:column>
-							<f:facet name="header"></f:facet>
+								<f:facet name="header"></f:facet>
 							#{adminPageBean.giveDay(p)} #{p.action}
 						</h:column>
-						
 
-							
+
+
 						</h:dataTable>
 
 					</h:form>

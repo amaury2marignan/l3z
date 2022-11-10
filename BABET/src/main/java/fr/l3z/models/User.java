@@ -35,11 +35,17 @@ public class User {
 	@OneToOne
 	private SkillProfile skillProfile;
 	
+	private String color;
+	
+	private int idPicNumber;
+	
 
-	public User(String userName, String password) {
+	public User(String userName, String password, String color) {
 		
 		this.userName = userName;
 		this.password = password;
+		this.color = color;
+		this.idPicNumber = 1;
 		this.score = 0;
 		
 	}
@@ -102,6 +108,22 @@ public class User {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getIdPicNumber() {
+		return idPicNumber;
+	}
+
+	public void setIdPicNumber(int idPicNumber) {
+		this.idPicNumber = idPicNumber;
 	}
 
 	

@@ -1,5 +1,6 @@
 package fr.l3z.repositories;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class EventRepositoryImpl implements EventRepository {
 	
 	@Inject
 	private SkillProfileRepository skillProfileRep;
+	@Inject
+	private UserRepository userRep;
 	
 	
 	public EventRepositoryImpl() {
@@ -136,6 +139,55 @@ public class EventRepositoryImpl implements EventRepository {
 				.setParameter("familyIdParam", id)
 				.getResultList();
 		}
+
+	@Override
+	public int pointsOfDay(Long id) {
+		int pointsOfWeek = 0;
+		List<Event> eventsWithPoints= entityManager
+				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null AND u.nbPoints > -100", Event.class)
+				.setParameter("userIdParam", id)
+				.getResultList();
+		for(Event e:eventsWithPoints) {
+			if(e.getDate().getYear()==LocalDate.now().getYear()) {
+				if(e.getDate().getDayOfYear()==LocalDate.now().getDayOfYear()) {
+				pointsOfWeek=pointsOfWeek+e.getNbPoints();	
+				}
+			}
+		}
+		return pointsOfWeek;
+	}
+	
+	
+
+	@Override
+	public int pointsOfMonth(Long id) {
+		int pointsOfMonth = 0;
+		List<Event> eventsWithPoints= entityManager
+				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null AND u.nbPoints > -100", Event.class)
+				.setParameter("userIdParam", id)
+				.getResultList();
+		for(Event e:eventsWithPoints) {
+			if(e.getDate().getYear()==LocalDate.now().getYear()) {
+				if(e.getDate().getDayOfYear()==LocalDate.now().getDayOfYear()) {
+				pointsOfMonth=pointsOfMonth+e.getNbPoints();	
+				}
+			}
+		}
+		return pointsOfMonth;
+	}
+
+	@Override
+	public int ringsScore(Long id) {
+		int ringsSpent = 0;
+		List<Event> eventsWithSpendings= entityManager
+				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints < -99", Event.class)
+				.setParameter("userIdParam", id)
+				.getResultList();
+		for(Event e:eventsWithSpendings) {
+				ringsSpent=ringsSpent-e.getNbPoints();	
+		}
+		return userRep.find(id).getScore()-ringsSpent;
+	}
 
 	
 

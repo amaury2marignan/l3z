@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="babetCss.css" />
+
+	<title>Page Utilisateur</title>
+</h:head>
+
+<body>
+	<div class="content">
+
+		<div class="logoIndex">
+			<a> <img src="#{userProfilePageBean.picString()}" width="100%" />
+			</a>
+		</div>
+
+		<div class="topBox">
+
+			<div class="userName">Bienvenue
+				#{userProfilePageBean.user.userName}</div>
+
+			<div class="userSkillProfile">
+				<ui:repeat
+					value="#{userProfilePageBean.user.skillProfile.skillNoteList}"
+					var="p">
+					<div class="userSkill">
+						<div class="skillName">#{p.skill.name}</div>
+
+						<div class="stars">
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote1(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote2(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote3(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote4(p.score)}" />
+							<h:graphicImage url="/resources/star.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote5(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote1Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote2Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote3Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote4Inverted(p.score)}" />
+							<h:graphicImage url="/resources/starGrey.png" width="20%"
+								rendered="#{userProfilePageBean.skillNote5Inverted(p.score)}" />
+						</div>
+					</div>
+				</ui:repeat>
+				<div class="espace5px"></div>
+				<div>
+					<a href="../user/userSkillProfilePage.xhtml"><img
+						src="../resources/boutonTroisPoints.png" height="30px" /> </a>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+		<div class="actions">
+
+
+			<div class="boutonGauche">
+				<a href="../family/familyPage.xhtml"> <img
+					src="../resources/babetidfamily.png" width="95%" />
+				</a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPageVote.xhtml"><img
+					src="../resources/boutonVote.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPagePurchase.xhtml"><img
+					src="../resources/boutonCourses.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userPage.xhtml"><img
+					src="../resources/boutonTasks.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGauche">
+				<a href="../user/userProfilePage.xhtml"><img
+					src="../resources/boutonProfile.png" width="95%" /> </a>
+			</div>
+
+			<div class="boutonGauche">
+				<a href="../user/userPageHistoric.xhtml"><img
+					src="../resources/boutonHistorique.png" width="95%" /> </a>
+			</div>
+			<div class="boutonGaucheLong">
+				<a href="../user/userPageNew.xhtml"><img
+					src="../resources/boutonNewTask.png" width="95%" /> </a>
+			</div>
+		</div>
+
+		<div class="upContener">
+			<div class="upContener1">
+				<div class="upScoreBox">
+					<div class="upScore">#{userProfilePageBean.pointsOfDay}</div>
+					<div class="upScoreLabel">
+						points<br />aujourd'hui
+					</div>
+				</div>
+				<div class="upScoreBox">
+					<div class="upScore">#{userProfilePageBean.pointsOfMonth}</div>
+					<div class="upScoreLabel">
+						points<br />ce mois
+					</div>
+				</div>
+				<div class="upScoreBox">
+					<div class="upScore">#{userProfilePageBean.user.score}</div>
+					<div class="upScoreLabel">
+						points<br />totaux
+					</div>
+				</div>
+				<div class="upRingBox">
+					<div class="upScore">#{userProfilePageBean.ringsScore}</div>
+					<div class="upScoreLabel">pièces</div>
+				</div>
+			</div>
+
+			<h:form>
+				<div class="upContener2">
+
+					<div class="upProfileForm">
+						<br />
+						<div class="upFormLine">changer de pseudo :</div>
+						<div class="upFormLine">
+							<h:inputText value="#{userProfilePageBean.user.userName}"
+								style="font-family: Berlin Sans FB Demi;width:650%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:20px;color:black;padding-left:5px;" />
+							<h:commandLink action="#{userProfilePageBean.changeUser()}">
+								<h:graphicImage url="/resources/boutonSaveChanges.png"
+									width="70%" />
+							</h:commandLink>
+						</div>
+						<br />
+						<div class="upFormLine">changer de couleur :</div>
+						<div class="upFormLineColor">
+							<h:commandLink action="#{userProfilePageBean.colorGrey}">
+								<h:graphicImage url="/resources/idPics/grey/id0.png"
+									width="90%" rendered="#{userProfilePageBean.greyNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorGrey}">
+								<h:graphicImage url="/resources/idPics/grey/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.greySelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorOrange}">
+								<h:graphicImage url="/resources/idPics/orange/id0.png"
+									width="90%"
+									rendered="#{userProfilePageBean.orangeNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorOrange}">
+								<h:graphicImage url="/resources/idPics/orange/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.orangeSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorYellow}">
+								<h:graphicImage url="/resources/idPics/yellow/id0.png"
+									width="90%"
+									rendered="#{userProfilePageBean.yellowNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorYellow}">
+								<h:graphicImage url="/resources/idPics/yellow/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.yellowSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorBlue}">
+								<h:graphicImage url="/resources/idPics/blue/id0.png"
+									width="90%" rendered="#{userProfilePageBean.blueNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorBlue}">
+								<h:graphicImage url="/resources/idPics/blue/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.blueSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorGreen}">
+								<h:graphicImage url="/resources/idPics/green/id0.png"
+									width="90%" rendered="#{userProfilePageBean.greenNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorGreen}">
+								<h:graphicImage url="/resources/idPics/green/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.greenSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorPink}">
+								<h:graphicImage url="/resources/idPics/pink/id0.png"
+									width="90%" rendered="#{userProfilePageBean.pinkNotSelect()}" />
+							</h:commandLink>
+							<h:commandLink action="#{userProfilePageBean.colorPink}">
+								<h:graphicImage url="/resources/idPics/pink/selectid0.png"
+									width="90%" rendered="#{userProfilePageBean.pinkSelect()}" />
+							</h:commandLink>
+						</div>
+
+					</div>
+
+					<div class="upIdPicListContener">
+					Magasin
+						<div class="upPicList">
+							<ui:repeat value="#{userProfilePageBean.picList}" var="p">
+								<div class="upPicBox">
+
+									<h:graphicImage url="#{userProfilePageBean.picString2(p)}"
+										width="100%" />
+									<div class="upPicListLabel">
+										#{userProfilePageBean.costOfPic(p)} pièces</div>
+									<h:commandLink action="#{userProfilePageBean.buyPic(p)}">
+										<h:graphicImage url="/resources/boutonPanier.png"
+											rendered="#{userProfilePageBean.buyOk(p)}" width="100%" />
+									</h:commandLink>
+									<h:graphicImage url="/resources/boutonPanierGris.png"
+										rendered="#{userProfilePageBean.buyNotOk(p)}" width="100%" />
+								</div>
+							</ui:repeat>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+
+
+
+
+	</div>
+
+</body>
+</html>

@@ -22,6 +22,12 @@ public interface EventRepository extends GenericRepository<Long, Event> {
 
 	List<Event> findVotes(Long id);
 
+	int pointsOfDay(Long id);
+
+	int pointsOfMonth(Long id);
+
+	int ringsScore(Long id);
+
 	
 	
 	

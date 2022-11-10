@@ -63,6 +63,9 @@ public class AdminPageBean  implements Serializable {
 	private String newUserName;
 	private String newUserPassword;
 	private Boolean newUserIsParent;
+	private String newUserColor;
+	private int newUserIdPicNumber;
+	
 	
 	
 
@@ -74,6 +77,7 @@ public class AdminPageBean  implements Serializable {
 		this.setNewUserName("nouveau membre");
 		this.setNewUserPassword("mot de passe");
 		this.setNewUserIsParent(false);
+		this.setNewUserColor("grey");
 	}
 	
 	public String updateUserList(Family family) {
@@ -104,7 +108,8 @@ public class AdminPageBean  implements Serializable {
 		if (this.family.getId()==null){
 			return "admin/adminPage.xhtml?faces-redirect=true";
 		} else {
-			User newUser = new User(newUserName,newUserPassword);
+			
+			User newUser = new User(newUserName,newUserPassword,newUserColor);
 			newUser.setFamily(this.family);
 			SkillProfile newUserSP = new SkillProfile();
 			
@@ -178,6 +183,132 @@ public class AdminPageBean  implements Serializable {
 	public String detailsUser(Long userId) {
 		this.setUser(userRep.find(userId));
 		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorGrey(){
+		this.newUserColor="grey";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorOrange(){
+		this.newUserColor="orange";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorYellow(){
+		this.newUserColor="yellow";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorBlue(){
+		this.newUserColor="blue";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorGreen(){
+		this.newUserColor="green";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public String colorPink(){
+		this.newUserColor="pink";
+		return "/admin/userPageAdmin.xhtml";
+	}
+	
+	public Boolean greyNotSelect() {
+		if(newUserColor.equals("grey")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean greySelect() {
+		if(newUserColor.equals("grey")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean orangeNotSelect() {
+		if(newUserColor.equals("orange")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean orangeSelect() {
+		if(newUserColor.equals("orange")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean yellowNotSelect() {
+		if(newUserColor.equals("yellow")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean yellowSelect() {
+		if(newUserColor.equals("yellow")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean blueNotSelect() {
+		if(newUserColor.equals("blue")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean blueSelect() {
+		if(newUserColor.equals("blue")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean greenNotSelect() {
+		if(newUserColor.equals("green")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean greenSelect() {
+		if(newUserColor.equals("green")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean pinkNotSelect() {
+		if(newUserColor.equals("pink")) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public Boolean pinkSelect() {
+		if(newUserColor.equals("pink")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public Boolean adminConnectOK() {
@@ -274,6 +405,22 @@ public class AdminPageBean  implements Serializable {
 
 	public void setNewUserIsParent(Boolean newUserIsParent) {
 		this.newUserIsParent = newUserIsParent;
+	}
+
+	public String getNewUserColor() {
+		return newUserColor;
+	}
+
+	public void setNewUserColor(String newUserColor) {
+		this.newUserColor = newUserColor;
+	}
+
+	public int getNewUserIdPicNumber() {
+		return newUserIdPicNumber;
+	}
+
+	public void setNewUserIdPicNumber(int newUserIdPicNumber) {
+		this.newUserIdPicNumber = newUserIdPicNumber;
 	}
 
 }
