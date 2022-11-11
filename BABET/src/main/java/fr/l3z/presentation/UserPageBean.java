@@ -47,7 +47,7 @@ public class UserPageBean  implements Serializable {
 	private Family family = new Family();
 	private List<Task> tasksList = new ArrayList<Task>();
 	private Task task = new Task();
-	
+	private int pointsOfMonth;
 	
 	
 	
@@ -59,7 +59,7 @@ public class UserPageBean  implements Serializable {
 		this.family = familyRep.find(SessionUtils.getFamilyId());
 		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
 		tasksList.sort(Comparator.comparing(Task::getNextDate));
-		
+		this.pointsOfMonth=eventRep.pointsOfMonth(this.user.getId());
 	}
 	
 	public String picString() {
@@ -231,7 +231,7 @@ public class UserPageBean  implements Serializable {
 				user.getUserName()+" a réalisé la tâche "+task.getName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		if(this.task.getRepeatAfter()!=0) {
+		if(task.getRepeatAfter()!=0) {
 			Task planTask = new Task(
 					this.family,
 					task.getName(),
@@ -425,5 +425,13 @@ public class UserPageBean  implements Serializable {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public int getPointsOfMonth() {
+		return pointsOfMonth;
+	}
+
+	public void setPointsOfMonth(int pointsOfMonth) {
+		this.pointsOfMonth = pointsOfMonth;
 	}
 }

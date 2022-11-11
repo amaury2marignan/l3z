@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import fr.l3z.models.Family;
 import fr.l3z.models.User;
+import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -25,6 +26,8 @@ public class FamilyPageBean {
 	private FamilyRepository familyRep;
 	@Inject
 	private UserRepository userRep;
+	@Inject
+	private EventRepository eventRep;
 	
 	
 	private Family family = new Family();
@@ -40,7 +43,18 @@ public class FamilyPageBean {
 		
 		this.setUsers(userRep.usersByFamily(family.getId()));
 	}
+	
+	public int getDayPoints(User u) {
+		return eventRep.pointsOfDay(u.getId());
+	}
+	
+	public int getMonthPoints(User u) {
+		return eventRep.pointsOfMonth(u.getId());
+	}
 
+	public String getPic(User u) {
+		return "../resources/idPics/"+u.getColor()+"/id"+u.getIdPicNumber()+".png";
+	}
 	
 	public String doLoginUser(User user) {
 		System.out.println("user en train de se connecter : "+user);

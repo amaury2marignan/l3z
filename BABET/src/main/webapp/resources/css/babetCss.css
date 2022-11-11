@@ -178,7 +178,7 @@ body {
 
 .topRight {
 	margin: 2px;
-	width: 10%;
+	width: 13%;
 	margin-top: 8px;
 }
 
@@ -1563,6 +1563,7 @@ body {
 	color:#FFD966;
 	border-radius:9px;
 	text-align:center;
+	margin:2px;
 	
 }
 
@@ -1606,3 +1607,51 @@ body {
 .upPicListLabel{
 	text-align:center;
 }
+
+.usersList{
+	width:100%;
+	height:360px;
+	display:flex;
+	flex-wrap:wrap;
+	padding:17px;
+	align-content: center;
+	overflow:auto;
+	text-align:center;
+}
+
+.fpUserBox{
+	width:17%;
+	background-color:white;
+	border-radius:9px;
+	border:hidden;
+	margin:5px;
+	padding:2px;
+	color:black;
+	}
+.fpUserPic{
+	width:100%
+}
+
+.fpUserScore{
+	width:100%;
+	display:flex;
+}	
+.fpUserScore2{
+	width:30%;
+	margin:2px;
+	background-color:#70AD47;
+	color:white;
+	text-align:center;
+	border-radius:9px;
+}
+.fpScore{
+	width:100%;
+	margin-bottom:2px;
+	font-size:12px;
+	}
+.fpUserScoreLabel{
+	width:100%;
+	margin-bottom:2px;
+	font-size:5px;
+	}
+

@@ -11,38 +11,60 @@
 </h:head> 
 <body> 
 
-<p>#{familyPageBean.family.familyName}</p>
-<p>#{familyPageBean.connectedUser.userName}</p>
+<div class="content">
+	<div class="logoIndex">
+			<a href="../index.xhtml"> 
+			<img src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
 
-<div class="usersList">
-		<h:form>
-			
-			<ui:repeat value="#{familyPageBean.users}"
-				var="p">
+		<div class="topBox">
+			<div class="userName">Famille #{familyPageBean.family.familyName}</div>
+		</div>
 
-
-				<div>
-					<h4 name="header">Nom : #{p.userName} </h4>
-
-				</div>
-
-				
-
-				<div>
-					<h:commandButton
-						action="#{familyPageBean.doLoginUser(p)}"
-						
-						class="btn-primary">
-<img src="../resources/babetidfamily.png" width="10%"/>
-					</h:commandButton>
-					<h:commandButton
-						action="#{familyPageBean.doLoginUser(p)}"
-						value="c'est moi !" class="btn-primary">
-
-					</h:commandButton>
-				</div>
+<h:form>
+	<div class="usersList">
+		
+			<ui:repeat value="#{familyPageBean.users}" var="p">
+				<div class="fpUserBox">
+					<div class="fpUserPic">
+					<h:graphicImage url="#{familyPageBean.getPic(p)}" width="100%"/>
+					</div>
+					#{p.userName}
+					<div class="fpUserScore">
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{familyPageBean.getDayPoints(p)}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>ce jour
+							</div>
+						</div>
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{familyPageBean.getMonthPoints(p)}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>ce mois
+							</div>
+						</div>
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{p.score}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>totaux
+							</div>
+						</div>
+					</div>
+					<h:commandLink action="#{familyPageBean.doLoginUser(p)}">
+						<h:graphicImage url="/resources/boutonConnect.png" width="95%"/>
+						</h:commandLink>
+				</div>				
 			</ui:repeat>
-		</h:form>
+		
 	</div>
+	</h:form>
+</div>
 </body> 
 </html>
