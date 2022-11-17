@@ -73,6 +73,17 @@ public class UserProfilePageBean  implements Serializable {
 		this.picList.add(6);
 		this.picList.add(7);
 		this.picList.add(8);
+		this.picList.add(9);
+		this.picList.add(10);
+		this.picList.add(11);
+		this.picList.add(12);
+		this.picList.add(13);
+		this.picList.add(14);
+		this.picList.add(15);
+		this.picList.add(16);
+		this.picList.add(17);
+		this.picList.add(18);
+		this.picList.add(19);
 		
 	}
 	

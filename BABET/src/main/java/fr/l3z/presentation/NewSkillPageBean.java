@@ -97,9 +97,23 @@ public class NewSkillPageBean  implements Serializable {
 		Skill savedNewSkill = skillRep.save(newSkill);
 		
 		for(User u:this.userList) {
+			Long idSkillParent=null;
+			
+			for(Skill s:skillRep.findWithFamily(this.family.getId())) {
+				if(s.getName().equals("Parent")) {
+					idSkillParent = s.getId();
+				}
+			}
+			
+			if(skillProfileRep.isThisSkillIn(idSkillParent, u.getSkillProfile())) {
+				skillProfileRep.setSkillScore(savedNewSkill.getId(), u.getSkillProfile(), 5);
+				skillProfileRep.update(u.getSkillProfile().getId(), u.getSkillProfile());
+				userRep.update(u.getId(), u);
+			} else {
 			skillProfileRep.setSkillScore(savedNewSkill.getId(), u.getSkillProfile(), 1);
 			skillProfileRep.update(u.getSkillProfile().getId(), u.getSkillProfile());
 			userRep.update(u.getId(), u);
+				}
 			}
 		
 		

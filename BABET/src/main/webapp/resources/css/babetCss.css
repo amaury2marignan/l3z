@@ -70,7 +70,7 @@ body {
 	color: #FFD966;
 	font-size: 30px;
 	padding: 2px;
-	height: 50%;
+	height: 35%;
 }
 
 .userSkillProfile {
@@ -79,7 +79,8 @@ body {
 	flex-wrap: wrap;
 	padding-left: 2px;
 	width: 97%;
-	align-content: flex-end;
+	align-content: flex-start;
+	overflow:auto;
 	height: 50%;
 	}
 
@@ -91,7 +92,7 @@ body {
 	padding-right: 3px;
 	padding-top: 2px;
 	width: 20%;
-	height: 45%;
+	height: 30%;
 	display: flex;
 	flex-direction: row;
 	font-size: 10px;
@@ -163,6 +164,20 @@ body {
 }
 
 .topBox {
+	background-color: #44546A;
+	margin: 2px;
+	width: 70.5%;
+	border-radius: 9px;
+	margin-top: 8px;
+	box-shadow: 2px 2px 2px #A6A6A6;
+	height: 120px;
+	padding: 2px;
+	padding-bottom: 0px;
+	vertical-align: text-top;
+	margin-bottom: 0px;
+}
+
+.topBoxAdmin {
 	background-color: #44546A;
 	margin: 2px;
 	width: 70.5%;
@@ -1543,6 +1558,7 @@ body {
 }
 .upContener{
 	width:83%;
+	margin-top:10px;
 }
 .upContener2{
 	width:100%;
@@ -1614,7 +1630,7 @@ body {
 	display:flex;
 	flex-wrap:wrap;
 	padding:17px;
-	align-content: center;
+	align-content: flex-start;
 	overflow:auto;
 	text-align:center;
 }
