@@ -5,8 +5,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import fr.l3z.models.Family;
+import fr.l3z.models.Skill;
 import fr.l3z.models.User;
 import fr.l3z.repositories.FamilyRepository;
+import fr.l3z.repositories.SkillProfileRepository;
+import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
 
@@ -24,7 +27,10 @@ public class LoginBean {
 	private UserRepository userRep;
 	@Inject
 	private FamilyRepository familyRep;
-	
+	@Inject
+	private SkillProfileRepository skillProfileRep;
+	@Inject
+	private SkillRepository skillRep;
 	
 	
 	public String getUserName() {
@@ -71,8 +77,22 @@ public class LoginBean {
 		if((userName.equals("BabetAdmin"))&&(password.equals("Gyne301"))){
 			SessionUtils.setAdminConnect(Long.valueOf(1));
 			return "/admin/adminPage.xhtml?faces-redirect=true";
+		} else {
+			User user = userRep.findByUserName(userName);
+			if((user!=null)&&(user.getPassword().equals(password))) {
+				SessionUtils.setUserId(user.getId());
+				SessionUtils.setFamilyId(user.getFamily().getId());
+				Skill parentSkill = skillRep.findByNameAndFamily(SessionUtils.getFamilyId(),"Parent");
+				if(skillProfileRep.getScore(parentSkill.getId(), user.getSkillProfile())==5) {
+					return "/parent/parentPage.xhtml?faces-redirect=true";
+				} else {
+					return "/user/userPage.xhtml?faces-redirect=true";
+				}
+			} else {
+				return "/index.xhtml?faces-redirect=true";
+			}
 		}
-		return "index.xhtml";
+		
 	}
 	
 	

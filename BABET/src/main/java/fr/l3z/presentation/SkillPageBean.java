@@ -87,7 +87,7 @@ public class SkillPageBean  implements Serializable {
 	
 	public Boolean modifyButtonOK() {
 		
-		SkillNote parentSkillNote = new SkillNote(skillRep.findByName("parent"),5);
+		SkillNote parentSkillNote = new SkillNote(skillRep.findByNameAndFamily(this.family.getId(),"parent"),5);
 		SkillProfile parentSkillProfile = new SkillProfile();
 		skillProfileRep.setSkillScore(parentSkillNote.getSkill().getId(), parentSkillProfile, 5);
 		

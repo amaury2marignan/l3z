@@ -18,9 +18,10 @@
 		<h:panelGroup layout="block"
 			rendered="#{adminPageBean.adminNotConnect()}">
 			<div class="logoIndex">
-				<a href="../index.xhtml"> <img
-					src="../resources/babetlogocarre.png" width="100%" />
-				</a>
+			<h:form>
+			<h:commandLink action="#{adminPageBean.logOff()}">
+							<h:graphicImage url="/resources/babetlogocarre.png" width="100%" />
+								</h:commandLink></h:form>
 			</div>
 			<div class="topBoxAdmin">
 				<div class="userName">Vous n'êtes pas connecté</div>
@@ -30,10 +31,11 @@
 			rendered="#{adminPageBean.adminConnectOK()}">
 
 			<div class="logoIndex">
-				<a href="../index.xhtml"> <img
-					src="../resources/babetlogocarre.png" width="100%" />
-				</a>
-			</div>
+			<h:form>
+			<h:commandLink action="#{adminPageBean.logOff()}">
+							<h:graphicImage url="/resources/babetlogocarre.png" width="100%" />
+								</h:commandLink>
+			</h:form></div>
 
 			<div class="topBoxAdmin">
 				<div class="userName">Babet Admin</div>
@@ -239,11 +241,31 @@
 				</div>
 
 			</div>
+			<div class="adminCol4">
+			<div class="adminListContenerEvent">
+				Détails <br />
+				<div class="adminSubtitle">#{adminPageBean.family.familyName}</div>
+				<div class="adminSubtitle">#{adminPageBean.user.userName}</div>
+				<div class="adminList6">
+					<h:form>
+
+						<div class="upFormLine">Mot de passe :</div>
+						<div class="upFormLine">
+							<h:inputText value="#{adminPageBean.user.password}"
+								style="font-family: Berlin Sans FB Demi;width:650%;height:95%;margin:2px;border-radius:5px;border:hidden;font-size:20px;color:black;padding-left:5px;" />
+							<h:commandLink action="#{adminPageBean.changeUserPassword()}">
+								<h:graphicImage url="/resources/boutonSaveChanges.png"
+									width="70%" />
+							</h:commandLink>
+						</div>
+
+					</h:form>
+				</div>
+
+			</div>
 
 			<div class="adminListContenerEvent">
 				Evènements<br />
-				<div class="adminSubtitle">#{adminPageBean.family.familyName}</div>
-				<div class="adminSubtitle">#{adminPageBean.user.userName}</div>
 				<div class="adminList4">
 					<h:form>
 
@@ -261,7 +283,7 @@
 					</h:form>
 				</div>
 
-			</div>
+			</div></div>
 
 
 

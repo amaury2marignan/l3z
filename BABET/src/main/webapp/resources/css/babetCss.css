@@ -191,6 +191,20 @@ body {
 	margin-bottom: 0px;
 }
 
+.topBoxParent {
+	background-color: #44546A;
+	margin: 2px;
+	width: 67%;
+	border-radius: 9px;
+	margin-top: 8px;
+	box-shadow: 2px 2px 2px #A6A6A6;
+	height: 100px;
+	padding: 2px;
+	padding-bottom: 0px;
+	vertical-align: text-top;
+	margin-bottom: 0px;
+}
+
 .topRight {
 	margin: 2px;
 	width: 13%;
@@ -1125,10 +1139,11 @@ body {
 	color: #FFD966;
 	margin: 2px;
 	margin-top: 0px;
+	margin-bottom:4px;
 	padding: 2px;
 	padding-bottom: 0px;
-	width: 29%;
-	height: 350px;
+	width: 100%;
+	height: 172px;
 	background-color: #A6A6A6;
 	border-radius: 9px;
 	text-align: center;
@@ -1198,6 +1213,10 @@ body {
 	border-radius: 9px;
 }
 
+.adminCol4{
+	width:31%;
+}
+
 .adminList5 {
 	color: black;
 	font-size: 16px;
@@ -1211,6 +1230,21 @@ body {
 	margin-bottom: 7px;
 	margin-top: 2px;
 	background-color: white;
+	border-radius: 9px;
+}
+
+.adminList6 {
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	margin: 2px;
+	padding: 2px;
+	height: 59%;
+	overflow: auto;
+	width: 85%;
+	margin-left: 12px;
+	margin-bottom: 7px;
+	margin-top: 2px;
 	border-radius: 9px;
 }
 
@@ -1652,6 +1686,20 @@ body {
 	width:100%;
 	display:flex;
 }	
+.fpUserAction{
+	width:98%;
+	display:flex;
+	background-color:#A6A6A6;
+	color:#FFD966;
+	border-radius:9px;
+	text-align:center;
+	margin:2px;
+	padding:2px;
+	
+}	
+.parentSetPoint{
+	margin:2px;
+}
 .fpUserScore2{
 	width:30%;
 	margin:2px;

@@ -144,7 +144,7 @@ public class EventRepositoryImpl implements EventRepository {
 	public int pointsOfDay(Long id) {
 		int pointsOfWeek = 0;
 		List<Event> eventsWithPoints= entityManager
-				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null AND u.nbPoints > -100", Event.class)
+				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null", Event.class)
 				.setParameter("userIdParam", id)
 				.getResultList();
 		for(Event e:eventsWithPoints) {
@@ -163,7 +163,7 @@ public class EventRepositoryImpl implements EventRepository {
 	public int pointsOfMonth(Long id) {
 		int pointsOfMonth = 0;
 		List<Event> eventsWithPoints= entityManager
-				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null AND u.nbPoints > -100", Event.class)
+				.createQuery("select u from Event u where u.user.id = :userIdParam AND u.nbPoints != null", Event.class)
 				.setParameter("userIdParam", id)
 				.getResultList();
 		for(Event e:eventsWithPoints) {

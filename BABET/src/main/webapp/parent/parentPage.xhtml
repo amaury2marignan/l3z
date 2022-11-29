@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<h:outputStylesheet library="css" name="babetCss.css" />
+ 
+	<title>Page Famille</title>
+</h:head> 
+<body> 
+
+<div class="content">
+	<div class="logoIndex">
+			<a href="../index.xhtml"> 
+			<img src="../resources/babetlogocarre.png" width="100%" />
+			</a>
+		</div>
+
+		<div class="topBoxParent">
+			<div class="userName">Famille #{familyPageBean.family.familyName}</div>
+		</div>
+<div class="logoIndex">
+			<a href="../user/userPage.xhtml"> <img src="#{userProfilePageBean.picString()}" width="100%" />
+			</a>
+		</div>
+
+	<div class="usersList">
+		
+			<ui:repeat value="#{parentPageBean.users}" var="p">
+			
+				<div class="fpUserBox">
+					<div class="fpUserPic">
+					<h:graphicImage url="#{parentPageBean.getPic(p)}" width="100%"/>
+					</div>
+					#{p.userName}
+					<div class="fpUserScore">
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{parentPageBean.getDayPoints(p)}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>ce jour
+							</div>
+						</div>
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{parentPageBean.getMonthPoints(p)}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>ce mois
+							</div>
+						</div>
+						<div class="fpUserScore2">
+							<div class="fpScore">
+							#{p.score}
+							</div>
+							<div class="fpUserScoreLabel">
+							points<br/>totaux
+							</div>
+						</div>
+					</div>
+					<h:form>
+					<div class="fpUserAction">
+					
+					<h:commandLink action="#{parentPageBean.withdraw100Points(p)}">
+						<h:graphicImage url="/resources/boutonMoins.png" width="100%"/>
+						</h:commandLink>
+					<div class="parentSetPoint">
+					100
+					points
+					</div>
+					<h:commandLink action="#{parentPageBean.add100Points(p)}">
+						<h:graphicImage url="/resources/boutonPlus.png" width="100%"/>
+						</h:commandLink>
+						
+						</div>
+						</h:form>
+					<h:form>
+					<div class="fpUserAction">
+					
+					<h:commandLink action="#{parentPageBean.withdraw10Points(p)}">
+						<h:graphicImage url="/resources/boutonMoins.png" width="100%"/>
+						</h:commandLink>
+					<div class="parentSetPoint">
+					10 points
+					</div>
+					<h:commandLink action="#{parentPageBean.add10Points(p)}">
+						<h:graphicImage url="/resources/boutonPlus.png" width="100%"/>
+						</h:commandLink>
+						
+						</div>
+						</h:form>
+						<h:form>
+					<div class="fpUserAction">
+					
+					<h:commandLink action="#{parentPageBean.withdraw1Points(p)}">
+						<h:graphicImage url="/resources/boutonMoins.png" width="100%"/>
+						</h:commandLink>
+					<div class="parentSetPoint">
+					1 point
+					</div>
+					<h:commandLink action="#{parentPageBean.add1Points(p)}">
+						<h:graphicImage url="/resources/boutonPlus.png" width="100%"/>
+						</h:commandLink>
+						
+						</div>
+						</h:form>
+				</div>	
+							
+			</ui:repeat>
+		
+	</div>
+	
+</div>
+</body> 
+</html>

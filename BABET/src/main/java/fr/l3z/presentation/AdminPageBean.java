@@ -86,6 +86,18 @@ public class AdminPageBean  implements Serializable {
 		eventsList.sort(Comparator.comparing(Event::getDate).reversed());
 		this.skillsList=skillRep.findWithFamily(family.getId());
 		this.family=familyRep.find(family.getId());
+		this.user=null;
+		return "admin/adminPage.xhtml?faces-redirect=true";
+	}
+	
+	public String logOff() {
+		SessionUtils.setAdminConnect(Long.valueOf(0));
+		return "/index.xhtml?faces-redirect=true";
+	}
+	
+	public String changeUserPassword() {
+		this.user.setPassword(user.getPassword());
+		userRep.update(this.user.getId(), user);
 		return "admin/adminPage.xhtml?faces-redirect=true";
 	}
 	
@@ -316,7 +328,11 @@ public class AdminPageBean  implements Serializable {
 	}
 	
 	public Boolean adminNotConnect() {
-		return !SessionUtils.isAdminLogged();
+		if (SessionUtils.isAdminLogged()){
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public List<Family> getFamiliesList() {
