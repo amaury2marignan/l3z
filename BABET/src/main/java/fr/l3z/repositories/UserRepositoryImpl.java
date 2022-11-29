@@ -96,4 +96,13 @@ public class UserRepositoryImpl implements UserRepository {
 				.getResultList();
 	}
 
+	@Override
+	public User findByNameAndFamily(String userName, Long id) {
+		return entityManager
+				.createQuery("select u from User u where u.userName = :userNameParam AND u.family.id = :familyIdParam", User.class)
+				.setParameter("userNameParam", userName)
+				.setParameter("familyIdParam", id)
+				.getSingleResult();
+	}
+
 }

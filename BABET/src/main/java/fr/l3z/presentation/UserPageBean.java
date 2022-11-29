@@ -291,8 +291,8 @@ public class UserPageBean  implements Serializable {
 					);
 			Event savedNewEvent3 = eventRep.save(newEvent3);
 		}
-		
-		return "user/userPage.xhtml?faces-redirect=true";
+		this.user = userRep.find(SessionUtils.getUserId());
+		return "/user/userPage.xhtml?faces-redirect=true";
 		
 	}
 	
@@ -363,6 +363,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(savedNewEvent);
 		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
 		tasksList.sort(Comparator.comparing(Task::getNextDate));
+		this.user = userRep.find(SessionUtils.getUserId());
 		return "user/userPage.xhtml?faces-redirect=true";
 		
 	}

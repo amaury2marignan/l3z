@@ -18,25 +18,26 @@
 			</a>
 		</div>
 
-		<div class="topBox">
+		<div class="topBoxAdmin">
 			<div class="userName">Famille #{familyPageBean.family.familyName}</div>
 		</div>
 
-
+<h:form>
 	<div class="usersList">
-		<h:form>
+		
 			<ui:repeat value="#{familyPageBean.users}" var="p">
 				<div class="fpUserBox">
 					<div class="fpUserPic">
-					<h:graphicImage url="#{familyPageBean.getPic(p)}"/>
+					<h:graphicImage url="#{familyPageBean.getPic(p)}" width="100%"/>
 					</div>
+					#{p.userName}
 					<div class="fpUserScore">
 						<div class="fpUserScore2">
 							<div class="fpScore">
 							#{familyPageBean.getDayPoints(p)}
 							</div>
 							<div class="fpUserScoreLabel">
-							points<br/>aujourd'hui
+							points<br/>ce jour
 							</div>
 						</div>
 						<div class="fpUserScore2">
@@ -57,12 +58,13 @@
 						</div>
 					</div>
 					<h:commandLink action="#{familyPageBean.doLoginUser(p)}">
-						<h:graphicImage url="/resources/boutonConnect.png" width="100%"/>
+						<h:graphicImage url="/resources/boutonConnect.png" width="95%"/>
 						</h:commandLink>
 				</div>				
 			</ui:repeat>
-		</h:form>
+		
 	</div>
+	</h:form>
 </div>
 </body> 
 </html>

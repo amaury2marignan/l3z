@@ -1384,8 +1384,7 @@ body {
 }
 .taskListName {
 	width: 100%;
-	color: white;
-	background-color: #FFD966;
+	color: black;
 	border-radius: 5px;
 	text-align: left;
 	height:40px;

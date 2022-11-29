@@ -86,12 +86,16 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 
 	@Override
 	public int getScore(Long skillId, SkillProfile skillProfileToCheck) {
+		System.out.println(skillProfileToCheck.getSkillNoteList());
 		for (SkillNote sn: skillProfileToCheck.getSkillNoteList()) {
-			if (sn.getSkill().getId()==skillId){
+			System.out.println(sn);
+			System.out.println(skillId);
+			System.out.println(sn.getSkill().getId());
+			if (sn.getSkill().getId().equals(skillId)){
 				return sn.getScore();
 			}
 		}
-		return 0;
+		return 35;
 	}
 
 	@Override
