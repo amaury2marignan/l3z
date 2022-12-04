@@ -86,7 +86,7 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 
 	@Override
 	public int getScore(Long skillId, SkillProfile skillProfileToCheck) {
-		System.out.println(skillProfileToCheck.getSkillNoteList());
+		System.out.println("getScore - skillID : "+skillId+" - SPtoCheck : "+skillProfileToCheck.getSkillNoteList());
 		for (SkillNote sn: skillProfileToCheck.getSkillNoteList()) {
 			System.out.println(sn);
 			System.out.println(skillId);
@@ -95,7 +95,7 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 				return sn.getScore();
 			}
 		}
-		return 35;
+		return 0;
 	}
 
 	@Override

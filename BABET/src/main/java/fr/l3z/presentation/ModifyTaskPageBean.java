@@ -84,7 +84,11 @@ public class ModifyTaskPageBean  implements Serializable {
 		}
 		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		this.skillList = skillRep.findWithFamily(this.family.getId());
+		if (this.task.getNextTask()==null) {
+			this.nextTaskName=" ";
+		} else {
 		this.nextTaskName=this.task.getNextTask().getName();
+		}
 		this.allTaskNames.add(" ");
 		for(Task taskD:taskRep.findByStatus0(this.family.getId())) {
 			this.allTaskNames.add(taskD.getName());

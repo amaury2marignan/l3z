@@ -65,7 +65,7 @@ public class UserPageNewBean  implements Serializable {
 	}
 	
 	public String updateTaskListWithSkill(Long skillId) {
-		this.tasksList = taskRep.findBySkillId(skillId);
+		this.tasksList = taskRep.findModelsBySkillId(skillId);
 		return "user/userPageNew.xhtml?faces-redirect=true";
 	}
 	

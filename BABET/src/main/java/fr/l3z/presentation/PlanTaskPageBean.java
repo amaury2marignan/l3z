@@ -110,6 +110,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -144,6 +145,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -193,6 +195,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1+savedPlanTask.getNbPoints());
+		this.user.setCoins(this.user.getCoins()+1+savedPlanTask.getNbPoints());
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -302,6 +305,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -336,6 +340,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -370,6 +375,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -405,6 +411,7 @@ public class PlanTaskPageBean implements Serializable {
 		planTask.setNextTask(this.task.getNextTask());
 		Task savedPlanTask = taskRep.save(planTask);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,

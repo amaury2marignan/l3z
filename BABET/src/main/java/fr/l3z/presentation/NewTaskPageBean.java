@@ -70,15 +70,17 @@ public class NewTaskPageBean  implements Serializable {
 		
 		this.user = userRep.find(SessionUtils.getUserId());
 		this.family = familyRep.find(SessionUtils.getFamilyId());
+		System.out.println("task before init :"+this.task);
 		this.task.setName("Nom de la Tache");
 		this.task.setDescription("Description");
 		this.task.setRepeatAfter(0);
 		this.task.setNextTask(new Task(this.family,"-","-",null,0,null,null,0));
 		this.task.setSkillProfileMinimumToDo(new SkillProfile());
 		this.task.setSkillProfileMinimumToCheck(new SkillProfile());
+		System.out.println("task after setSP :"+this.task);
 		this.task.setStatus(0);
-		this.task.setNbPoints(skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		this.task.setDifficulty(1);
+		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(this.task.getSkillProfileMinimumToDo()));
 		this.skillList = skillRep.findWithFamily(this.family.getId());
 		this.allTaskNames.add(" ");
 		for(Task taskD:taskRep.findByStatus0(this.family.getId())) {
@@ -362,6 +364,8 @@ public class NewTaskPageBean  implements Serializable {
 		this.task.setStatus(0);
 		this.task.setFamily(this.family);
 		SkillProfile savedSPMDo = skillProfileRep.save(this.task.getSkillProfileMinimumToDo());
+		
+		System.out.println("newTask SPMDo :"+savedSPMDo);
 		this.task.setSkillProfileMinimumToDo(savedSPMDo);
 		this.task.setNbPoints(this.task.getDifficulty()+skillRep.getNbPoints(savedSPMDo));
 

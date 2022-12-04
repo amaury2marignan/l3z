@@ -22,6 +22,8 @@ import fr.l3z.models.User;
 import fr.l3z.models.Event;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
+import fr.l3z.repositories.SkillProfileRepository;
+import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -40,6 +42,10 @@ public class DetailTaskPageBean implements Serializable {
 	private TaskRepository taskRep;
 	@Inject 
 	private EventRepository eventRep;
+	@Inject
+	private SkillProfileRepository skillProfileRep;
+	@Inject
+	private SkillRepository skillRep;
 	
 	private User user = new User();
 	private Family family = new Family();
@@ -100,6 +106,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setStatus(4);
 		taskRep.update(this.task.getId(),this.task);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		
 		Event newEvent = new Event(
@@ -125,6 +132,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setWhoDidIt(this.user);
 		taskRep.update(this.task.getId(),this.task);
 		this.user.setScore(this.user.getScore()+this.task.getNbPoints());
+		this.user.setCoins(this.user.getCoins()+this.task.getNbPoints());
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -205,6 +213,7 @@ public class DetailTaskPageBean implements Serializable {
 		this.task.setStatus(5);
 		taskRep.update(this.task.getId(),this.task);
 		this.task.getWhoDidIt().setScore(this.task.getWhoDidIt().getScore()-this.task.getNbPoints());
+		this.task.getWhoDidIt().setCoins(this.task.getWhoDidIt().getCoins()-this.task.getNbPoints());
 		userRep.update(this.task.getWhoDidIt().getId(), this.task.getWhoDidIt());
 		Event newEvent = new Event(
 				this.family,
@@ -246,6 +255,33 @@ public class DetailTaskPageBean implements Serializable {
 		System.out.println("taskD = "+taskD);
 		this.task=taskD;
 		return "/detail/planTaskPage.xhtml";
+	}
+	
+	public Boolean cancelParentOK() {
+		if((this.task.getStatus()>0)&&(this.task.getStatus()<3)&&(skillProfileRep.isThisSkillIn(skillRep.findByNameAndFamily(this.family.getId(), "Parent").getId(),this.user.getSkillProfile()))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public String cancelParent() {
+		this.task.setStatus(5);
+		taskRep.update(this.task.getId(),this.task);
+		Event newEvent = new Event(
+				this.family,
+				this.user,
+				LocalDateTime.now(),
+				null,
+				null,
+				null,
+				null,
+				null,
+				0,
+				user.getUserName()+" a annulé la tache "+this.task.getName()	
+				);
+		Event savedNewEvent = eventRep.save(newEvent);
+		return "/user/userPage.xhtml";
 	}
 	
 	

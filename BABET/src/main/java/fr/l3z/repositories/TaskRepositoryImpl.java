@@ -208,6 +208,28 @@ public class TaskRepositoryImpl implements TaskRepository {
 		}
 		return listTaskWith;
 	}
+
+	@Override
+	public List<Task> findModelsBySkillId(Long skillId) {
+		List<SkillProfile> skListAll = skillProfileRep.findAll();
+		List<SkillProfile> skListWith = new ArrayList<SkillProfile>();
+		for(SkillProfile sp:skListAll) {
+			if (skillProfileRep.isThisSkillIn(skillId, sp)){
+				skListWith.add(sp);
+			}
+		}
+		List<Task> listTaskWith = new ArrayList<Task>();
+		List<Task> listTaskAll = findAll();
+		for(Task t:listTaskAll) {
+			if ((skListWith.contains(t.getSkillProfileMinimumToDo()))|(t.getStatus()==0)){
+				listTaskWith.add(t);
+			}
+		}
+		return listTaskWith;
+	}
+	
+
+	
 	
 
 }

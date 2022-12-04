@@ -65,7 +65,17 @@ public class ParentPageBean {
 	}
 	
 	public String withdraw10Points(User u) {
-		u.setScore(u.getScore()-10);
+		if(u.getScore()<10) {
+			u.setScore(0);
+		} else {
+			u.setScore(u.getScore()-10);
+		}
+		if(u.getCoins()<10) {
+			u.setCoins(0);
+		} else {
+			u.setCoins(u.getCoins()-10);	
+		}
+		
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -90,7 +100,7 @@ public class ParentPageBean {
 				null,
 				null,
 				null,
-				-100,
+				-10,
 				u.getUserName()+" a perdu 10 points"	
 				);
 		Event savedNewEvent2 = eventRep.save(newEvent2);
@@ -101,6 +111,7 @@ public class ParentPageBean {
 	public String add10Points(User u) {
 		
 		u.setScore(u.getScore()+10);
+		u.setCoins(u.getCoins()+10);
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -134,7 +145,16 @@ public class ParentPageBean {
 	}
 	
 	public String withdraw100Points(User u) {
-		u.setScore(u.getScore()-100);
+		if(u.getScore()<100) {
+			u.setScore(0);
+		} else {
+			u.setScore(u.getScore()-100);
+		}
+		if(u.getCoins()<100) {
+			u.setCoins(0);
+		} else {
+			u.setCoins(u.getCoins()-100);	
+		}
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -170,6 +190,7 @@ public class ParentPageBean {
 	public String add100Points(User u) {
 		
 		u.setScore(u.getScore()+100);
+		u.setCoins(u.getCoins()+100);
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -203,7 +224,16 @@ public class ParentPageBean {
 	}
 	
 	public String withdraw1Points(User u) {
-		u.setScore(u.getScore()-1);
+		if(u.getScore()<1) {
+			u.setScore(0);
+		} else {
+			u.setScore(u.getScore()-1);
+		}
+		if(u.getCoins()<1) {
+			u.setCoins(0);
+		} else {
+			u.setCoins(u.getCoins()-1);	
+		}
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -239,6 +269,7 @@ public class ParentPageBean {
 	public String add1Points(User u) {
 		
 		u.setScore(u.getScore()+1);
+		u.setCoins(u.getCoins()+1);
 		userRep.update(u.getId(), u);
 		Event newEvent = new Event(
 				this.family,
@@ -250,7 +281,7 @@ public class ParentPageBean {
 				null,
 				null,
 				0,
-				connectedUser.getUserName()+" a ajouté 1 points à "+u.getUserName()	
+				connectedUser.getUserName()+" a ajouté 1 point à "+u.getUserName()	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
 		
@@ -264,7 +295,7 @@ public class ParentPageBean {
 				null,
 				null,
 				1,
-				u.getUserName()+" a reçu 1 points"	
+				u.getUserName()+" a reçu 1 point"	
 				);
 		Event savedNewEvent2 = eventRep.save(newEvent2);
 				

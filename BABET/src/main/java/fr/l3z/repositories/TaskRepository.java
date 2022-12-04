@@ -26,6 +26,12 @@ public interface TaskRepository extends GenericRepository<Long, Task> {
 	List<Task> findBySkill0(Long id);
 
 	List<Task> findBySkillToDo(Long skillId);
+
+	List<Task> findModelsBySkillId(Long skillId);
+
+
+
+	
 	
 	
 }

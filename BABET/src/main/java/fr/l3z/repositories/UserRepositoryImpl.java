@@ -74,6 +74,7 @@ public class UserRepositoryImpl implements UserRepository {
 		userAModifier.setScore(t.getScore());
 		userAModifier.setColor(t.getColor());
 		userAModifier.setIdPicNumber(t.getIdPicNumber());
+		userAModifier.setCoins(t.getCoins());
 		
 		entityManager.merge(userAModifier);
 		

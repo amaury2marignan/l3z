@@ -64,7 +64,7 @@ public class UserProfilePageBean  implements Serializable {
 		tasksList.sort(Comparator.comparing(Task::getNextDate));
 		this.pointsOfDay=eventRep.pointsOfDay(this.user.getId());
 		this.pointsOfMonth=eventRep.pointsOfMonth(this.user.getId());
-		this.ringsScore=eventRep.ringsScore(this.user.getId());
+		this.ringsScore=this.user.getCoins();
 		
 		this.picList.add(2);
 		this.picList.add(3);
@@ -118,6 +118,7 @@ public class UserProfilePageBean  implements Serializable {
 	
 	public String buyPic(int i) {
 		this.user.setIdPicNumber(i);
+		this.user.setCoins(this.user.getCoins()-costOfPic(i));
 		userRep.update(this.user.getId(),this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -128,11 +129,11 @@ public class UserProfilePageBean  implements Serializable {
 				null,
 				null,
 				null,
-				-costOfPic(i),
+				0,
 				user.getUserName()+" a dépensé "+costOfPic(i)+" pièces"	
 				);
 		Event savedNewEvent = eventRep.save(newEvent);
-		this.ringsScore=eventRep.ringsScore(this.user.getId());
+		this.ringsScore=this.user.getCoins();
 		return "user/userProfilePage.xhtml";
 	}
 	
@@ -356,154 +357,7 @@ public class UserProfilePageBean  implements Serializable {
 		}
 	}
 
-	
-
-	public boolean isOkReservationButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==1 ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
-	public boolean isOkDoButton(Task task) {
-	
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && ((task.getStatus()==1) || ((task.getStatus()==2)&&(task.getWhoDidIt().getId()==user.getId())))) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
-	public boolean isOkCheckButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToCheck()) && task.getStatus()==3 && task.getWhoDidIt().getId()!=this.user.getId()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean isOkPlanButton(Task task) {
-		if(taskRep.compareSkillProfile(this.user.getSkillProfile(),task.getSkillProfileMinimumToDo()) && task.getStatus()==0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public String reservationAction(Task task) {
-		task.setWhoDidIt(this.user);
-		task.setStatus(2);
-		System.out.println(task);
-		taskRep.update(task.getId(), task);
-		Event newEvent = new Event(
-				this.family,
-				this.user,
-				LocalDateTime.now(),
-				task,
-				null,
-				null,
-				null,
-				null,
-				0,
-				user.getUserName()+" a réservé la tâche "+task.getName()	
-				);
-		Event savedNewEvent = eventRep.save(newEvent);
-		System.out.println(savedNewEvent);
-		
-		return "user/userPage.xhtml?faces-redirect=true";
-		
-	}
-
-	public String doAction(Task task) {
-		task.setWhoDidIt(this.user);
-		task.setStatus(3);
-		System.out.println(task);
-		taskRep.update(task.getId(), task);
-		this.user.setScore(this.user.getScore()+task.getNbPoints());
-		userRep.update(this.user.getId(), this.user);
-		Event newEvent = new Event(
-				this.family,
-				this.user,
-				LocalDateTime.now(),
-				task,
-				null,
-				null,
-				null,
-				null,
-				task.getNbPoints(),
-				user.getUserName()+" a réalisé la tâche "+task.getName()	
-				);
-		Event savedNewEvent = eventRep.save(newEvent);
-		if(this.task.getRepeatAfter()!=0) {
-			Task planTask = new Task(
-					this.family,
-					task.getName(),
-					task.getDescription(),
-					LocalDate.now().plusDays(task.getRepeatAfter()),
-					task.getRepeatAfter(),
-					task.getSkillProfileMinimumToDo(),
-					task.getSkillProfileMinimumToCheck(),
-					task.getDifficulty()
-					);
-			planTask.setStatus(1);
-			planTask.setNbPoints(task.getNbPoints());
-			planTask.setNextTask(task.getNextTask());
-			Task savedPlanTask = taskRep.save(planTask);
-
-			Event newEvent2 = new Event(
-					this.family,
-					this.user,
-					LocalDateTime.now(),
-					savedPlanTask,
-					null,	
-					null,
-					null,
-					null,
-					0,
-					task.getName()+" a été planifiée automatiquement pour dans "+task.getRepeatAfter()+" jours"
-					);
-			Event savedNewEvent2 = eventRep.save(newEvent2);
-		}
-		if(task.getNextTask()!=null) {
-			Task planTask2 = new Task(
-					this.family,
-					task.getNextTask().getName(),
-					task.getNextTask().getDescription(),
-					LocalDate.now(),
-					task.getNextTask().getRepeatAfter(),
-					task.getNextTask().getSkillProfileMinimumToDo(),
-					task.getNextTask().getSkillProfileMinimumToCheck(),
-					task.getNextTask().getDifficulty()
-					);
-			planTask2.setStatus(1);
-			planTask2.setNbPoints(task.getNextTask().getNbPoints());
-			planTask2.setNextTask(task.getNextTask().getNextTask());
-			Task savedPlanTask2 = taskRep.save(planTask2);
-
-			Event newEvent3 = new Event(
-					this.family,
-					this.user,
-					LocalDateTime.now(),
-					savedPlanTask2,
-					null,	
-					null,
-					null,
-					null,
-					0,
-					task.getNextTask().getName()+" a été planifiée automatiquement"
-					);
-			Event savedNewEvent3 = eventRep.save(newEvent3);
-		}
-		
-		return "user/userPage.xhtml?faces-redirect=true";
-		
-	}
-	
+			
 	public Boolean today(Task task) {
 		if((task.getNextDate().getYear()==(LocalDate.now().getYear())&&(task.getNextDate().getDayOfYear()==(LocalDate.now().getDayOfYear())))){
 			return true;
@@ -547,48 +401,6 @@ public class UserProfilePageBean  implements Serializable {
 	}
 	
 	
-	
-	
-	public String checkAction(Task task) {
-		task.setStatus(4);
-		System.out.println(task);
-		taskRep.update(task.getId(), task);
-		this.user.setScore(this.user.getScore()+1);
-		userRep.update(this.user.getId(), this.user);
-		Event newEvent = new Event(
-				this.family,
-				this.user,
-				LocalDateTime.now(),
-				task,
-				null,	
-				null,
-				null,
-				null,
-				1,
-				user.getUserName()+" a validé la tâche "+task.getName()	
-				);
-		Event savedNewEvent = eventRep.save(newEvent);
-		System.out.println(savedNewEvent);
-		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
-		tasksList.sort(Comparator.comparing(Task::getNextDate));
-		return "user/userPage.xhtml?faces-redirect=true";
-		
-	}
-	
-	public String modifyAction(Task taskD) {
-		this.task = taskD;
-		return "/detail/modifyTaskPage.xhtml";
-	}
-
-	public String planAction(Task taskD) {
-		this.task = taskD;
-		return "/detail/planTaskPage.xhtml";
-	}
-	
-	public String detailsAction(Task taskD) {
-		this.task = taskD;
-		return "/detail/detailTaskPage.xhtml";
-	}
 	
 	public User getUser() {
 		return user;

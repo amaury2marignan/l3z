@@ -113,7 +113,14 @@
 				<div class="dtpScore">#{detailTaskPageBean.task.nbPoints}</div>
 				points
 			</div>
-
+			<h:form>
+			<h:panelGroup class="dtpNext1" layout="block"
+				rendered="#{detailTaskPageBean.cancelParentOK()}"><div class="dtpNext2">annuler</div> 
+				<h:commandLink action="#{detailTaskPageBean.cancelParent()}">
+				<h:graphicImage url="/resources/boutonCancel.png" width="60%" />
+				</h:commandLink>
+				</h:panelGroup>
+			</h:form>
 		</div>
 
 

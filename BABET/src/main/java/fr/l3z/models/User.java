@@ -26,6 +26,7 @@ public class User {
 	private String userName;
 	private String password;
 	private int score;
+	private int coins;
 	
 	
 	@ManyToOne
@@ -47,6 +48,7 @@ public class User {
 		this.color = color;
 		this.idPicNumber = 1;
 		this.score = 0;
+		this.coins=0;
 		
 	}
 	
@@ -124,6 +126,14 @@ public class User {
 
 	public void setIdPicNumber(int idPicNumber) {
 		this.idPicNumber = idPicNumber;
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
 	}
 
 	

@@ -16,10 +16,12 @@ import javax.inject.Inject;
 
 import fr.l3z.models.Event;
 import fr.l3z.models.Family;
+import fr.l3z.models.Skill;
 import fr.l3z.models.Task;
 import fr.l3z.models.User;
 import fr.l3z.repositories.EventRepository;
 import fr.l3z.repositories.FamilyRepository;
+import fr.l3z.repositories.SkillRepository;
 import fr.l3z.repositories.TaskRepository;
 import fr.l3z.repositories.UserRepository;
 import fr.l3z.session.SessionUtils;
@@ -42,12 +44,16 @@ public class UserPageBean  implements Serializable {
 	private TaskRepository taskRep;
 	@Inject 
 	private EventRepository eventRep;
+	@Inject
+	private SkillRepository skillRep;
 	
 	private User user = new User();
 	private Family family = new Family();
 	private List<Task> tasksList = new ArrayList<Task>();
 	private Task task = new Task();
 	private int pointsOfMonth;
+	private String sortBy;
+	private List<String> sortByList = new ArrayList<String>();
 	
 	
 	
@@ -60,6 +66,31 @@ public class UserPageBean  implements Serializable {
 		this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
 		tasksList.sort(Comparator.comparing(Task::getNextDate));
 		this.pointsOfMonth=eventRep.pointsOfMonth(this.user.getId());
+		this.sortByList.add("");
+		for(Skill s:skillRep.findWithFamily(this.family.getId())){
+			this.sortByList.add(s.getName());
+		}
+		this.sortBy=" ";
+	}
+	
+	public String sort() {
+		if (this.sortBy == null) {
+			this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
+			tasksList.sort(Comparator.comparing(Task::getNextDate));
+			return "user/userPage.xhtml?faces-redirect=true";
+		} else {
+			if (this.sortBy.equals(" ")) {
+				this.setTasksList(taskRep.findTasksToDo(this.family.getId()));
+				tasksList.sort(Comparator.comparing(Task::getNextDate));
+				return "user/userPage.xhtml?faces-redirect=true";
+			} else {
+				Skill s = skillRep.findByNameAndFamily(this.family.getId(), this.sortBy);
+				this.setTasksList(taskRep.findBySkillToDo(s.getId()));
+				tasksList.sort(Comparator.comparing(Task::getNextDate));
+				return "user/userPage.xhtml?faces-redirect=true";
+			}
+		}
+
 	}
 	
 	public String picString() {
@@ -217,6 +248,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
 		this.user.setScore(this.user.getScore()+task.getNbPoints());
+		this.user.setCoins(this.user.getCoins()+task.getNbPoints());
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -346,6 +378,7 @@ public class UserPageBean  implements Serializable {
 		System.out.println(task);
 		taskRep.update(task.getId(), task);
 		this.user.setScore(this.user.getScore()+1);
+		this.user.setCoins(this.user.getCoins()+1);
 		userRep.update(this.user.getId(), this.user);
 		Event newEvent = new Event(
 				this.family,
@@ -434,5 +467,21 @@ public class UserPageBean  implements Serializable {
 
 	public void setPointsOfMonth(int pointsOfMonth) {
 		this.pointsOfMonth = pointsOfMonth;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
+	}
+
+	public List<String> getSortByList() {
+		return sortByList;
+	}
+
+	public void setSortByList(List<String> sortByList) {
+		this.sortByList = sortByList;
 	}
 }
