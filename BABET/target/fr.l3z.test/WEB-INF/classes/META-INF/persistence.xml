@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-	<persistence-unit name="babet">
-	 <jta-data-source>java:jboss/datasources/babetDS</jta-data-source>
-      <properties>
-         <property name="hibernate.hbm2ddl.auto" value="update" />
-         <property name="hibernate.show_sql" value="true" />
-         <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
-      </properties>
-   </persistence-unit>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="babetdb" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db5016140772.hosting-data.io:3306/babetdb"/>
+            <property name="javax.persistence.jdbc.user" value="dbu1408417"/>
+            <property name="javax.persistence.jdbc.password" value="Admin_1515"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/> 
+        </properties>
+    </persistence-unit>
 </persistence>

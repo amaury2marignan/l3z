@@ -1,5 +1,8 @@
 package fr.l3z.test;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-
 
 import fr.l3z.models.Family;
 import fr.l3z.models.Skill;
@@ -29,27 +31,47 @@ import fr.l3z.repositories.UserRepository;
 @Singleton
 @Startup
 public class Launcher {
-	
+
 	@Inject
 	private UserRepository userRep;
 	@Inject
 	private FamilyRepository familyRep;
-	@Inject 
+	@Inject
 	private SkillRepository skillRep;
 	@Inject
 	private SkillNoteRepository skillNoteRep;
-	
+
 	@Inject
 	private TaskRepository taskRep;
 	@Inject
 	private SkillProfileRepository skillProfileRep;
-	
-	
-	
+
 	@PostConstruct
 	public void data() {
 		
-		
+		String jdbcUrl = "jdbc:mysql://da2473984-001.eu.clouddb.ovh.net:35728/babetdb?useUnicode=true&serverTimezone=Europe/Paris"; 
+		String username = "admin"; 
+		String password = "Admin1515"; 
+		try { 
+			// Charger le driver JDBC 
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			// Essayer de se connecter à la base de données 
+			Connection connection = DriverManager.getConnection(jdbcUrl, username, password); 
+			if (connection != null) {
+				System.out.println("Connection to database established successfully!");
+				} else { 
+					System.out.println("Failed to make connection!");
+					} 
+			// Fermer la connexion 
+			connection.close(); 
+			} catch (SQLException e) {
+				System.out.println("SQL Exception: " + e.getMessage());
+				e.printStackTrace(); 
+				} catch (ClassNotFoundException e) { 
+					System.out.println("JDBC Driver not found: " + e.getMessage()); 
+					e.printStackTrace(); 
+					}  
+		}
 		
 		
 //		Family f1 = new Family("Famille1","0000");
@@ -413,6 +435,6 @@ public class Launcher {
 //		savedPreparerLaverSdBBas.setStatus(3);
 //		savedPreparerLaverSdBBas.setWhoDidIt(savedU2);
 //		Task ToDoSavedPreparerLaverSdBBas = taskRep.save(savedPreparerLaverSdBBas);
-		}
+		
 	
 }

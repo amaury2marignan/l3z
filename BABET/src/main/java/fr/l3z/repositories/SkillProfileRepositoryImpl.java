@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Family;
@@ -23,12 +25,21 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 	private SkillRepository skillRep;
 	
 	public SkillProfileRepositoryImpl() {
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+	        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public SkillProfile save(SkillProfile t) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -54,23 +65,26 @@ public class SkillProfileRepositoryImpl implements SkillProfileRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(SkillProfile.class, id));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void deleteByObject(SkillProfile t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(SkillProfile.class, t.getId()));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void update(Long idAModifier, SkillProfile t) {
+		entityManager.getTransaction().begin();
 		SkillProfile skillProfileAModifier=entityManager.find(SkillProfile.class,idAModifier);
 		skillProfileAModifier.setSkillNoteList(t.getSkillNoteList());
 		
 		entityManager.merge(skillProfileAModifier);
-		
+		entityManager.getTransaction().commit();
 	}
 	@Override
 	public boolean isThisSkillIn(Long skillId,SkillProfile skillProfileToCheck) {

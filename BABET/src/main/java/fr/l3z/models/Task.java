@@ -61,6 +61,7 @@ public class Task {
 		this.status = 0;
 		this.nextTask = null;
 		this.nbPoints = 0;
+		this.difficulty=difficulty;
 	}
 	
 	

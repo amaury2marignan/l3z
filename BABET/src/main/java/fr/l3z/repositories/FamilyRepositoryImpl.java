@@ -6,6 +6,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Event;
@@ -27,12 +29,21 @@ public class FamilyRepositoryImpl implements FamilyRepository {
 	private EntityManager entityManager;
 	
 	public FamilyRepositoryImpl() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public Family save(Family t) {
-		entityManager.persist(t);
+		 entityManager.getTransaction().begin();
+	        entityManager.persist(t);
+	        entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -58,7 +69,7 @@ public class FamilyRepositoryImpl implements FamilyRepository {
 
 	@Override
 	public void delete(Long id) {
-		System.out.println("delete action begins");
+		entityManager.getTransaction().begin();
 		List<Event> eventList = entityManager
 				.createQuery("select u from Event u where u.family.id = :familyParam", Event.class)
 				.setParameter("familyParam", id)
@@ -157,20 +168,25 @@ public class FamilyRepositoryImpl implements FamilyRepository {
 		
 		entityManager.remove(entityManager.find(Family.class, id));
 		
-	}
-
-	@Override
-	public void deleteByObject(Family t) {
-		entityManager.remove(entityManager.find(Family.class, t.getId()));
+		 entityManager.getTransaction().commit();
 		
 	}
 
 	@Override
+	public void deleteByObject(Family t) {
+		 entityManager.getTransaction().begin();
+		entityManager.remove(entityManager.find(Family.class, t.getId()));
+		 entityManager.getTransaction().commit();
+	}
+
+	@Override
 	public void update(Long idAModifier, Family t) {
+		entityManager.getTransaction().begin();
 		Family familyAModifier=entityManager.find(Family.class,idAModifier);
 		familyAModifier.setFamilyName(t.getFamilyName());
 		familyAModifier.setPassword(t.getPassword());
 		entityManager.merge(familyAModifier);
+		entityManager.getTransaction().commit();
 		
 	}
 

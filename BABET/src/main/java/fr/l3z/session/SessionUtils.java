@@ -8,8 +8,6 @@ public class SessionUtils {
 
 	private static final String USER_ID = "userId";
 	private static final String FAMILY_ID = "familyId";
-	private static final String ADMIN_CONNECT = "adminConnect";
-
 	public static HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
@@ -81,4 +79,6 @@ public class SessionUtils {
 	public static void logout() {
 		getSession().invalidate();
 	}
+
+	private static final String ADMIN_CONNECT = "adminConnect";
 }

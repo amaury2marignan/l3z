@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Vote;
@@ -17,12 +19,21 @@ public class VoteRepositoryImpl implements VoteRepository {
 	private EntityManager entityManager;
 	
 	public VoteRepositoryImpl() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public Vote save(Vote t) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		 entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -48,18 +59,23 @@ public class VoteRepositoryImpl implements VoteRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Vote.class, id));
+		 entityManager.getTransaction().commit();
 		
 	}
 
 	@Override
 	public void deleteByObject(Vote t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Vote.class, t.getId()));
+		entityManager.getTransaction().commit();
 		
 	}
 
 	@Override
 	public void update(Long idAModifier, Vote t) {
+		entityManager.getTransaction().begin();
 		Vote voteAModifier=entityManager.find(Vote.class,idAModifier);
 		voteAModifier.setSkillProfile(t.getSkillProfile());
 		voteAModifier.setOpenToVote(t.getOpenToVote());
@@ -69,7 +85,7 @@ public class VoteRepositoryImpl implements VoteRepository {
 		voteAModifier.setTaskNewRepeatAfter(t.getTaskNewRepeatAfter());
 		voteAModifier.setTaskNewSPMDo(t.getTaskNewSPMDo());
 		entityManager.merge(voteAModifier);
-		
+		entityManager.getTransaction().commit();
 	}
 
 	

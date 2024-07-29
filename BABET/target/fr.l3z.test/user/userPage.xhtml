@@ -17,8 +17,7 @@
 	<div class="content">
 
 		<div class="logoIndex">
-			<a > <img
-				src="#{userPageBean.picString()}" width="100%" />
+			<a> <img src="#{userPageBean.picString()}" width="100%" />
 			</a>
 		</div>
 
@@ -78,7 +77,7 @@
 
 		<div class="actions">
 
-			
+
 			<div class="boutonGauche">
 				<a href="../family/familyPage.xhtml"> <img
 					src="../resources/babetidfamily.png" width="95%" />
@@ -89,7 +88,7 @@
 					src="../resources/boutonVote.png" width="95%" /> </a>
 			</div>
 			<div class="boutonGauche">
-					<a href="../user/userPagePurchase.xhtml"><img
+				<a href="../user/userPagePurchase.xhtml"><img
 					src="../resources/boutonCourses.png" width="95%" /> </a>
 			</div>
 			<div class="boutonGauche">
@@ -100,7 +99,7 @@
 				<a href="../user/userProfilePage.xhtml"><img
 					src="../resources/boutonProfile.png" width="95%" /> </a>
 			</div>
-			
+
 			<div class="boutonGauche">
 				<a href="../user/userPageHistoric.xhtml"><img
 					src="../resources/boutonHistorique.png" width="95%" /> </a>
@@ -109,6 +108,20 @@
 				<a href="../user/userPageNew.xhtml"><img
 					src="../resources/boutonNewTask.png" width="95%" /> </a>
 			</div>
+			<h:form>
+				<div class="triTask">
+					trier par :
+					<div class="triTaskForm">
+						<h:selectOneMenu value="#{userPageBean.sortBy}"
+							style="font-family: Berlin Sans FB Demi;width:100px;height:20px;margin:2px;border-radius:5px;border:hidden;font-size:9px;color:black;background-color:white;padding-left:5px;overflow:auto;">
+							<f:selectItems value="#{userPageBean.sortByList}" />
+						</h:selectOneMenu>
+						<h:commandLink action="#{userPageBean.sort()}">
+							<h:graphicImage url="/resources/boutonPlan.png" width="70%" />
+						</h:commandLink>
+					</div>
+				</div>
+			</h:form>
 		</div>
 
 
@@ -128,39 +141,46 @@
 						</h:column>
 						<h:column>
 							<h:panelGroup layout="block" rendered="#{userPageBean.today(p)}">
-							<div class="taskListDateToday">aujourd'hui</div>
+								<div class="taskListDateToday">aujourd'hui</div>
 							</h:panelGroup>
-							<h:panelGroup layout="block" rendered="#{userPageBean.tomorrow(p)}">
-							<div class="taskListDateTomorrow">demain</div>
+							<h:panelGroup layout="block"
+								rendered="#{userPageBean.tomorrow(p)}">
+								<div class="taskListDateTomorrow">demain</div>
 							</h:panelGroup>
-							<h:panelGroup layout="block" rendered="#{userPageBean.moreThanTomorrow(p)}">
-							<div class="taskListDateMoreThan">dans #{userPageBean.nbDays(p)}</div>
+							<h:panelGroup layout="block"
+								rendered="#{userPageBean.moreThanTomorrow(p)}">
+								<div class="taskListDateMoreThan">dans
+									#{userPageBean.nbDays(p)}</div>
 							</h:panelGroup>
 							<h:panelGroup layout="block" rendered="#{userPageBean.past(p)}">
-							<div class="taskListDatePast">dépassé...</div>
+								<div class="taskListDatePast">dépassé...</div>
 							</h:panelGroup>
 						</h:column>
 						<h:column>
-						<div class="taskListScoreContener">
-							<div class="taskListScore">#{p.nbPoints}</div>
-							<div class="taskListScoreLabel">points</div>
+							<div class="taskListScoreContener">
+								<div class="taskListScore">#{p.nbPoints}</div>
+								<div class="taskListScoreLabel">points</div>
 							</div>
 						</h:column>
 						<h:column>
 							<f:facet name="header"></f:facet>
-						<h:commandLink action="#{userPageBean.reservationAction(p)}">
-						<h:graphicImage url="/resources/boutonBleu.png" width="33%" rendered="#{userPageBean.isOkReservationButton(p)}" />
-						</h:commandLink>
-						<h:commandLink action="#{userPageBean.doAction(p)}">
-							<h:graphicImage url="/resources/boutonFleche.png" width="33%" rendered="#{userPageBean.isOkDoButton(p)}"/>
-						</h:commandLink>
-						<h:commandLink action="#{userPageBean.checkAction(p)}">
-							<h:graphicImage url="/resources/boutonValid.png" width="33%" rendered="#{userPageBean.isOkCheckButton(p)}"/>
-						</h:commandLink>
-						<h:commandLink action="#{userPageBean.detailsAction(p)}">
-							<f:param name="taskId" value="#{p.id}" />
-							<h:graphicImage url="/resources/boutonTroisPoints.png" width="33%" />
-						</h:commandLink>
+							<h:commandLink action="#{userPageBean.reservationAction(p)}">
+								<h:graphicImage url="/resources/boutonBleu.png" width="33%"
+									rendered="#{userPageBean.isOkReservationButton(p)}" />
+							</h:commandLink>
+							<h:commandLink action="#{userPageBean.doAction(p)}">
+								<h:graphicImage url="/resources/boutonFleche.png" width="33%"
+									rendered="#{userPageBean.isOkDoButton(p)}" />
+							</h:commandLink>
+							<h:commandLink action="#{userPageBean.checkAction(p)}">
+								<h:graphicImage url="/resources/boutonValid.png" width="33%"
+									rendered="#{userPageBean.isOkCheckButton(p)}" />
+							</h:commandLink>
+							<h:commandLink action="#{userPageBean.detailsAction(p)}">
+								<f:param name="taskId" value="#{p.id}" />
+								<h:graphicImage url="/resources/boutonTroisPoints.png"
+									width="33%" />
+							</h:commandLink>
 						</h:column>
 					</h:dataTable>
 

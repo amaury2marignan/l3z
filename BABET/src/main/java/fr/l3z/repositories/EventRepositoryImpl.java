@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Event;
@@ -29,12 +31,15 @@ public class EventRepositoryImpl implements EventRepository {
 	
 	
 	public EventRepositoryImpl() {
-		
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+	        this.entityManager = emf.createEntityManager();
 	}
 	
 	@Override
 	public Event save(Event t) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -60,18 +65,21 @@ public class EventRepositoryImpl implements EventRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Event.class, id));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void deleteByObject(Event t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Event.class, t.getId()));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void update(Long idAModifier, Event t) {
+		entityManager.getTransaction().begin();
 		Event eventAModifier=entityManager.find(Event.class,idAModifier);
 		eventAModifier.setUser(t.getUser());
 		eventAModifier.setDate(t.getDate());
@@ -81,7 +89,7 @@ public class EventRepositoryImpl implements EventRepository {
 		eventAModifier.setPurchase(t.getPurchase());
 
 		entityManager.merge(eventAModifier);
-		
+		entityManager.getTransaction().commit();
 	}
 	
 	@Override
@@ -168,7 +176,7 @@ public class EventRepositoryImpl implements EventRepository {
 				.getResultList();
 		for(Event e:eventsWithPoints) {
 			if(e.getDate().getYear()==LocalDate.now().getYear()) {
-				if(e.getDate().getDayOfYear()==LocalDate.now().getDayOfYear()) {
+				if(e.getDate().getMonth().equals(LocalDate.now().getMonth())) {
 				pointsOfMonth=pointsOfMonth+e.getNbPoints();	
 				}
 			}
@@ -187,6 +195,12 @@ public class EventRepositoryImpl implements EventRepository {
 				ringsSpent=ringsSpent-e.getNbPoints();	
 		}
 		return userRep.find(id).getScore()-ringsSpent;
+	}
+
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+		
 	}
 
 	

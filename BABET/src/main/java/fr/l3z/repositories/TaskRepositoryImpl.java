@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.SkillNote;
@@ -27,12 +29,22 @@ public class TaskRepositoryImpl implements TaskRepository {
 	private SkillRepository skillRep;
 
 	public TaskRepositoryImpl() {
-
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+        this.entityManager = emf.createEntityManager();
 	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+		
+	}
+	
 
 	@Override
 	public Task save(Task t) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -56,7 +68,9 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Task.class, id));
+		entityManager.getTransaction().commit();
 
 	}
 	@Override
@@ -73,12 +87,15 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 	@Override
 	public void deleteByObject(Task t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Task.class, t.getId()));
+		entityManager.getTransaction().commit();
 
 	}
 
 	@Override
 	public void update(Long idAModifier, Task t) {
+		entityManager.getTransaction().begin();
 		Task taskAModifier = entityManager.find(Task.class, idAModifier);
 		taskAModifier.setName(t.getName());
 		taskAModifier.setDescription(t.getDescription());
@@ -93,7 +110,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 		taskAModifier.setDifficulty(t.getDifficulty());
 
 		entityManager.merge(taskAModifier);
-
+		entityManager.getTransaction().commit();
 	}
 
 	public boolean compareSkillProfile(SkillProfile userSkillProfile, SkillProfile taskSkillProfile) {
@@ -219,9 +236,9 @@ public class TaskRepositoryImpl implements TaskRepository {
 			}
 		}
 		List<Task> listTaskWith = new ArrayList<Task>();
-		List<Task> listTaskAll = findAll();
+		List<Task> listTaskAll = findByStatus0(skillRep.find(skillId).getFamily().getId());
 		for(Task t:listTaskAll) {
-			if ((skListWith.contains(t.getSkillProfileMinimumToDo()))|(t.getStatus()==0)){
+			if ((skListWith.contains(t.getSkillProfileMinimumToDo()))){
 				listTaskWith.add(t);
 			}
 		}

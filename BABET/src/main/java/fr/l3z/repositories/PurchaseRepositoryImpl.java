@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.SkillNote;
@@ -20,12 +22,21 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 	private EntityManager entityManager;
 
 	public PurchaseRepositoryImpl() {
-
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+	        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+		
 	}
 
 	@Override
 	public Purchase save(Purchase t) {
+		 entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -49,8 +60,9 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Purchase.class, id));
-
+		entityManager.getTransaction().commit();
 	}
 	@Override
 	public List<Purchase> findByStatus(int status){
@@ -66,12 +78,14 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
 	@Override
 	public void deleteByObject(Purchase t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Purchase.class, t.getId()));
-
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void update(Long idAModifier, Purchase t) {
+		entityManager.getTransaction().begin();
 		Purchase purchaseAModifier = entityManager.find(Purchase.class, idAModifier);
 		purchaseAModifier.setDescription(t.getDescription());
 		purchaseAModifier.setStatus(t.getStatus());
@@ -79,7 +93,7 @@ public class PurchaseRepositoryImpl implements PurchaseRepository {
 
 
 		entityManager.merge(purchaseAModifier);
-
+		entityManager.getTransaction().commit();
 	}
 
 

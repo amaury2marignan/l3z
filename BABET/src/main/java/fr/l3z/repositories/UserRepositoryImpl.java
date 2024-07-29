@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Family;
@@ -21,12 +23,21 @@ public class UserRepositoryImpl implements UserRepository {
 	private FamilyRepository familyRep;
 	
 	public UserRepositoryImpl() {
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+	        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public User save(User t) {
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -52,7 +63,9 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(User.class, id));
+		entityManager.getTransaction().commit();
 		
 	}
 	
@@ -60,12 +73,14 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void deleteByObject(User t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(User.class, t.getId()));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void update(Long idAModifier, User t) {
+		entityManager.getTransaction().begin();
 		User userAModifier=entityManager.find(User.class,idAModifier);
 		userAModifier.setUserName(t.getUserName());
 		userAModifier.setPassword(t.getPassword());
@@ -77,7 +92,7 @@ public class UserRepositoryImpl implements UserRepository {
 		userAModifier.setCoins(t.getCoins());
 		
 		entityManager.merge(userAModifier);
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override

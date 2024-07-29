@@ -3,10 +3,10 @@ data source wildfly config
 
 
 <datasource jndi-name="java:jboss/datasources/babetDS" pool-name="lbabetPool" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-    <connection-url>jdbc:mysql://localhost:3306/babetDB?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;serverTimezone=Europe/Paris</connection-url>
+    <connection-url>jdbc:mysql://da2473984-001.eu.clouddb.ovh.net:35728/babetdb?useUnicode=true&amp;serverTimezone=Europe/Paris&amp;useSSL=true&amp;requireSSL=true</connection-url>
     <driver>mysql</driver>
     <security>
-        <user-name>root</user-name>
-		<password>RRRRR</password>
+        <user-name>admin</user-name>
+		<password>Admin1515</password>
     </security>
 </datasource>

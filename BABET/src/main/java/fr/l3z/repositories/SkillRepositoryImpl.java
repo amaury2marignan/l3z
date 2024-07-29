@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.Family;
@@ -21,12 +23,21 @@ public class SkillRepositoryImpl implements SkillRepository {
 	private EntityManager entityManager;
 	
 	public SkillRepositoryImpl() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+        this.entityManager = emf.createEntityManager();
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public Skill save(Skill t) {
+		 entityManager.getTransaction().begin();
 		entityManager.persist(t);
+		 entityManager.getTransaction().commit();
 		return t;
 	}
 
@@ -52,18 +63,21 @@ public class SkillRepositoryImpl implements SkillRepository {
 
 	@Override
 	public void delete(Long id) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Skill.class, id));
-		
+		 entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void deleteByObject(Skill t) {
+		entityManager.getTransaction().begin();
 		entityManager.remove(entityManager.find(Skill.class, t.getId()));
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override
 	public void update(Long idAModifier, Skill t) {
+		entityManager.getTransaction().begin();
 		Skill skillAModifier=entityManager.find(Skill.class,idAModifier);
 		skillAModifier.setName(t.getName());
 		skillAModifier.setDescription(t.getDescription());
@@ -75,7 +89,7 @@ public class SkillRepositoryImpl implements SkillRepository {
 		skillAModifier.setDescriptionLevel5(t.getDescriptionLevel5());
 		
 		entityManager.merge(skillAModifier);
-		
+		entityManager.getTransaction().commit();
 	}
 
 	@Override

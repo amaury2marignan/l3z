@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import fr.l3z.models.SkillVote;
@@ -17,13 +19,23 @@ public class SkillVoteRepositoryImpl implements SkillVoteRepository {
 	private EntityManager entityManager;
 	
 	public SkillVoteRepositoryImpl() {
+		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("babetdb");
+	        this.entityManager = emf.createEntityManager();
+		
+	}
+	
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		
 	}
 	
 	@Override
 	public SkillVote save(SkillVote t) {
-		entityManager.persist(t);
-		return t;
+		 entityManager.getTransaction().begin();
+	        entityManager.persist(t);
+	        entityManager.getTransaction().commit();
+	        return t;
 	}
 
 	@Override
@@ -48,24 +60,30 @@ public class SkillVoteRepositoryImpl implements SkillVoteRepository {
 
 	@Override
 	public void delete(Long id) {
-		entityManager.remove(entityManager.find(SkillVote.class, id));
+	     entityManager.getTransaction().begin();
+	        entityManager.remove(entityManager.find(SkillVote.class, id));
+	        entityManager.getTransaction().commit();
 		
 	}
 
 	@Override
 	public void deleteByObject(SkillVote t) {
-		entityManager.remove(entityManager.find(SkillVote.class, t.getId()));
+		 entityManager.getTransaction().begin();
+	        entityManager.remove(entityManager.find(SkillVote.class, t.getId()));
+	        entityManager.getTransaction().commit();
 		
 	}
 
 	@Override
 	public void update(Long idAModifier, SkillVote t) {
-		SkillVote skillVoteAModifier=entityManager.find(SkillVote.class,idAModifier);
-		skillVoteAModifier.setSkill(t.getSkill());
-		skillVoteAModifier.setWhoAsked(t.getWhoAsked());
-		skillVoteAModifier.setWhoValidate(t.getWhoValidate());
-		skillVoteAModifier.setStatus(t.getStatus());
-		entityManager.merge(skillVoteAModifier);
+		   entityManager.getTransaction().begin();
+	        SkillVote skillVoteAModifier = entityManager.find(SkillVote.class, idAModifier);
+	        skillVoteAModifier.setSkill(t.getSkill());
+	        skillVoteAModifier.setWhoAsked(t.getWhoAsked());
+	        skillVoteAModifier.setWhoValidate(t.getWhoValidate());
+	        skillVoteAModifier.setStatus(t.getStatus());
+	        entityManager.merge(skillVoteAModifier);
+	        entityManager.getTransaction().commit();
 		
 	}
 

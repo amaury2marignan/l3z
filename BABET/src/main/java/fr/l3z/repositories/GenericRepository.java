@@ -2,8 +2,11 @@ package fr.l3z.repositories;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 public interface GenericRepository<I, T>  {
 
+	void setEntityManager(EntityManager entityManager);
 
 	T save(T t);
 
