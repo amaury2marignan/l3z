@@ -72,7 +72,7 @@ public class UserSkillProfilePageBean  implements Serializable {
 	}
 	
 	public Boolean newSkillButtonOK() {
-		SkillNote parentSkillNote = new SkillNote(skillRep.findByNameAndFamily(this.family.getId(),"parent"),5);
+		SkillNote parentSkillNote = new SkillNote(skillRep.findByNameAndFamily(this.family.getId(),"Parent"),5);
 		SkillProfile parentSkillProfile = new SkillProfile();
 		skillProfileRep.setSkillScore(parentSkillNote.getSkill().getId(), parentSkillProfile, 5);
 		
